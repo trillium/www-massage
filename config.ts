@@ -8,6 +8,7 @@ export const CALENDARS_TO_CHECK = ["primary", "trillium@hatsfabulous.com"]
 export const SLOT_PADDING = 0
 export const OWNER_TIMEZONE = "America/Los_Angeles"
 export const LEAD_TIME = 3 * 60 // 3 hours
+export const DEFAULT_APPOINTMENT_INTERVAL = 30 // minutes
 
 const DEFAULT_WORKDAY = [
   {
