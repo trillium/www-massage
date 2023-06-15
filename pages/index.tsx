@@ -9,6 +9,7 @@ import Template from "@/components/Template"
 import AvailabilityPicker from "@/components/availability/AvailabilityPicker"
 import {
   ALLOWED_DURATIONS,
+  DEFAULT_APPOINTMENT_INTERVAL,
   DEFAULT_DURATION,
   OWNER_AVAILABILITY,
 } from "@/config"
@@ -45,7 +46,7 @@ function Page({
     duration,
     availabilitySlots: OWNER_AVAILABILITY,
   })
-
+  
   const offers = getAvailability({
     busy: mapStringsToDates(busy),
     potential,
@@ -85,7 +86,7 @@ function Page({
 export async function getServerSideProps({ query }: GetServerSidePropsContext) {
   const schema = z.object({
     duration: z
-      .enum([...(ALLOWED_DURATIONS.map(String) as [string, ...string[]])])
+      .enum([...(ALLOWED_DURATIONS.map(String) as [string, ...string[]]), DEFAULT_APPOINTMENT_INTERVAL.toString()])
       .optional()
       .default(String(DEFAULT_DURATION))
       .transform(Number),
