@@ -16,7 +16,7 @@ export default function DurationPicker() {
         className="block text-sm font-medium leading-0 text-gray-900 dark:text-gray-100">
         Duration
       </label>
-      <div className="isolate inline-flex rounded-md shadow-sm mt-1">
+      <div className="isolate inline-flex rounded-md shadow-sm mt-1 h-9">
         {ALLOWED_DURATIONS.map((theDuration, i) => (
           <button
             key={theDuration}
