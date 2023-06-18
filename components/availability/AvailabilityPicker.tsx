@@ -13,10 +13,21 @@ import format from "date-fns-tz/format"
 const Calendar = dynamic(() => import("./date/Calendar"), { ssr: false })
 const TimeList = dynamic(() => import("./time/TimeList"), { ssr: false })
 
-type AvailabilityPickerProps = {
-  slots: DateTimeInterval[]
+export type PickerProps = {
+  durationProps: {
+    title: string
+  },
+  tzPickerProps?: {
+    showPicker: boolean
+  }
 }
-export default function AvailabilityPicker({ slots }: AvailabilityPickerProps) {
+
+export default function AvailabilityPicker({ slots, pickerProps }: {
+  slots: DateTimeInterval[],
+  pickerProps: PickerProps
+}) {
+  const { durationProps } = pickerProps
+  const { showPicker } = pickerProps.tzPickerProps || { showPicker: true }
   const {
     state: { selectedDate, timeZone },
   } = useProvider()
@@ -47,8 +58,8 @@ export default function AvailabilityPicker({ slots }: AvailabilityPickerProps) {
   return (
     <div className="flex flex-col space-y-8">
       <div className="flex space-x-6">
-        <DurationPicker />
-        <TimezonePicker />
+        <DurationPicker {...durationProps} />
+        {showPicker && <TimezonePicker />}
       </div>
       <BookingForm />
       <Calendar
