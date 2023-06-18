@@ -5,6 +5,7 @@ import { ALLOWED_DURATIONS, DEFAULT_DURATION } from "@/config"
 import Day from "@/lib/day"
 import type { DateTimeInterval } from "@/lib/types"
 import type { PageProps } from "@/pages"
+import type { BookingFormData } from "@/components/booking/BookingForm"
 
 type ModalStatus = "open" | "busy" | "error" | "closed"
 
@@ -25,6 +26,8 @@ export type StateType = {
   modal: ModalStatus
   /** The time slot the user selected (if made). */
   selectedTime?: DateTimeInterval
+  /** The form data the user entered (if made). */
+  formData?: BookingFormData
 }
 
 export type ActionType =
@@ -53,6 +56,11 @@ export type ActionType =
       /** Set the selected time interval. */
       payload: DateTimeInterval
     }
+  | {
+      type: "SET_FORM"
+      /** Set booking form data. */
+      payload: BookingFormData
+    }
 
 const StateSetContext = createContext<Dispatch<ActionType> | undefined>(
   undefined
@@ -63,6 +71,13 @@ const StateContext = createContext<StateType>({
   end: Day.todayWithOffset(14),
   timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   modal: "closed",
+  formData: {
+    name: "",
+    email: "",
+    location: "",
+    phone: "",
+    paymentMethod: "",
+  },
 })
 
 /**
@@ -109,6 +124,13 @@ export function withProvider<T extends PageProps>(Component: FC<T>): FC<T> {
       selectedDate: props.selectedDate,
       timeZone: props.timeZone,
       duration: props.duration,
+      formData: {
+        name: "",
+        email: "",
+        location: "",
+        phone: "",
+        paymentMethod: "", 
+      },
     }
 
     return (
@@ -142,6 +164,13 @@ function getInitialState(values: Omit<PageProps, "busy">): StateType {
         ? values.duration
         : DEFAULT_DURATION,
     modal: "closed",
+    formData: {
+      name: "",
+      email: "",
+      location: "",
+      phone: "",
+      paymentMethod: "cash", 
+    },
   }
 }
 
@@ -194,6 +223,10 @@ function reducerFunction(state: StateType, action: ActionType): StateType {
       // If we're setting a selected time, assume we want to
       // open the modal to let the user confirm it.
       newState.modal = "open"
+      break
+    }
+    case "SET_FORM": {
+      newState = { ...state, formData: action.payload }
       break
     }
     default: {
