@@ -4,6 +4,8 @@ import { z } from "zod"
 import createCalendarAppointment from "@/lib/availability/createAppointment"
 import getHash from "@/lib/hash"
 
+import templates from "@/lib/messageTemplates/templates"
+
 const AppointmentPropsSchema = z.object({
   name: z.string(),
   email: z.string().email(),
@@ -67,7 +69,7 @@ export default async function handler(
   const response = await createCalendarAppointment({
     ...validObject,
     requestId: hash,
-    summary: `${validObject.duration} minute meeting with ${process.env.NEXT_PUBLIC_OWNER_NAME ?? "me"}`,
+    summary: templates.eventSummary({duration: validObject.duration, clientName: validObject.name}) || "Error in createEventSummary()",
   })
 
   const details = await response.json()
