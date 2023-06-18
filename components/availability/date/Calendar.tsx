@@ -21,7 +21,11 @@ export default function Calendar({
   const { start: startDate, end: endDate } = getDateRangeInterval({
     start,
     end,
+    timeZone: "Etc/GMT",
   })
+
+  console.log("startDate", startDate)
+  console.log("endDate", endDate)
 
   // Handles when the date changes due to the selected timezone
   const now = Day.todayWithOffset(0)
@@ -32,7 +36,9 @@ export default function Calendar({
     // an incomplete row.
     end: endOfWeek(addDays(endDate, 2)),
   }).map((day) => Day.dayFromDate(day))
-
+  
+  console.log("days", days)
+  
   // Remove cases where the first week is empty.
   // (Usually timezone changing related)
   const firstWeek = days.at(6)
@@ -48,6 +54,7 @@ export default function Calendar({
   if (lastWeek && lastWeek.toInterval(timeZone).end >= endDate) {
     days.splice(-7, 7)
   }
+  console.log("lastWeek", lastWeek)
 
   return (
     <div
