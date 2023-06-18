@@ -12,6 +12,7 @@ import {
   DEFAULT_APPOINTMENT_INTERVAL,
   DEFAULT_DURATION,
   OWNER_AVAILABILITY,
+  DEFAULT_PRICING
 } from "@/config"
 import { useProvider, withProvider } from "@/context/AvailabilityContext"
 import getAvailability from "@/lib/availability/getAvailability"
@@ -39,7 +40,7 @@ function Page({
 
   const pickerProps: PickerProps = {
     durationProps: {
-      title: `Session Duration`
+      title: `Session Duration - $${DEFAULT_PRICING[duration]}`
     },
     tzPickerProps: {
       showPicker: false
