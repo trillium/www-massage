@@ -6,7 +6,7 @@ export default function Confirmation() {
       </h1>
       <p className="mt-6 text-xl text-gray-800 dark:text-gray-200 font-medium">
         {/* eslint-disable-next-line react/no-unescaped-entities */}
-        I'll review your appointment request shortly and get back to you shortly!
+        I'll review your appointment request and get back to you shortly!
       </p>
     </div>
   )
