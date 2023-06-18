@@ -46,18 +46,7 @@ function buildEventBody({
         displayName: name,
       },
     ],
-    ...(location === `phone`
-      ? { location: process.env.OWNER_PHONE_NUMBER ?? `TBD` }
-      : {
-          conferenceData: {
-            createRequest: {
-              requestId,
-              conferenceSolutionKey: {
-                type: `hangoutsMeet`,
-              },
-            },
-          },
-        }),
+    ...{location}
   }
 }
 

@@ -28,7 +28,7 @@ const AppointmentRequestSchema = z.object({
     message: "End must be a valid date.",
   }),
   timeZone: z.string(),
-  location: z.enum(["meet", "phone"]),
+  location: z.string(),
   duration: z
     .string()
     .refine((value) => !Number.isNaN(Number.parseInt(value)), {

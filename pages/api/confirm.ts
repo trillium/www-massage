@@ -10,7 +10,8 @@ const AppointmentPropsSchema = z.object({
   start: z.string(),
   end: z.string(),
   timeZone: z.string(),
-  location: z.enum(["meet", "phone"]),
+  location: z.string(),
+  // phone: z.string(),
   duration: z
     .string()
     .refine((value) => !Number.isNaN(Number.parseInt(value)), {
