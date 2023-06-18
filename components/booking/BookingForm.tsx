@@ -8,7 +8,6 @@ import Spinner from "../Spinner"
 import type { ActionType } from "@/context/AvailabilityContext"
 import { useProvider } from "@/context/AvailabilityContext"
 import { formatLocalDate, formatLocalTime } from "@/lib/availability/helpers"
-import ThemeSwitch from "../ThemeSwitch"
 
 const locations = [
   {
