@@ -1,7 +1,12 @@
 import type { AvailabilitySlotsMap } from "./lib/types"
 
 export const ALLOWED_DURATIONS = [60, 90, 120, 150]
-
+export const DEFAULT_PRICING: {[key: number] : number} = {
+  60: 100,
+  90: 150,
+  120: 200,
+  150: 250,
+}
 export const DEFAULT_DURATION = 60
 
 export const CALENDARS_TO_CHECK = ["primary", "trillium@hatsfabulous.com"]
