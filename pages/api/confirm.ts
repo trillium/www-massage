@@ -47,7 +47,7 @@ export default async function handler(
   const validationResult = AppointmentPropsSchema.safeParse(object)
 
   if (!validationResult.success) {
-    res.status(400).json({ error: "Malformed request" })
+    res.status(400).json({ error: "Malformed request in data validation" })
     return
   }
 
@@ -58,7 +58,7 @@ export default async function handler(
     Number.isNaN(Date.parse(validObject.start)) ||
     Number.isNaN(Date.parse(validObject.end))
   ) {
-    res.status(400).json({ error: "Malformed request" })
+    res.status(400).json({ error: "Malformed request in date parsing" })
     return
   }
 
