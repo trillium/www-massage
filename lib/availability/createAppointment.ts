@@ -1,6 +1,8 @@
 import type { AppointmentProps } from "../types"
 import getAccessToken from "@/lib/availability/getAccessToken"
 
+import templates from "@/lib/messageTemplates/templates"
+
 // Helper function to build the description
 function buildDescription(location: string) {
   if (!process.env.OWNER_PHONE_NUMBER) {
@@ -29,7 +31,7 @@ function buildEventBody({
   requestId,
   name,
 }: AppointmentProps) {
-  const description = buildDescription(location)
+  const description = templates.eventDescription({start, end, summary, email, location, name})
 
   return {
     start: {
@@ -46,18 +48,7 @@ function buildEventBody({
         displayName: name,
       },
     ],
-    ...(location === `phone`
-      ? { location: process.env.OWNER_PHONE_NUMBER ?? `TBD` }
-      : {
-          conferenceData: {
-            createRequest: {
-              requestId,
-              conferenceSolutionKey: {
-                type: `hangoutsMeet`,
-              },
-            },
-          },
-        }),
+    ...{location}
   }
 }
 

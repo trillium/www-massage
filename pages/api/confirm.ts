@@ -4,13 +4,16 @@ import { z } from "zod"
 import createCalendarAppointment from "@/lib/availability/createAppointment"
 import getHash from "@/lib/hash"
 
+import templates from "@/lib/messageTemplates/templates"
+
 const AppointmentPropsSchema = z.object({
   name: z.string(),
   email: z.string().email(),
   start: z.string(),
   end: z.string(),
   timeZone: z.string(),
-  location: z.enum(["meet", "phone"]),
+  location: z.string(),
+  // phone: z.string(),
   duration: z
     .string()
     .refine((value) => !Number.isNaN(Number.parseInt(value)), {
@@ -47,7 +50,7 @@ export default async function handler(
   const validationResult = AppointmentPropsSchema.safeParse(object)
 
   if (!validationResult.success) {
-    res.status(400).json({ error: "Malformed request" })
+    res.status(400).json({ error: "Malformed request in data validation" })
     return
   }
 
@@ -58,7 +61,7 @@ export default async function handler(
     Number.isNaN(Date.parse(validObject.start)) ||
     Number.isNaN(Date.parse(validObject.end))
   ) {
-    res.status(400).json({ error: "Malformed request" })
+    res.status(400).json({ error: "Malformed request in date parsing" })
     return
   }
 
@@ -66,7 +69,7 @@ export default async function handler(
   const response = await createCalendarAppointment({
     ...validObject,
     requestId: hash,
-    summary: `${validObject.duration} minute meeting with ${process.env.NEXT_PUBLIC_OWNER_NAME ?? "me"}`,
+    summary: templates.eventSummary({duration: validObject.duration, clientName: validObject.name}) || "Error in createEventSummary()",
   })
 
   const details = await response.json()

@@ -3,7 +3,7 @@ import clsx from "clsx"
 import { ALLOWED_DURATIONS } from "@/config"
 import { useProvider } from "@/context/AvailabilityContext"
 
-export default function DurationPicker() {
+export default function DurationPicker({ title }: { title: string }) {
   const {
     state: { duration },
     dispatch,
@@ -14,7 +14,7 @@ export default function DurationPicker() {
       <label
         htmlFor="duration"
         className="block text-sm font-medium leading-0 text-gray-900 dark:text-gray-100">
-        Duration
+        {title || "Duration"}
       </label>
       <div className="isolate inline-flex rounded-md shadow-sm mt-1 h-9">
         {ALLOWED_DURATIONS.map((theDuration, i) => (

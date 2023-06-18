@@ -37,8 +37,6 @@ export default function Calendar({
     end: endOfWeek(addDays(endDate, 2)),
   }).map((day) => Day.dayFromDate(day))
   
-  console.log("days", days)
-  
   // Remove cases where the first week is empty.
   // (Usually timezone changing related)
   const firstWeek = days.at(6)

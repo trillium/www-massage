@@ -8,22 +8,54 @@ import Spinner from "../Spinner"
 import type { ActionType } from "@/context/AvailabilityContext"
 import { useProvider } from "@/context/AvailabilityContext"
 import { formatLocalDate, formatLocalTime } from "@/lib/availability/helpers"
-import ThemeSwitch from "../ThemeSwitch"
 
-const locations = [
+/**
+ * Represents form data from the booking form
+ */
+export type BookingFormData = {
+  /** Name of the requester */
+  name?: string,
+  /** Email address of the requester */
+  email?: string,
+  /** Address of the requester */
+  location?: string,
+  /** Phone number of the requester */
+  phone?: string,
+  /** Payment method of the requester */
+  paymentMethod?: string,
+}
+
+const paymentMethod = [
   {
-    name: "Phone",
-    value: "phone",
+    name: "Cash",
+    value: "cash",
+    hint: "Having exact change helps a lot :)"
   },
   {
-    name: "Google Meet",
-    value: "meet",
+    name: "Venmo",
+    value: "venmo",
+    hint: "Venmo name is @TrilliumSmith"
+  },
+  {
+    name: "CashApp",
+    value: "cashapp",
+    hint: "CashApp name is $trilliummassage"
+  },
+  {
+    name: "Credit Card",
+    value: "creditCard",
+    hint: "Chip cards preferred, reduces fees"
+  },
+  {
+    name: "Invoice",
+    value: "invoice",
+    hint: "Invoice sent via email"
   },
 ]
 
 export default function BookingForm() {
   const {
-    state: { modal, selectedTime, timeZone, duration },
+    state: { modal, selectedTime, timeZone, duration, formData },
     dispatch,
   } = useProvider()
   const router = useRouter()
@@ -49,7 +81,13 @@ export default function BookingForm() {
         className="mt-3 sm:mt-0 sm:ml-4"
         onSubmit={(event) => {
           handleSubmit(event, dispatch, router)
-        }}>
+        }}
+        onChange={(event) => {
+          const target = event.target as HTMLInputElement
+          const newState = {...formData, [target.name]: target.value}
+          dispatch({ type: "SET_FORM", payload: newState })
+        }}
+      >
         <Dialog.Title
           as="h3"
           className="text-base font-semibold leading-6 text-gray-900 dark:text-gray-100">
@@ -95,8 +133,45 @@ export default function BookingForm() {
                 aria-required
                 name="name"
                 id="name"
+                value={formData && formData.name}
                 className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                placeholder="Jane Smith"
+                placeholder="Will Smith"
+              />
+            </div>
+            <div className="relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-secondary-600">
+              <label
+                htmlFor="email"
+                className="block text-xs font-medium text-gray-900 dark:text-gray-100">
+                Phone Number
+              </label>
+              <input
+                aria-label="Phone Number"
+                required
+                autoComplete="te;"
+                aria-required
+                name="phone"
+                id="phone"
+                value={formData && formData.phone}
+                className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                placeholder="(555) 444 - 3333"
+              />
+            </div>
+            <div className="relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-secondary-600">
+              <label
+                htmlFor="email"
+                className="block text-xs font-medium text-gray-900 dark:text-gray-100">
+                Location
+              </label>
+              <input
+                aria-label="street address"
+                required
+                autoComplete="street-address"
+                aria-required
+                name="location"
+                id="location"
+                value={formData && formData.location}
+                className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                placeholder="123 Address Road, Beverly Hills, CA 90210"
               />
             </div>
             <div className="relative rounded-md rounded-t-none px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-secondary-600">
@@ -108,38 +183,43 @@ export default function BookingForm() {
               <input
                 aria-label="Email"
                 required
+                autoComplete="email"
                 aria-required
                 type="email"
                 name="email"
                 id="email"
+                value={formData && formData.email}
                 className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                placeholder="jsmith@gmail.com"
+                placeholder="name@example.com"
               />
             </div>
           </div>
           <div>
-            <p className="text-sm font-medium">How would you like to meet?</p>
+            <p className="text-sm font-medium">Intended payment method</p>
             <fieldset className="mt-2">
               <div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-4">
-                {locations.map((location) => (
-                  <div key={location.value} className="flex items-center">
+                {paymentMethod.map((payType) => (
+                  <div key={payType.value} className="flex items-center">
                     <input
-                      id={location.value}
-                      aria-label={location.name}
-                      name="location"
+                      id={payType.value}
+                      aria-label={payType.name}
+                      name="paymentMethod"
                       type="radio"
-                      value={location.value}
-                      defaultChecked={location.value === locations[0].value}
+                      value={payType.value}
+                      defaultChecked={payType.value === paymentMethod[0].value}
                       className="h-4 w-4 border-gray-300 text-secondary-600 focus:ring-secondary-600"
                     />
                     <label
-                      htmlFor={location.value}
+                      htmlFor={payType.value}
                       className="ml-1.5 block text-sm leading-6 text-gray-800 dark:text-gray-100">
-                      {location.name}
+                      {payType.name}
                     </label>
                   </div>
                 ))}
               </div>
+              <p className="text-sm pl-4 text-gray-500 dark:text-gray-300">
+                * {!!formData && paymentMethod.filter((p) => p.value === formData.paymentMethod)[0].hint}
+              </p>
             </fieldset>
           </div>
         </div>
