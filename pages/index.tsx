@@ -4,9 +4,7 @@ import type {
 } from "next"
 import bookingConfig from "@/bookingConfig"
 
-export type options = {
-  title: string
-}
+export type options = {}
 
 const options: options = {
   ...bookingConfig
