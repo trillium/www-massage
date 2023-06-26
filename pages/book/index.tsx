@@ -8,6 +8,13 @@ export type options = {
   title: string
 }
 
+bookingConfig.pricing = {
+  60: 100,
+  90: 150,
+  120: 200,
+  150: 250,
+}
+
 const options: options = {
   ...bookingConfig
 }
