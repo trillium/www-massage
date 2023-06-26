@@ -41,7 +41,7 @@ function Main({
 
   const pickerProps: PickerProps = {
     durationProps: {
-      title: options.title || `Session Duration - $${options.pricing[duration]}`
+      title: `Session Duration - $${options.pricing[duration]}`
     },
     tzPickerProps: {
       showPicker: false
@@ -92,7 +92,7 @@ function Main({
         title="Book a session with Trillium :)"
         text="Select a date and time and fill out the form to request an appointment time."
       />
-      <AvailabilityPicker slots={slots} pickerProps={pickerProps} />
+      <AvailabilityPicker slots={slots} pickerProps={pickerProps} options={options} />
     </main>
   )
 }
