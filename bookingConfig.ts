@@ -1,5 +1,36 @@
 import { OWNER_TIMEZONE, DEFAULT_WORKDAY } from "./config"
 
+export type bookingConfigType = {
+    durations: number[],
+    pricing: {
+        [key: number]: number
+    },
+    padding: number,
+    leadTime: number,
+    availability: {
+        default_workday: {
+            start: {
+                hour: number,
+            },
+            end: {
+                hour: number,
+            },
+        }[],
+        owner_availability: {
+            [key: number]: {
+                start: {
+                    hour: number,
+                },
+                end: {
+                    hour: number,
+                },
+            }[]
+        }
+    },
+    interval: number,
+    timeZone: string,
+}
+
 const bookingConfig = {
     durations: [60, 90, 120, 150],
     pricing: {
