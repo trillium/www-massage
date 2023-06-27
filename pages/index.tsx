@@ -2,16 +2,14 @@ import BookingFeature, { PageProps, getServerSideProps as componentGetServiceSid
 import type {
   GetServerSidePropsContext,
 } from "next"
-import bookingConfig from "@/bookingConfig"
+import bookingConfig, { bookingConfigType } from "@/bookingConfig"
 
-export type options = {}
-
-const options: options = {
+const options: bookingConfigType = {
   ...bookingConfig
 }
 
 //type that combines PageProps and options
-export type PagePropsWithOptions = PageProps & options
+export type PagePropsWithOptions = PageProps & {options: bookingConfigType}
 
 function TestPage(props: PagePropsWithOptions) {
   return (

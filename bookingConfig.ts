@@ -1,4 +1,5 @@
-import { OWNER_TIMEZONE, DEFAULT_WORKDAY } from "./config"
+import { OWNER_TIMEZONE, DEFAULT_WORKDAY, defaultWorkdayType } from "./config"
+import { AvailabilitySlotsMap } from "./lib/types"
 
 export type bookingConfigType = {
     durations: number[],
@@ -8,24 +9,8 @@ export type bookingConfigType = {
     padding: number,
     leadTime: number,
     availability: {
-        default_workday: {
-            start: {
-                hour: number,
-            },
-            end: {
-                hour: number,
-            },
-        }[],
-        owner_availability: {
-            [key: number]: {
-                start: {
-                    hour: number,
-                },
-                end: {
-                    hour: number,
-                },
-            }[]
-        }
+        default_workday: defaultWorkdayType, 
+        owner_availability: AvailabilitySlotsMap,
     },
     interval: number,
     timeZone: string,

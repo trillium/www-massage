@@ -25,6 +25,7 @@ import {
 } from "@/lib/availability/helpers"
 import Day from "@/lib/day"
 import localeDayString from "@/lib/locale"
+import { bookingConfigType } from "@/bookingConfig"
 
 export type PageProps = InferGetServerSidePropsType<typeof getServerSideProps>
 
@@ -33,7 +34,7 @@ function Main({
   end,
   busy,
   options
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: PageProps & { options: bookingConfigType }) {
   const {
     state: { duration, selectedDate },
     dispatch,
