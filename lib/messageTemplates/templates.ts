@@ -4,8 +4,22 @@
  * @function
  * @returns {string} Returns the summary string for an event.
  */
-function eventSummary ({clientName, duration} : {clientName: string, duration: string}) {
-  return `${duration} minute massage with ${clientName} - TrilliumMassage`
+function eventSummary (
+  {
+    clientName,
+    duration,
+    price
+  } : {
+  clientName: string,
+  duration: string
+  price?: string}
+  ) {
+  let outStr = `${duration} minute massage with ${clientName}`
+  if (price) {
+    outStr = `${outStr}, ${price}`
+  outStr = `${outStr} - TrilliumMassage`
+  return `outStr`
+  }
 }
 
 /**
