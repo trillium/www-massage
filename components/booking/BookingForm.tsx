@@ -155,7 +155,7 @@ export default function BookingForm() {
               <input
                 aria-label="Phone Number"
                 required
-                autoComplete="te;"
+                autoComplete="tel"
                 aria-required
                 name="phone"
                 id="phone"
