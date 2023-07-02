@@ -56,7 +56,7 @@ export default async function handler(
   const response = await createCalendarAppointment({
     ...validObject,
     requestId: hash,
-    summary: templates.eventSummary({duration: validObject.duration, clientName: validObject.name}) || "Error in createEventSummary()",
+    summary: templates.eventSummary(validObject) || "Error in createEventSummary()",
   })
 
   const details = await response.json()

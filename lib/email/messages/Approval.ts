@@ -1,32 +1,11 @@
+import templates ,{ EventProps, detailsHelper } from "@/lib/messageTemplates/templates"
+
 const LINE_PREFIX = `<div class="gmail_default" style="font-family:arial,sans-serif">`
 const LINE_SUFFIX = `</div>`
 
-export default function ApprovalEmail({
-  email,
-  name,
-  location,
-  dateSummary,
-  approveUrl,
-  timeZone,
-}: {
-  dateSummary: string
-  email: string
-  name: string
-  location: string
-  approveUrl: string
-  timeZone: string
-}) {
-  const SUBJECT = `${name} wants to meet with you`
-
-  const declineUrl = `mailto:${encodeURI(email)}?subject=${encodeURIComponent(
-    `Re: Your meeting request`
-  )}&body=${encodeURIComponent(
-    `Hi there,
-
-I just checked my calendar and it looks like ${dateSummary} won't work.
-
-Would you be able to meet at a different time?`
-  )}`
+export default function ApprovalEmail(props: EventProps & { approveUrl: string, dateSummary: string }) {
+  const { name, email, location, dateSummary, timeZone, approveUrl } = props
+  const SUBJECT = "Request for " + templates.eventSummary(props)
 
   let body = `<div dir="ltr">`
   body += [

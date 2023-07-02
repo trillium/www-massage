@@ -1,3 +1,5 @@
+import templates, { detailsHelper, signatureBlock } from "@/lib/messageTemplates/templates"
+
 const LINE_PREFIX = `<div class="gmail_default" style="font-family:arial,sans-serif">`
 const LINE_SUFFIX = `</div>`
 

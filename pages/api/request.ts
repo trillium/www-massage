@@ -74,6 +74,7 @@ export default async function handler(
 
   // Generate and send the confirmation email
   const confirmationEmail = ConfirmationEmail({
+    ...data,
     dateSummary: intervalToHumanString({
       start,
       end,
