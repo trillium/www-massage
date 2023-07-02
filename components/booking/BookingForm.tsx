@@ -27,7 +27,7 @@ export type BookingFormData = {
   price?: string,
 }
 
-const paymentMethod = [
+export const paymentMethod = [
   {
     name: "Cash",
     value: "cash",
@@ -36,7 +36,7 @@ const paymentMethod = [
   {
     name: "Venmo",
     value: "venmo",
-    hint: "Venmo name is @TrilliumSmith"
+    hint: "Venmo name is @TrilliumSmith, last 4 phone is -5344"
   },
   {
     name: "CashApp",
@@ -222,10 +222,13 @@ export default function BookingForm() {
                       className="ml-1.5 block text-sm leading-6 text-gray-800 dark:text-gray-100">
                       {payType.name}
                     </label>
+                    <p className="text-sm pl-4 text-gray-500 dark:text-secondary-400 block sm:hidden">
+                {(!!formData && formData.paymentMethod == payType.value) && `* ${payType.hint}`}
+              </p>
                   </div>
                 ))}
               </div>
-              <p className="text-sm pl-4 text-gray-500 dark:text-gray-300">
+              <p className="text-sm pl-4 text-gray-500 dark:text-secondary-400 hidden sm:block">
                 * {!!formData && paymentMethod.filter((p) => p.value === formData.paymentMethod)[0].hint}
               </p>
             </fieldset>

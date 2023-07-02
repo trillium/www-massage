@@ -1,3 +1,5 @@
+import { paymentMethod as paymentMethods } from "@/components/booking/BookingForm"
+
 function timeStringFormatter(timeString: string) {
   const date = new Date(timeString)
   const options = {
@@ -31,6 +33,7 @@ export type EventProps =  {
  * @returns {string} Returns the summary string for an event.
  */
 export function detailsHelper({ name, duration, email, phone, start, end, location, price, paymentMethod} : EventProps, sep: string = "\n") {
+  const paymentTip = paymentMethods.filter(method => method.value === paymentMethod)[0].hint
   let output = ""
 
   output += `<b>name</b>: ${name}` + sep
@@ -44,6 +47,8 @@ export function detailsHelper({ name, duration, email, phone, start, end, locati
   if (price) output += `<b>price</b>: $${price}` + sep
   
   if (price && paymentMethod) output += `<b>payment method</b>: ${paymentMethod}` + sep
+
+  if (paymentTip) output += `<b>payment tip</b>: ${paymentTip}` + sep
   
   return output
 }
