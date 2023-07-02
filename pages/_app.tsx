@@ -20,9 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <ThemeProvider attribute="class" defaultTheme={theme}>
         <Head>
-          <title>{`Meet with ${
-            process.env.NEXT_PUBLIC_OWNER_NAME ?? "me"
-          }`}</title>
+          <title>{`Trillium Massage`}</title>
           <link
             rel="icon"
             type="image/png"
