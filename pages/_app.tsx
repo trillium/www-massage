@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app"
 import { Public_Sans } from "next/font/google"
+import { Analytics } from '@vercel/analytics/react';
 import Head from "next/head"
 
 import { ThemeProvider } from 'next-themes'
@@ -44,6 +45,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </nav>
         <Component {...pageProps} />
       </ThemeProvider>
+      <Analytics />
     </>
   )
 }
