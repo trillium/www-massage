@@ -1,5 +1,7 @@
+import { NextRequest, NextResponse } from "next/server"
+import { IncomingMessage } from "http"
+
 import LRUCache from "lru-cache"
-import type { NextApiRequest, NextApiResponse } from "next"
 import { z } from "zod"
 
 import { OWNER_TIMEZONE } from "@/config"
@@ -36,10 +38,9 @@ const AppointmentRequestSchema = z.object({
     }),
 })
 
-export default async function POST(
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> {
+export async function POST(
+  req: NextRequest & IncomingMessage
+): Promise<NextResponse> {
   if (req.method !== "POST") {
     res.status(405).json({ error: "Method not allowed" })
     return
