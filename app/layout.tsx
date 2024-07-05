@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html>
+    <html lang="en" className={public_sans.className} suppressHydrationWarning>
       <link
         rel="icon"
         type="image/png"
@@ -38,12 +38,7 @@ export default function RootLayout({
         sizes="16x16"
         href="/favicon-16x16.png"
       />
-      <ThemeProvider attribute="class" defaultTheme={theme}>
-        <style jsx global>{`
-          html {
-            font-family: ${public_sans.style.fontFamily};
-          }
-        `}</style>
+      <ThemeProvider attribute="class" defaultTheme={theme}>j
         <nav className="w-screen flex justify-end pr-4 pt-4">
           <ThemeSwitch />
         </nav>
