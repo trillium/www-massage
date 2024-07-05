@@ -25,7 +25,10 @@ export async function GET(req: NextRequest) {
     return
   }
 
-  const { data, key } = req.query
+  const searchParams = req.nextUrl.searchParams
+  
+  const data = searchParams.get('data')
+  const key = searchParams.get("key")
 
   if (!data) {
     res.status(400).json({ error: "Data is missing" })
