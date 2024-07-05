@@ -1,3 +1,5 @@
+"use client"
+
 export default function Confirmation() {
   return (
     <div className="py-8 sm:py-16 mx-auto max-w-2xl">
