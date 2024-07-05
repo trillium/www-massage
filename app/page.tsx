@@ -1,30 +1,20 @@
 import type {
-  GetServerSidePropsContext,
   InferGetServerSidePropsType,
 } from "next"
 import { z } from "zod"
 
 import ClientPage from "./ClientPage"
-import Template from "@/components/Template"
-import AvailabilityPicker, { PickerProps } from "@/components/availability/AvailabilityPicker"
 import {
   ALLOWED_DURATIONS,
   DEFAULT_APPOINTMENT_INTERVAL,
   DEFAULT_DURATION,
-  OWNER_AVAILABILITY,
-  DEFAULT_PRICING
 } from "@/config"
-import { useProvider, withProvider } from "@/context/AvailabilityContext"
-import getAvailability from "@/lib/availability/getAvailability"
 import getBusyTimes from "@/lib/availability/getBusyTimes"
-import getPotentialTimes from "@/lib/availability/getPotentialTimes"
 import {
   getDateRangeInterval,
   mapDatesToStrings,
-  mapStringsToDates,
 } from "@/lib/availability/helpers"
 import Day from "@/lib/day"
-import localeDayString from "@/lib/locale"
 
 export type PageProps = InferGetServerSidePropsType<typeof fetchData>
 
