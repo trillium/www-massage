@@ -49,7 +49,6 @@ export async function POST(
   }
 
   // Apply rate limiting using the client's IP address
-
   const limitReached = checkRateLimit()
 
   if (limitReached) {
