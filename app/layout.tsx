@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html>
+    <html lang="en" className={public_sans.className} suppressHydrationWarning>
       <link
         rel="icon"
         type="image/png"
@@ -34,11 +34,6 @@ export default function RootLayout({
         href="/favicon-16x16.png"
       />
       <>
-        <style jsx global>{`
-          html {
-            font-family: ${public_sans.style.fontFamily};
-          }
-        `}</style>
         {children}
       </>
     </html>
