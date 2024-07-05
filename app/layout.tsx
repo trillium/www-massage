@@ -11,6 +11,7 @@ const public_sans = Public_Sans({
 })
 
 export const metadata: Metadata = {
+  title: `Meet with ${process.env.NEXT_PUBLIC_OWNER_NAME ?? "me"}`,
 }
 
 export default function RootLayout({
@@ -22,9 +23,6 @@ export default function RootLayout({
     <>
       <>
         <Head>
-          <title>{`Meet with ${
-            process.env.NEXT_PUBLIC_OWNER_NAME ?? "me"
-          }`}</title>
           <link
             rel="icon"
             type="image/png"
