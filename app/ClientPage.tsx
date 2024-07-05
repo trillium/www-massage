@@ -1,29 +1,15 @@
 "use client"
 
-import type {
-  GetServerSidePropsContext,
-  InferGetServerSidePropsType,
-} from "next"
+import type { InferGetServerSidePropsType } from "next"
 import { useEffect } from "react"
-import { z } from "zod"
 
 import Template from "@/components/Template"
 import AvailabilityPicker from "@/components/availability/AvailabilityPicker"
-import {
-  ALLOWED_DURATIONS,
-  DEFAULT_APPOINTMENT_INTERVAL,
-  DEFAULT_DURATION,
-  OWNER_AVAILABILITY,
-} from "@/config"
+import { OWNER_AVAILABILITY } from "@/config"
 import { useProvider, withProvider } from "@/context/AvailabilityContext"
 import getAvailability from "@/lib/availability/getAvailability"
-import getBusyTimes from "@/lib/availability/getBusyTimes"
 import getPotentialTimes from "@/lib/availability/getPotentialTimes"
-import {
-  getDateRangeInterval,
-  mapDatesToStrings,
-  mapStringsToDates,
-} from "@/lib/availability/helpers"
+import { mapStringsToDates } from "@/lib/availability/helpers"
 import Day from "@/lib/day"
 import localeDayString from "@/lib/locale"
 
@@ -48,7 +34,7 @@ function Page({
     duration,
     availabilitySlots: OWNER_AVAILABILITY,
   })
-  
+
   const offers = getAvailability({
     busy: mapStringsToDates(busy),
     potential,
@@ -65,7 +51,7 @@ function Page({
   // with some availability.
   useEffect(() => {
     if (!selectedDate && slots.length > 0) {
-      const date: Date = slots[0].start;
+      const date: Date = slots[0].start
       const dateString: string = localeDayString(date)
 
       dispatch({
