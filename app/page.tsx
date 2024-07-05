@@ -18,7 +18,7 @@ import Day from "@/lib/day"
 
 export type PageProps = InferGetServerSidePropsType<typeof fetchData>
 
-export async function fetchData({ searchParams }: { searchParams: URLSearchParams} ) {
+async function fetchData({ searchParams }: { searchParams: URLSearchParams} ) {
   const schema = z.object({
     duration: z
       .enum([...(ALLOWED_DURATIONS.map(String) as [string, ...string[]]), DEFAULT_APPOINTMENT_INTERVAL.toString()])
