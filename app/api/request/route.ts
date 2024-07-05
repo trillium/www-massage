@@ -45,8 +45,7 @@ export async function POST(
   const headers = nextHeaders()
   const jsonData = await req.json()
   if (req.method !== "POST") {
-    res.status(405).json({ error: "Method not allowed" })
-    return
+    return NextResponse.json({ error: "Method not allowed" }, { status: 405 })
   }
 
   // Apply rate limiting using the client's IP address
@@ -54,16 +53,14 @@ export async function POST(
   const limitReached = checkRateLimit()
 
   if (limitReached) {
-    res.status(429).json({ error: "Rate limit exceeded" })
-    return
+    return NextResponse.json({ error: "Rate limit exceeded" }, { status: 429 })
   }
 
   // Validate and parse the request body using Zod
   const validationResult = AppointmentRequestSchema.safeParse(jsonData)
 
   if (!validationResult.success) {
-    res.status(400).json({ error: validationResult.error.message })
-    return
+    return NextResponse.json(validationResult.error.message, { status: 400 })
   }
   const { data } = validationResult
 
@@ -106,7 +103,7 @@ export async function POST(
     body: confirmationEmail.body,
   })
 
-  res.status(200).json({ success: true })
+  return NextResponse.json({ success: true }, { status: 200 })
 
   /**
    * Checks the rate limit for the current IP address.
