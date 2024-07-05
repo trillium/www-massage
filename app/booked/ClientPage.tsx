@@ -1,12 +1,6 @@
 "use client"
 
-import { useSearchParams } from "next/navigation"
-
-export default function Booked() {
-  const searchParams = useSearchParams()
-
-  const url = searchParams.get("url")
-
+export default function Booked({ url }: { url: string }) {
   if (!url || typeof url !== "string") {
     return
   }
