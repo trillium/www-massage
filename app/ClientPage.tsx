@@ -85,44 +85,4 @@ function Page({
   )
 }
 
-export async function getServerSideProps({ query }: GetServerSidePropsContext) {
-  const schema = z.object({
-    duration: z
-      .enum([...(ALLOWED_DURATIONS.map(String) as [string, ...string[]]), DEFAULT_APPOINTMENT_INTERVAL.toString()])
-      .optional()
-      .default(String(DEFAULT_DURATION))
-      .transform(Number),
-    timeZone: z.string().optional(),
-    selectedDate: z
-      .string()
-      .regex(/^\d{4}-\d{2}-\d{2}$/u)
-      .optional(),
-  })
-
-  const { duration, timeZone, selectedDate } = schema.parse(query)
-
-  // Offer two weeks of availability.
-  const start = Day.todayWithOffset(0)
-  const end = Day.todayWithOffset(14)
-
-  const busy = await getBusyTimes(
-    getDateRangeInterval({
-      start,
-      end,
-      timeZone,
-    })
-  )
-
-  return {
-    props: {
-      start: start.toString(),
-      end: end.toString(),
-      busy: mapDatesToStrings(busy),
-      duration,
-      ...(timeZone && { timeZone }),
-      ...(selectedDate && { selectedDate }),
-    },
-  }
-}
-
 export default withProvider(Page)
