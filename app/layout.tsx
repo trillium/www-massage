@@ -48,7 +48,7 @@ export default function RootLayout({
         <nav className="w-screen flex justify-end pr-4 pt-4">
           <ThemeSwitch />
         </nav>
-        <Component {...pageProps} />
+        {children}
       </ThemeProvider>
     </>
   )
