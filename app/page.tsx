@@ -66,6 +66,8 @@ export async function fetchData({ searchParams }: { searchParams: URLSearchParam
   }
 }
 
+export const dynamic = "force-dynamic"
+
 export default async function Page({ searchParams }: { searchParams: URLSearchParams }) {
   const { props } = await fetchData( { searchParams })
   return <ClientPage {...props} />
