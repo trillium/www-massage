@@ -70,7 +70,11 @@ export async function GET(req: NextRequest) {
   const response = await createCalendarAppointment({
     ...validObject,
     requestId: hash,
-    summary: templates.eventSummary({duration: validObject.duration, clientName: validObject.name}) || "Error in createEventSummary()",
+    summary:
+      templates.eventSummary({
+        duration: validObject.duration,
+        clientName: validObject.name,
+      }) || "Error in createEventSummary()",
   })
 
   const details = await response.json()
