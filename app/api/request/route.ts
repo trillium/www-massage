@@ -171,4 +171,4 @@ function intervalToHumanString({
   })}`
 }
 
-// doneze
+// donezo
