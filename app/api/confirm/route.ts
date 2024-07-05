@@ -1,3 +1,4 @@
+import { type NextRequest } from "next/server"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { z } from "zod"
 
@@ -18,10 +19,7 @@ const AppointmentPropsSchema = z.object({
     }),
 })
 
-export async function GET(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export async function GET(req: NextRequest) {
   if (req.method !== "GET") {
     res.status(405).json({ error: "Method not allowed" })
     return
