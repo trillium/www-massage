@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
+import { headers as nextHeaders } from "next/headers"
 import { IncomingMessage } from "http"
 
 import LRUCache from "lru-cache"
@@ -41,6 +42,7 @@ const AppointmentRequestSchema = z.object({
 export async function POST(
   req: NextRequest & IncomingMessage
 ): Promise<NextResponse> {
+  const headers = nextHeaders()
   if (req.method !== "POST") {
     res.status(405).json({ error: "Method not allowed" })
     return
@@ -68,7 +70,7 @@ export async function POST(
   const end = new Date(data.end)
 
   const approveUrl = `${
-    req.headers.origin ?? "?"
+    headers.get("origin") ?? "?"
   }/api/confirm/?data=${encodeURIComponent(JSON.stringify(data))}&key=${getHash(
     JSON.stringify(data)
   )}`
@@ -111,7 +113,7 @@ export async function POST(
    * @return {boolean} Whether the rate limit has been reached.
    */
   function checkRateLimit(): boolean {
-    const forwarded = req.headers["x-forwarded-for"]
+    const forwarded = headers.get("x-forwarded-for")
     const ip =
       (Array.isArray(forwarded) ? forwarded[0] : forwarded) ??
       req.socket.remoteAddress ??
