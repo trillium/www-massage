@@ -18,7 +18,7 @@ const AppointmentPropsSchema = z.object({
     }),
 })
 
-export default async function handler(
+export async function GET(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
