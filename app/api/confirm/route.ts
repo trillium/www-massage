@@ -67,7 +67,11 @@ export async function GET(req: NextRequest) {
   const response = await createCalendarAppointment({
     ...validObject,
     requestId: hash,
-    summary: `${validObject.duration} minute meeting with ${process.env.NEXT_PUBLIC_OWNER_NAME ?? "me"}`,
+    summary:
+      templates.eventSummary({
+        duration: validObject.duration,
+        clientName: validObject.name,
+      }) || "Error in createEventSummary()",
   })
 
   const details = await response.json()
