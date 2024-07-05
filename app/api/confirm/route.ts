@@ -1,4 +1,5 @@
 import { type NextRequest } from "next/server"
+import { redirect } from "next/navigation"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { z } from "zod"
 
@@ -85,8 +86,7 @@ export async function GET(req: NextRequest) {
 
   // If we have a link to the event, take us there.
   if (match && match[1]) {
-    res.redirect(`/booked?url=${encodeURIComponent(match[1])}`)
-
+    redirect(`/booked?url=${encodeURIComponent(match[1])}`)
     return
   }
 
