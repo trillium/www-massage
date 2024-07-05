@@ -4,6 +4,7 @@ import type {
 } from "next"
 import { z } from "zod"
 
+import ClientPage from "./ClientPage"
 import Template from "@/components/Template"
 import AvailabilityPicker, { PickerProps } from "@/components/availability/AvailabilityPicker"
 import {
@@ -65,4 +66,9 @@ export async function fetchData({ searchParams }: { searchParams: URLSearchParam
       ...(selectedDate && { selectedDate }),
     },
   }
+}
+
+export default async function Page({ searchParams }: { searchParams: URLSearchParams }) {
+  const { props } = await fetchData( { searchParams })
+  return <ClientPage {...props} />
 }
