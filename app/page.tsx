@@ -23,9 +23,9 @@ import {
 import Day from "@/lib/day"
 import localeDayString from "@/lib/locale"
 
-export type PageProps = InferGetServerSidePropsType<typeof getServerSideProps>
+export type PageProps = InferGetServerSidePropsType<typeof fetchData>
 
-export async function getServerSideProps({ query }: GetServerSidePropsContext) {
+export async function fetchData({ query }: GetServerSidePropsContext) {
   const schema = z.object({
     duration: z
       .enum([...(ALLOWED_DURATIONS.map(String) as [string, ...string[]])])
