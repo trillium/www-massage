@@ -36,7 +36,7 @@ const AppointmentRequestSchema = z.object({
     }),
 })
 
-export default async function handler(
+export default async function POST(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> {
