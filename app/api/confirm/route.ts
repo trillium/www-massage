@@ -30,8 +30,8 @@ export async function GET(req: NextRequest) {
   }
 
   const searchParams = req.nextUrl.searchParams
-  
-  const data = searchParams.get('data')
+
+  const data = searchParams.get("data")
   const key = searchParams.get("key")
 
   if (!data) {
