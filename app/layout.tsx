@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <>
       <>
-        <Head>
+        <html>
           <link
             rel="icon"
             type="image/png"
@@ -35,7 +35,7 @@ export default function RootLayout({
             sizes="16x16"
             href="/favicon-16x16.png"
           />
-        </Head>
+        </html>
         <style jsx global>{`
           html {
             font-family: ${public_sans.style.fontFamily};
