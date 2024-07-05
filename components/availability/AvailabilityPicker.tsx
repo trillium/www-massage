@@ -1,7 +1,7 @@
 import { utcToZonedTime } from "date-fns-tz"
 import dynamic from "next/dynamic"
 
-import BookingForm from "../booking/BookingForm"
+import BookingForm from "@/components/booking/BookingForm"
 import DurationPicker from "./controls/DurationPicker"
 import TimezonePicker from "./controls/TimezonePicker"
 import { useProvider } from "@/context/AvailabilityContext"

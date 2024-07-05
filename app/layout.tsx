@@ -4,7 +4,7 @@ import { Metadata } from "next"
 
 import { ThemeProviders } from "@/app/ThemeProviders"
 
-import "../styles/global.css"
+import "@/styles/global.css"
 import ThemeSwitch from "@/components/ThemeSwitch"
 
 import siteMetadata from "./siteMetadata"
