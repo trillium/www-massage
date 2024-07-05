@@ -2,7 +2,7 @@ import React from "react"
 import { Public_Sans } from "next/font/google"
 import { Metadata } from "next"
 
-import { ThemeProviders } from '@/app/ThemeProviders'
+import { ThemeProviders } from "@/app/ThemeProviders"
 
 import "../styles/global.css"
 import ThemeSwitch from "@/components/ThemeSwitch"
