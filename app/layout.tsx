@@ -1,6 +1,6 @@
 import React from "react"
 import { Public_Sans } from "next/font/google"
-import Head from "next/head"
+import { Metadata } from "next"
 
 import { ThemeProvider } from 'next-themes'
 
@@ -12,6 +12,9 @@ const public_sans = Public_Sans({
   weight: "variable",
   display: "swap",
 })
+
+export const metadata: Metadata = {
+}
 
 const theme = "system"
 
