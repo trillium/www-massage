@@ -20,9 +20,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <>
+    <html>
       <>
-        <html>
+        <>
           <link
             rel="icon"
             type="image/png"
@@ -35,7 +35,7 @@ export default function RootLayout({
             sizes="16x16"
             href="/favicon-16x16.png"
           />
-        </html>
+        </>
         <style jsx global>{`
           html {
             font-family: ${public_sans.style.fontFamily};
@@ -43,6 +43,6 @@ export default function RootLayout({
         `}</style>
         {children}
       </>
-    </>
+    </html>
   )
 }
