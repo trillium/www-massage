@@ -26,7 +26,6 @@ const AppointmentPropsSchema = z.object({
 export async function GET(req: NextRequest) {
   if (req.method !== "GET") {
     return NextResponse.json({ error: "Method not allowed" }, { status: 405 })
-    return
   }
 
   const searchParams = req.nextUrl.searchParams
