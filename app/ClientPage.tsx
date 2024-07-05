@@ -13,13 +13,13 @@ import { mapStringsToDates } from "@/lib/availability/helpers"
 import Day from "@/lib/day"
 import localeDayString from "@/lib/locale"
 
-export type PageProps = InferGetServerSidePropsType<typeof getServerSideProps>
+import PageProps from "./page"
 
 function Page({
   start,
   end,
   busy,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetServerSidePropsType<typeof PageProps>) {
   const {
     state: { duration, selectedDate },
     dispatch,
