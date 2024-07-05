@@ -26,7 +26,6 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <ThemeProvider attribute="class" defaultTheme={theme}>
         <>
       <link
         rel="icon"
@@ -41,6 +40,7 @@ export default function RootLayout({
         href="/favicon-16x16.png"
       />
         </>
+      <ThemeProvider attribute="class" defaultTheme={theme}>
         <style jsx global>{`
           html {
             font-family: ${public_sans.style.fontFamily};
