@@ -43,6 +43,7 @@ export async function POST(
   req: NextRequest & IncomingMessage
 ): Promise<NextResponse> {
   const headers = nextHeaders()
+  const jsonData = await req.json()
   if (req.method !== "POST") {
     res.status(405).json({ error: "Method not allowed" })
     return
@@ -58,7 +59,7 @@ export async function POST(
   }
 
   // Validate and parse the request body using Zod
-  const validationResult = AppointmentRequestSchema.safeParse(req.body)
+  const validationResult = AppointmentRequestSchema.safeParse(jsonData)
 
   if (!validationResult.success) {
     res.status(400).json({ error: validationResult.error.message })
