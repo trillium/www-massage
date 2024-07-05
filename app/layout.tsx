@@ -38,12 +38,14 @@ export default function RootLayout({
         sizes="16x16"
         href="/favicon-16x16.png"
       />
-      <ThemeProvider attribute="class" defaultTheme={theme}>j
-        <nav className="w-screen flex justify-end pr-4 pt-4">
-          <ThemeSwitch />
-        </nav>
-        {children}
-      </ThemeProvider>
+      <body className="h-full">
+        <ThemeProvider attribute="class" defaultTheme={theme}>
+          <nav className="w-screen flex justify-end pr-4 pt-4">
+            <ThemeSwitch />
+          </nav>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
