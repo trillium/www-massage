@@ -2,7 +2,7 @@ import React from "react"
 import { Public_Sans } from "next/font/google"
 import { Metadata } from "next"
 
-import { ThemeProvider } from 'next-themes'
+import { ThemeProviders } from '@/app/ThemeProviders'
 
 import "../styles/global.css"
 import ThemeSwitch from "@/components/ThemeSwitch"
@@ -16,8 +16,6 @@ const public_sans = Public_Sans({
 export const metadata: Metadata = {
   title: `Meet with ${process.env.NEXT_PUBLIC_OWNER_NAME ?? "me"}`,
 }
-
-const theme = "system"
 
 export default function RootLayout({
   children,
@@ -39,12 +37,12 @@ export default function RootLayout({
         href="/favicon-16x16.png"
       />
       <body className="h-full">
-        <ThemeProvider attribute="class" defaultTheme={theme}>
+        <ThemeProviders>
           <nav className="w-screen flex justify-end pr-4 pt-4">
             <ThemeSwitch />
           </nav>
           {children}
-        </ThemeProvider>
+        </ThemeProviders>
       </body>
     </html>
   )
