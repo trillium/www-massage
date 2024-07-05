@@ -1,9 +1,13 @@
-import { useRouter } from "next/router"
+"use client"
+
+import { useSearchParams } from "next/navigation"
 
 export default function Booked() {
-  const { query } = useRouter()
+  const searchParams = useSearchParams()
 
-  if (!query || typeof query.url !== "string") {
+  const url = searchParams.get("url")
+
+  if (!url || typeof url !== "string") {
     return
   }
   return (
@@ -14,7 +18,7 @@ export default function Booked() {
       <p className="mt-6 text-xl text-gray-800 font-medium">
         It’s now on your calendar and an invite has been sent to them.{" "}
         <a
-          href={"https://www.google.com/calendar/event?eid=" + query.url}
+          href={"https://www.google.com/calendar/event?eid=" + url}
           target="_blank"
           rel="noreferrer"
           className="text-blue-700 underline">
