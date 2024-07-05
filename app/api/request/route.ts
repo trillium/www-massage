@@ -1,5 +1,8 @@
+import { NextRequest, NextResponse } from "next/server"
+import { headers as nextHeaders } from "next/headers"
+import { IncomingMessage } from "http"
+
 import LRUCache from "lru-cache"
-import type { NextApiRequest, NextApiResponse } from "next"
 import { z } from "zod"
 
 import { OWNER_TIMEZONE } from "@/config"
@@ -36,30 +39,27 @@ const AppointmentRequestSchema = z.object({
     }),
 })
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> {
+export async function POST(
+  req: NextRequest & IncomingMessage
+): Promise<NextResponse> {
+  const headers = nextHeaders()
+  const jsonData = await req.json()
   if (req.method !== "POST") {
-    res.status(405).json({ error: "Method not allowed" })
-    return
+    return NextResponse.json({ error: "Method not allowed" }, { status: 405 })
   }
 
   // Apply rate limiting using the client's IP address
-
   const limitReached = checkRateLimit()
 
   if (limitReached) {
-    res.status(429).json({ error: "Rate limit exceeded" })
-    return
+    return NextResponse.json({ error: "Rate limit exceeded" }, { status: 429 })
   }
 
   // Validate and parse the request body using Zod
-  const validationResult = AppointmentRequestSchema.safeParse(req.body)
+  const validationResult = AppointmentRequestSchema.safeParse(jsonData)
 
   if (!validationResult.success) {
-    res.status(400).json({ error: validationResult.error.message })
-    return
+    return NextResponse.json(validationResult.error.message, { status: 400 })
   }
   const { data } = validationResult
 
@@ -67,7 +67,7 @@ export default async function handler(
   const end = new Date(data.end)
 
   const approveUrl = `${
-    req.headers.origin ?? "?"
+    headers.get("origin") ?? "?"
   }/api/confirm/?data=${encodeURIComponent(JSON.stringify(data))}&key=${getHash(
     JSON.stringify(data)
   )}`
@@ -102,7 +102,7 @@ export default async function handler(
     body: confirmationEmail.body,
   })
 
-  res.status(200).json({ success: true })
+  return NextResponse.json({ success: true }, { status: 200 })
 
   /**
    * Checks the rate limit for the current IP address.
@@ -110,7 +110,7 @@ export default async function handler(
    * @return {boolean} Whether the rate limit has been reached.
    */
   function checkRateLimit(): boolean {
-    const forwarded = req.headers["x-forwarded-for"]
+    const forwarded = headers.get("x-forwarded-for")
     const ip =
       (Array.isArray(forwarded) ? forwarded[0] : forwarded) ??
       req.socket.remoteAddress ??
@@ -170,3 +170,5 @@ function intervalToHumanString({
     timeZoneName: "longGeneric",
   })}`
 }
+
+// donezo
