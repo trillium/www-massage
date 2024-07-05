@@ -27,7 +27,7 @@ import localeDayString from "@/lib/locale"
 
 export type PageProps = InferGetServerSidePropsType<typeof fetchData>
 
-export async function fetchData({ query }: GetServerSidePropsContext) {
+export async function fetchData({ searchParams }: { searchParams: URLSearchParams} ) {
   const schema = z.object({
     duration: z
       .enum([...(ALLOWED_DURATIONS.map(String) as [string, ...string[]]), DEFAULT_APPOINTMENT_INTERVAL.toString()])
@@ -41,7 +41,7 @@ export async function fetchData({ query }: GetServerSidePropsContext) {
       .optional(),
   })
 
-  const { duration, timeZone, selectedDate } = schema.parse(query)
+  const { duration, timeZone, selectedDate } = schema.parse(searchParams)
 
   // Offer two weeks of availability.
   const start = Day.todayWithOffset(0)
