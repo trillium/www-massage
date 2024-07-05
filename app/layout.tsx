@@ -1,4 +1,4 @@
-import type { AppProps } from "next/app"
+import React from "react"
 import { Public_Sans } from "next/font/google"
 import Head from "next/head"
 
@@ -10,7 +10,11 @@ const public_sans = Public_Sans({
   display: "swap",
 })
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <>
       <Head>
