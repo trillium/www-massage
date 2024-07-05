@@ -3,7 +3,7 @@ import type {
 } from "next"
 import { z } from "zod"
 
-import ClientPage from "./ClientPage"
+import ClientPage from "@/app/ClientPage"
 import {
   ALLOWED_DURATIONS,
   DEFAULT_DURATION,
