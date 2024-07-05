@@ -1,5 +1,4 @@
 import { Dialog } from "@headlessui/react"
-import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context"
 import { useRouter } from "next/navigation"
 import type { Dispatch, FormEvent } from "react"
 
@@ -265,7 +264,7 @@ export default function BookingForm() {
 function handleSubmit(
   event: FormEvent<HTMLFormElement>,
   dispatch: Dispatch<ActionType>,
-  router: AppRouterInstance
+  router: ReturnType<typeof useRouter>
 ) {
   event.preventDefault()
   dispatch({ type: "SET_MODAL", payload: "busy" })
