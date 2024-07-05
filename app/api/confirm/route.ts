@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { type NextRequest } from "next/server"
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { z } from "zod"
 
