@@ -1,6 +1,7 @@
 import React from "react"
 import { Public_Sans } from "next/font/google"
 import { Metadata } from "next"
+import { Analytics } from '@vercel/analytics/react';
 
 import { ThemeProviders } from "@/app/ThemeProviders"
 
@@ -77,6 +78,7 @@ export default function RootLayout({
           </nav>
           {children}
         </ThemeProviders>
+        <Analytics />
       </body>
     </html>
   )
