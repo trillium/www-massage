@@ -2,7 +2,13 @@
 
 export default function Booked({ url }: { url: string }) {
   if (!url || typeof url !== "string") {
-    return
+    return (
+      <div className="py-8 sm:py-16 mx-auto max-w-xl">
+        <h1 className="text-3xl font-bold tracking-tight text-secondary-700">
+          There was an error with the url parameter.
+        </h1>
+      </div>
+    )
   }
   return (
     <div className="py-8 sm:py-16 mx-auto max-w-xl">
