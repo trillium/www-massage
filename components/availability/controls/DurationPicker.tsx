@@ -39,7 +39,7 @@ export default function DurationPicker({ title }: { title: string }) {
                   theDuration === duration,
               }
             )}>
-            {theDuration}
+            {theDuration}m
           </button>
         ))}
       </div>
