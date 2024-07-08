@@ -7,7 +7,7 @@ export const DEFAULT_PRICING: {[key: number] : number} = {
   120: 140*2,
   150: 140*2.5,
 }
-export const DEFAULT_DURATION = 60
+export const DEFAULT_DURATION = 90
 
 export const CALENDARS_TO_CHECK = ["primary", "trillium@hatsfabulous.com"]
 export const SLOT_PADDING = 0
