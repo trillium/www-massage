@@ -229,6 +229,10 @@ function reducerFunction(state: StateType, action: ActionType): StateType {
       newState = { ...state, duration: action.payload }
       break
     }
+    case "SET_PRICE": {
+      newState = { ...state, price: action.payload }
+      break
+    }
     case "SET_MODAL": {
       newState = { ...state, modal: action.payload }
       break
