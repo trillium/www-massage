@@ -245,7 +245,7 @@ function reducerFunction(state: StateType, action: ActionType): StateType {
   })
 
   // Push to the window.
-  window.history.replaceState(null, "", `/?${newUrl.toString()}`)
+  window.history.replaceState(null, "", `${window.location.pathname}?${newUrl.toString()}`)
 
   return newState
 }
