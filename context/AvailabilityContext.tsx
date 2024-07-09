@@ -47,6 +47,11 @@ export type ActionType =
       payload: number
     }
   | {
+      type: "SET_PRICE"
+      /** Change the duration */
+      payload: number
+    }
+  | {
       type: "SET_MODAL"
       /** Set modal status */
       payload: ModalStatus
