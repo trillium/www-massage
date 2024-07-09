@@ -73,7 +73,8 @@ const StateSetContext = createContext<Dispatch<ActionType> | undefined>(
   undefined
 )
 const StateContext = createContext<StateType>({
-  duration: ALLOWED_DURATIONS[0],
+  duration: DEFAULT_DURATION,
+  price: DEFAULT_PRICING[DEFAULT_DURATION],
   start: Day.todayWithOffset(0),
   end: Day.todayWithOffset(14),
   timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
