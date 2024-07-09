@@ -88,6 +88,8 @@ const StateContext = createContext<StateType>({
   },
 })
 
+type ValuesProps = Omit<PageProps, "busy">  & { price: number }
+
 /**
  * The provider component that wraps the application, providing state and actions.
  *
@@ -101,7 +103,7 @@ export function Provider({
   values,
 }: {
   children: React.ReactNode
-  values: Omit<PageProps, "busy">
+  values: ValuesProps
 }): JSX.Element {
   // Get the initial state from the values passed in.
   const initialProps: StateType = getInitialState(values)
@@ -153,10 +155,10 @@ export function withProvider<T extends PageProps>(Component: FC<T>): FC<T> {
  * Return the initial state from the values passed in, applying sensible
  * defaults for values that are missing.
  *
- * @param {Omit<PageProps, "busy">} values The initial values to use.
+ * @param {ValuesProps} values The initial values to use.
  * @return {StateType} An object that can be used for the initial state.
  */
-function getInitialState(values: Omit<PageProps, "busy">): StateType {
+function getInitialState(values: ValuesProps): StateType {
   const timeZone =
     values.timeZone ?? Intl.DateTimeFormat().resolvedOptions().timeZone ?? "UTC"
 
