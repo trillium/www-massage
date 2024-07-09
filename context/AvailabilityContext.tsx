@@ -174,6 +174,10 @@ function getInitialState(values: ValuesProps): StateType {
       values.duration && !Number.isNaN(values.duration)
         ? values.duration
         : DEFAULT_DURATION,
+    price:
+      values.price && !Number.isNaN(values.price)
+        ? values.price
+        : DEFAULT_PRICING[DEFAULT_DURATION],
     modal: "closed",
     formData: {
       name: "",
