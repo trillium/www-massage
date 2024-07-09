@@ -71,3 +71,14 @@ export type AppointmentProps = {
   /** Duration of the meeting in minutes  */
   duration: string
 }
+
+export type EmailProps = {
+  dateSummary: string
+  email: string
+  name: string
+  location: string
+  approveUrl: string
+  timeZone: string
+  price: string,
+  duration: string,
+}
