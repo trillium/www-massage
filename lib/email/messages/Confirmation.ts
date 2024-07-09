@@ -1,11 +1,14 @@
+import { EmailProps } from "@/lib/types"
+
 const LINE_PREFIX = `<div class="gmail_default" style="font-family:arial,sans-serif">`
 const LINE_SUFFIX = `</div>`
 
 export default function ClientRequestEmail({
+  duration,
+  price,
+  name,
   dateSummary,
-}: {
-  dateSummary: string
-}) {
+}: Omit<EmailProps, "approveUrl">) {
   let body = `<div dir="ltr">`
   body += [
     `Hi there`,

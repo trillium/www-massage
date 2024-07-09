@@ -1,3 +1,5 @@
+import { EmailProps } from "@/lib/types"
+
 const LINE_PREFIX = `<div class="gmail_default" style="font-family:arial,sans-serif">`
 const LINE_SUFFIX = `</div>`
 
@@ -8,14 +10,9 @@ export default function ApprovalEmail({
   dateSummary,
   approveUrl,
   timeZone,
-}: {
-  dateSummary: string
-  email: string
-  name: string
-  location: string
-  approveUrl: string
-  timeZone: string
-}) {
+  price,
+  duration
+}: EmailProps) {
   const SUBJECT = `${name} wants to meet with you`
 
   const declineUrl = `mailto:${encodeURI(email)}?subject=${encodeURIComponent(
