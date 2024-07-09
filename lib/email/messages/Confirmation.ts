@@ -1,9 +1,7 @@
 const LINE_PREFIX = `<div class="gmail_default" style="font-family:arial,sans-serif">`
 const LINE_SUFFIX = `</div>`
 
-const SUBJECT = `Your meeting request`
-
-export default function ConfirmationEmail({
+export default function ClientRequestEmail({
   dateSummary,
 }: {
   dateSummary: string
