@@ -22,6 +22,8 @@ export type StateType = {
    * must be one of the values in {@link ALLOWED_DURATIONS}
    */
   duration: number
+  /** The number of cost of the session being requested. */
+  price: number
   /** Whether the booking modal is open or busy. */
   modal: ModalStatus
   /** The time slot the user selected (if made). */
