@@ -90,6 +90,7 @@ export async function POST(
 
   // Generate and send the confirmation email
   const confirmationEmail = ClientRequestEmail({
+    ...data,
     dateSummary: intervalToHumanString({
       start,
       end,
