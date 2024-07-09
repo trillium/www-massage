@@ -1,7 +1,7 @@
 import type { Dispatch, FC } from "react"
 import { useReducer, useContext, createContext } from "react"
 
-import { ALLOWED_DURATIONS, DEFAULT_DURATION } from "@/config"
+import { ALLOWED_DURATIONS, DEFAULT_DURATION, DEFAULT_PRICING } from "@/config"
 import Day from "@/lib/day"
 import type { DateTimeInterval } from "@/lib/types"
 import type { PageProps } from "@/app/page"
