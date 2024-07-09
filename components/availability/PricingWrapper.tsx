@@ -3,9 +3,7 @@
 import type { InferGetServerSidePropsType } from "next"
 import { useEffect } from "react"
 
-import {
-  PickerProps,
-} from "@/components/availability/AvailabilityPicker"
+import { PickerProps } from "@/components/availability/AvailabilityPicker"
 import { OWNER_AVAILABILITY } from "@/config"
 import { useProvider } from "@/context/AvailabilityContext"
 import getAvailability from "@/lib/availability/getAvailability"
