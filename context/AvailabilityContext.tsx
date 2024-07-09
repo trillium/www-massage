@@ -134,6 +134,7 @@ export function withProvider<T extends PageProps>(Component: FC<T>): FC<T> {
       selectedDate: props.selectedDate,
       timeZone: props.timeZone,
       duration: props.duration,
+      price: props.price,
       formData: {
         name: "",
         email: "",

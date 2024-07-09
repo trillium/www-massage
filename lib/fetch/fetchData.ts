@@ -4,6 +4,7 @@ import {
   ALLOWED_DURATIONS,
   DEFAULT_APPOINTMENT_INTERVAL,
   DEFAULT_DURATION,
+  DEFAULT_PRICING
 } from "@/config"
 import getBusyTimes from "@/lib/availability/getBusyTimes"
 import {
@@ -51,6 +52,7 @@ export async function fetchData({ searchParams }: { searchParams: URLSearchParam
       duration,
       ...(timeZone && { timeZone }),
       ...(selectedDate && { selectedDate }),
+      price: DEFAULT_PRICING[DEFAULT_DURATION]
     },
   }
 }
