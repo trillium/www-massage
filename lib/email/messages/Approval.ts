@@ -13,12 +13,12 @@ export default function ApprovalEmail({
   price,
   duration
 }: EmailProps) {
-  const SUBJECT = `${name} wants to meet with you`
+  const SUBJECT = `REQUEST: ${name}, ${duration}, ${price}`
 
   const declineUrl = `mailto:${encodeURI(email)}?subject=${encodeURIComponent(
-    `Re: Your meeting request`
+    `Re: Massage appointment request`
   )}&body=${encodeURIComponent(
-    `Hi there,
+    `Hi ${name || "there"},
 
 I just checked my calendar and it looks like ${dateSummary} won't work.
 
@@ -27,14 +27,26 @@ Would you be able to meet at a different time?`
 
   let body = `<div dir="ltr">`
   body += [
-    `<b>${name}</b> has requested a meeting on <b>${dateSummary}</b>, via <b>${location}</b>`,
+    `<b>${name}</b> has requested a meeting:`,
     `<br>`,
     `Their local timezone is ${timeZone}`,
+    `<br>`,
+    `<b>Name:</b> ${name}`,
+    `<br>`,
+    `<b>Date:</b> ${dateSummary}`,
+    `<br>`,
+    `<b>Location:</b> ${location}`,
+    `<br>`,
+    `<b>Price:</b> ${price}`,
+    `<br>`,
+    `<b>Duration:</b> ${duration}`,
+    `<br>`,
     `<br>`,
     `<br>`,
     `<b><a href=${approveUrl}>Accept the meeting</a></b>`,
     `<br>`,
     `<b><a href=${declineUrl}>Decline the meeting</a></b>`,
+    `<br>`,
   ]
     .map((line) => `${LINE_PREFIX}${line}${LINE_SUFFIX}`)
     .join("")
