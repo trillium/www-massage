@@ -6,13 +6,12 @@ import { useEffect } from "react"
 import { z } from "zod"
 
 import Template from "@/components/Template"
-import AvailabilityPicker, { PickerProps } from "@/components/availability/AvailabilityPicker"
+import AvailabilityPicker from "@/components/availability/AvailabilityPicker"
 import {
   ALLOWED_DURATIONS,
   DEFAULT_APPOINTMENT_INTERVAL,
   DEFAULT_DURATION,
   OWNER_AVAILABILITY,
-  DEFAULT_PRICING
 } from "@/config"
 import { useProvider, withProvider } from "@/context/AvailabilityContext"
 import getAvailability from "@/lib/availability/getAvailability"
@@ -37,15 +36,6 @@ function Page({
     state: { duration, selectedDate },
     dispatch,
   } = useProvider()
-
-  const pickerProps: PickerProps = {
-    durationProps: {
-      title: `Session Duration - $${DEFAULT_PRICING[duration]}`
-    },
-    tzPickerProps: {
-      showPicker: false
-    }
-  }
 
   const startDay = Day.dayFromString(start)
   const endDay = Day.dayFromString(end)
@@ -87,11 +77,8 @@ function Page({
 
   return (
     <main className="max-w-2xl sm:mx-auto mx-4 pb-24">
-      <Template 
-        title="Book a session with Trillium :)"
-        text="Select a date and time and fill out the form to request an appointment time."
-      />
-      <AvailabilityPicker slots={slots} pickerProps={pickerProps} />
+      <Template />
+      <AvailabilityPicker slots={slots} />
     </main>
   )
 }
