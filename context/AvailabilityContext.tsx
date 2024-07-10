@@ -88,7 +88,7 @@ const StateContext = createContext<StateType>({
   },
 })
 
-type ValuesProps = Omit<PageProps, "busy">  & { price: number }
+type ValuesProps = Omit<PageProps, "busy"> & { price: number }
 
 /**
  * The provider component that wraps the application, providing state and actions.
@@ -140,7 +140,7 @@ export function withProvider<T extends PageProps>(Component: FC<T>): FC<T> {
         email: "",
         location: "",
         phone: "",
-        paymentMethod: "", 
+        paymentMethod: "",
       },
     }
 
@@ -184,7 +184,7 @@ function getInitialState(values: ValuesProps): StateType {
       email: "",
       location: "",
       phone: "",
-      paymentMethod: "cash", 
+      paymentMethod: "cash",
     },
   }
 }
@@ -264,7 +264,11 @@ function reducerFunction(state: StateType, action: ActionType): StateType {
   })
 
   // Push to the window.
-  window.history.replaceState(null, "", `${window.location.pathname}?${newUrl.toString()}`)
+  window.history.replaceState(
+    null,
+    "",
+    `${window.location.pathname}?${newUrl.toString()}`
+  )
 
   return newState
 }
