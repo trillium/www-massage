@@ -8,6 +8,7 @@ export default function ClientRequestEmail({
   price,
   name,
   dateSummary,
+  location,
 }: Omit<EmailProps, "approveUrl">) {
   const SUBJECT = `Massage Session Request ${price}, ${duration}`
 
