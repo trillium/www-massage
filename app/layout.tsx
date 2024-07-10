@@ -33,11 +33,7 @@ export default function RootLayout({
         sizes="16x16"
         href="/favicon-16x16.png"
       />
-      <body className="h-full">
-        <>
-          {children}
-        </>
-      </body>
+      <body className="h-full">{children}</body>
     </html>
   )
 }
