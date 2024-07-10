@@ -1,21 +1,33 @@
+import { EmailProps } from "@/lib/types"
+
 const LINE_PREFIX = `<div class="gmail_default" style="font-family:arial,sans-serif">`
 const LINE_SUFFIX = `</div>`
 
-const SUBJECT = `Your meeting request`
-
-export default function ConfirmationEmail({
+export default function ClientRequestEmail({
+  duration,
+  price,
+  name,
   dateSummary,
-}: {
-  dateSummary: string
-}) {
+  location,
+}: Omit<EmailProps, "approveUrl">) {
+  const SUBJECT = `Massage Session Request ${price}, ${duration}`
+
   let body = `<div dir="ltr">`
   body += [
-    `Hi there`,
+    `Hi ${name || "there"}`,
     `<br>`,
-    `Just confirming that your request for <b>${dateSummary}</b> has been received. 
-I'll review it as soon as I can and get back to you with a confirmation.`,
+    `Just letting you know I received your appointment request!`,
+    `<br>`,
+    `<b>Date:</b> ${dateSummary}`,
+    `<b>Location:</b> ${location}`,
+    `<b>Price:</b> $${price}`,
+    `<b>Duration:</b> ${duration} minutes`,
+    `<br>`,
+    `I'll review it as soon as I can and get back to you with a confirmation.`,
     `<br>`,
     `Thanks!`,
+    `<br>`,
+    `Trillium Smith`,
   ]
     .map((line) => `${LINE_PREFIX}${line}${LINE_SUFFIX}`)
     .join("")

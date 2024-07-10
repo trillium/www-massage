@@ -1,7 +1,7 @@
 import type { Dispatch, FC } from "react"
 import { useReducer, useContext, createContext } from "react"
 
-import { ALLOWED_DURATIONS, DEFAULT_DURATION } from "@/config"
+import { ALLOWED_DURATIONS, DEFAULT_DURATION, DEFAULT_PRICING } from "@/config"
 import Day from "@/lib/day"
 import type { DateTimeInterval } from "@/lib/types"
 import type { PageProps } from "@/app/page"
@@ -22,6 +22,8 @@ export type StateType = {
    * must be one of the values in {@link ALLOWED_DURATIONS}
    */
   duration: number
+  /** The number of cost of the session being requested. */
+  price: number
   /** Whether the booking modal is open or busy. */
   modal: ModalStatus
   /** The time slot the user selected (if made). */
@@ -47,6 +49,11 @@ export type ActionType =
       payload: number
     }
   | {
+      type: "SET_PRICE"
+      /** Change the duration */
+      payload: number
+    }
+  | {
       type: "SET_MODAL"
       /** Set modal status */
       payload: ModalStatus
@@ -66,7 +73,8 @@ const StateSetContext = createContext<Dispatch<ActionType> | undefined>(
   undefined
 )
 const StateContext = createContext<StateType>({
-  duration: ALLOWED_DURATIONS[0],
+  duration: DEFAULT_DURATION,
+  price: DEFAULT_PRICING[DEFAULT_DURATION],
   start: Day.todayWithOffset(0),
   end: Day.todayWithOffset(14),
   timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -79,6 +87,8 @@ const StateContext = createContext<StateType>({
     paymentMethod: "",
   },
 })
+
+type ValuesProps = Omit<PageProps, "busy"> & { price: number }
 
 /**
  * The provider component that wraps the application, providing state and actions.
@@ -93,7 +103,7 @@ export function Provider({
   values,
 }: {
   children: React.ReactNode
-  values: Omit<PageProps, "busy">
+  values: ValuesProps
 }): JSX.Element {
   // Get the initial state from the values passed in.
   const initialProps: StateType = getInitialState(values)
@@ -124,12 +134,13 @@ export function withProvider<T extends PageProps>(Component: FC<T>): FC<T> {
       selectedDate: props.selectedDate,
       timeZone: props.timeZone,
       duration: props.duration,
+      price: props.price,
       formData: {
         name: "",
         email: "",
         location: "",
         phone: "",
-        paymentMethod: "", 
+        paymentMethod: "",
       },
     }
 
@@ -145,10 +156,10 @@ export function withProvider<T extends PageProps>(Component: FC<T>): FC<T> {
  * Return the initial state from the values passed in, applying sensible
  * defaults for values that are missing.
  *
- * @param {Omit<PageProps, "busy">} values The initial values to use.
+ * @param {ValuesProps} values The initial values to use.
  * @return {StateType} An object that can be used for the initial state.
  */
-function getInitialState(values: Omit<PageProps, "busy">): StateType {
+function getInitialState(values: ValuesProps): StateType {
   const timeZone =
     values.timeZone ?? Intl.DateTimeFormat().resolvedOptions().timeZone ?? "UTC"
 
@@ -163,13 +174,17 @@ function getInitialState(values: Omit<PageProps, "busy">): StateType {
       values.duration && !Number.isNaN(values.duration)
         ? values.duration
         : DEFAULT_DURATION,
+    price:
+      values.price && !Number.isNaN(values.price)
+        ? values.price
+        : DEFAULT_PRICING[DEFAULT_DURATION],
     modal: "closed",
     formData: {
       name: "",
       email: "",
       location: "",
       phone: "",
-      paymentMethod: "cash", 
+      paymentMethod: "cash",
     },
   }
 }
@@ -214,6 +229,10 @@ function reducerFunction(state: StateType, action: ActionType): StateType {
       newState = { ...state, duration: action.payload }
       break
     }
+    case "SET_PRICE": {
+      newState = { ...state, price: action.payload }
+      break
+    }
     case "SET_MODAL": {
       newState = { ...state, modal: action.payload }
       break
@@ -245,7 +264,11 @@ function reducerFunction(state: StateType, action: ActionType): StateType {
   })
 
   // Push to the window.
-  window.history.replaceState(null, "", `${window.location.pathname}?${newUrl.toString()}`)
+  window.history.replaceState(
+    null,
+    "",
+    `${window.location.pathname}?${newUrl.toString()}`
+  )
 
   return newState
 }

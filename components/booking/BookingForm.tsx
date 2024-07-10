@@ -54,7 +54,7 @@ const paymentMethod = [
 
 export default function BookingForm() {
   const {
-    state: { modal, selectedTime, timeZone, duration, formData },
+    state: { modal, selectedTime, timeZone, duration, formData, price },
     dispatch,
   } = useProvider()
   const router = useRouter()
@@ -104,6 +104,7 @@ export default function BookingForm() {
           value={selectedTime.end.toISOString()}
         />
         <input type="hidden" name="duration" value={duration} />
+        <input type="hidden" name="price" value={price} />
         <input type="hidden" name="timeZone" value={timeZone} />
 
         <div className="border-l-4 border-l-secondary-400 bg-secondary-50/30 dark:bg-secondary-50/10 p-3 mt-3 mb-4 rounded-md">

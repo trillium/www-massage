@@ -3,9 +3,7 @@
 import type { InferGetServerSidePropsType } from "next"
 import { useEffect } from "react"
 
-import {
-  PickerProps,
-} from "@/components/availability/AvailabilityPicker"
+import { PickerProps } from "@/components/availability/AvailabilityPicker"
 import { OWNER_AVAILABILITY } from "@/config"
 import { useProvider } from "@/context/AvailabilityContext"
 import getAvailability from "@/lib/availability/getAvailability"
@@ -70,6 +68,10 @@ export function PricingWrapper({
         payload: Day.dayFromString(dateString), //payload from date respecting timezone
       })
     }
+    dispatch({
+      type: "SET_PRICE",
+      payload: pricing[duration], //payload from date respecting timezone
+    })
     // Run once, on initial render.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
