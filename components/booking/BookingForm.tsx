@@ -103,9 +103,9 @@ export default function BookingForm() {
           name="end"
           value={selectedTime.end.toISOString()}
         />
-        <input type="hidden" name="duration" value={duration} />
-        <input type="hidden" name="price" value={price} />
-        <input type="hidden" name="timeZone" value={timeZone} />
+        <input type="hidden" readOnly name="duration" value={duration} />
+        <input type="hidden" readOnly name="price" value={price} />
+        <input type="hidden" readOnly name="timeZone" value={timeZone} />
 
         <div className="border-l-4 border-l-secondary-400 bg-secondary-50/30 dark:bg-secondary-50/10 p-3 mt-3 mb-4 rounded-md">
           <p className="text-sm md:text-base font-semibold text-secondary-800 dark:text-secondary-400">
