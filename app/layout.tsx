@@ -20,7 +20,7 @@ const public_sans = Public_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
-  title: `Meet with ${process.env.NEXT_PUBLIC_OWNER_NAME ?? "me"}`,
+  title: siteMetadata.title,
   openGraph: {
     title: siteMetadata.title,
     description: siteMetadata.description,
