@@ -10,6 +10,7 @@ import ThemeSwitch from "@/components/ThemeSwitch"
 
 import siteMetadata from "@/data/siteMetadata"
 import { NavOptions } from "@/components/NavOptions"
+import SectionContainer from "@/components/SectionContainer"
 
 const public_sans = Public_Sans({
   subsets: ["latin"],
@@ -74,14 +75,16 @@ export default function RootLayout({
       />
       <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
         <ThemeProviders>
-          <header className="relative flex items-center justify-between px-4 py-10 sm:px-0">
-            <div></div>
-            <nav className="flex items-center space-x-4 leading-5 sm:space-x-6">
-              <NavOptions />
-              <ThemeSwitch />
-            </nav>
-          </header>
-          {children}
+          <SectionContainer>
+            <header className="relative flex items-center justify-between px-4 py-10 sm:px-0">
+              <div></div>
+              <nav className="flex items-center space-x-4 leading-5 sm:space-x-6">
+                <NavOptions />
+                <ThemeSwitch />
+              </nav>
+            </header>
+            {children}
+          </SectionContainer>
         </ThemeProviders>
         <Analytics />
       </body>
