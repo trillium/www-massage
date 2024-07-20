@@ -42,8 +42,8 @@ module.exports = {
         14: '3.5rem',
       },
       colors: {
-        primary: colors.green,
-        secondary: colors.teal,
+        primary: colors.teal,
+        secondary: colors.green,
         gray: colors.neutral,
       },
       fontFamily: {
