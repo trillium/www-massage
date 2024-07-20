@@ -8,7 +8,8 @@ import { ThemeProviders } from "@/app/ThemeProviders"
 import "@/styles/global.css"
 import ThemeSwitch from "@/components/ThemeSwitch"
 
-import siteMetadata from "./siteMetadata"
+import siteMetadata from "@/data/siteMetadata"
+import { NavOptions } from "@/components/NavOptions"
 
 const public_sans = Public_Sans({
   subsets: ["latin"],
@@ -71,11 +72,15 @@ export default function RootLayout({
         sizes="16x16"
         href="/favicon-16x16.png"
       />
-      <body className="h-full">
+      <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
         <ThemeProviders>
-          <nav className="w-screen flex justify-end pr-4 pt-4">
-            <ThemeSwitch />
-          </nav>
+          <header className="relative flex items-center justify-between px-4 py-10 sm:px-0">
+            <div></div>
+            <nav className="flex items-center space-x-4 leading-5 sm:space-x-6">
+              <NavOptions />
+              <ThemeSwitch />
+            </nav>
+          </header>
           {children}
         </ThemeProviders>
         <Analytics />
