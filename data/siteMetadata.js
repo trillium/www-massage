@@ -7,7 +7,7 @@ const siteMetadata = {
   company: 'Trillium Massage',
   headerTitle: 'Trillium Smith',
   location: 'Los Angeles, CA',
-  openToWork: true,
+  // openToWork: true,
   description: 'Book a massage with Trillium!',
   language: 'en-us',
   theme: 'system', // system, dark or light
@@ -22,7 +22,7 @@ const siteMetadata = {
   // twitter: 'https://twitter.com/Twitter',
   // facebook: 'https://facebook.com',
   // youtube: 'https://youtube.com',
-  linkedin: 'https://www.linkedin.com/in/trilliumsmith/',
+  // linkedin: 'https://www.linkedin.com/in/trilliumsmith/',
   // threads: 'https://www.threads.net',
   // instagram: 'https://www.instagram.com',
   locale: 'en-US',
