@@ -28,14 +28,14 @@ export default function DurationPicker({ title }: { title: string }) {
             }}
             type="button"
             className={clsx(
-              "relative inline-flex items-center px-3 py-2 text-sm font-semibold ring-1 ring-inset focus:z-10 outline-secondary-600",
+              "relative inline-flex items-center px-3 py-2 text-sm font-semibold ring-1 ring-inset focus:z-10 outline-primary-600",
               {
                 "rounded-l-md": i === 0,
                 "rounded-r-md": i === ALLOWED_DURATIONS.length - 1,
                 "-ml-px": i > 0,
                 "bg-white text-gray-900 ring-gray-300 hover:bg-gray-200":
                   theDuration !== duration,
-                "bg-secondary-500 text-white ring-secondary-600 shadow-inner shadow-secondary-900":
+                "bg-primary-500 text-white ring-primary-600 shadow-inner shadow-primary-900":
                   theDuration === duration,
               }
             )}>

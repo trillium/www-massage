@@ -26,7 +26,7 @@ export default function TimezonePicker() {
         value={selectedTimeZoneValue}
         id="location"
         name="location"
-        className="mt-1 block w-full h-9 rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 dark:text-gray-100 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-secondary-600 leading-6 overflow-x-clip"
+        className="mt-1 block w-full h-9 rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 dark:text-gray-100 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-primary-600 leading-6 overflow-x-clip"
         onChange={(e) => {
           dispatch({
             type: "SET_TIMEZONE",

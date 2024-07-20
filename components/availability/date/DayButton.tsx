@@ -42,15 +42,15 @@ export default function DayButton({
       type="button"
       className={twMerge(
         clsx(
-          "p-4 transition-all flex flex-col items-center outline-secondary-600 relative",
+          "p-4 transition-all flex flex-col items-center outline-primary-600 relative",
           props.className,
           {
-            "font-semibold bg-slate-300 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hocus:border-secondary-500 hocus:shadow-sm hocus:shadow-secondary-100 hocus:-mt-0.5 hocus:z-10 hocus:mb-0.5 border border-transparent":
+            "font-semibold bg-slate-300 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hocus:border-primary-500 hocus:shadow-sm hocus:shadow-primary-100 hocus:-mt-0.5 hocus:z-10 hocus:mb-0.5 border border-transparent":
               !isDisabled,
             "bg-white dark:bg-slate-200 text-gray-500 dark:text-gray-500": isDisabled,
-            // "bg-secondary-500": isSelected && !isToday,
-            // "bg-secondary-600 dark:bg-secondary-600 hover:bg-secondary-500": isSelected && isToday,
-            "text-white dark:text-gray-100 bg-secondary-500 dark:bg-secondary-600": isSelected,
+            // "bg-primary-500": isSelected && !isToday,
+            // "bg-primary-600 dark:bg-primary-600 hover:bg-primary-500": isSelected && isToday,
+            "text-white dark:text-gray-100 bg-primary-500 dark:bg-primary-600": isSelected,
           }
         )
       )}
@@ -74,7 +74,7 @@ export default function DayButton({
             {
               "text-white": isSelected,
               "text-gray-500 dark:text-gray-500": isDisabled && !isSelected,
-              "text-secondary-700 dark:text-secondary-600": !isSelected,
+              "text-primary-700 dark:text-primary-600": !isSelected,
             }
           )}>
           {isToday && "TODAY"}
