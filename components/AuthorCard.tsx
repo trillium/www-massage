@@ -57,24 +57,15 @@ const AuthorCard = () => {
             Westchester, Trillium has built a reputation for providing effective
             massage therapy with a combined focus on relaxation and pain relief.
             His experience and commitment to client well-being have clients
-            saying "5-star service" after over 3,000 sessions across in-home,
-            in-office, and event locations.
+            saying &quot;5-star service&quot; after over 3,000 sessions across
+            in-home, in-office, and event locations.
           </p>
           <p className="py-2">
             Specializing in in-home massage and chair massage, Trillium brings
             relaxation and therapeutic relief directly to his clients. This
             mobile approach ensures that clients can enjoy a massage in the
             comfort of their own homes or workplaces, offering convenience and a
-            tailored experience. Whether it's relieving stress, alleviating
-            pain, or simply promoting relaxation, Trillium's expertise covers a
-            broad spectrum of needs.
-          </p>
-          <p className="py-2">
-            In addition to his massage services, Trillium also offers couples
-            massage workshops upon request. These workshops provide valuable
-            insights and techniques for those interested in learning more about
-            how to provide effective massage therapy while using good body
-            mechanics and avoiding injury.
+            tailored experience. Whether it&apos;s relieving stress, alleviating
           </p>
         </div>
       </div>
