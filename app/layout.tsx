@@ -11,6 +11,8 @@ import ThemeSwitch from "@/components/ThemeSwitch"
 import siteMetadata from "@/data/siteMetadata"
 import { NavOptions } from "@/components/NavOptions"
 import SectionContainer from "@/components/SectionContainer"
+import Link from "next/link"
+import Logo from '@/components/Logo'
 
 const public_sans = Public_Sans({
   subsets: ["latin"],
@@ -66,7 +68,22 @@ export default function RootLayout({
         <ThemeProviders>
           <SectionContainer>
             <header className="relative flex items-center justify-between px-4 py-10 sm:px-0">
-              <div></div>
+              <div className="align-center flex flex-row items-center">
+                <Link href="/" aria-label={siteMetadata.headerTitle}>
+                  <div className="flex items-center justify-between">
+                    <div className="mr-2 flex items-center">
+                      <Logo classes="text-primary-500 w-12 h-12" />
+                    </div>
+                    {typeof siteMetadata.headerTitle === "string" ? (
+                      <div className="hidden h-6 text-2xl font-semibold sm:block">
+                        {siteMetadata.headerTitle}
+                      </div>
+                    ) : (
+                      siteMetadata.headerTitle
+                    )}
+                  </div>
+                </Link>
+              </div>
               <nav className="flex items-center space-x-4 leading-5 sm:space-x-6">
                 <NavOptions />
                 <ThemeSwitch />
