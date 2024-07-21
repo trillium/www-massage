@@ -1,4 +1,3 @@
-import NextImage, { ImageProps } from "next/image"
 import Link from "next/link"
 
 interface BookSessionButtonProps {
@@ -10,13 +9,12 @@ interface BookSessionButtonProps {
 const BookSessionButton: React.FC<BookSessionButtonProps> = ({
   href,
   title,
-  classes = "",
 }) => (
   <Link
     href={href}
     className="group relative inline-flex h-[calc(48px+8px)] items-center border-primary-500 border-4 justify-center rounded-full pl-6 pr-14 font-medium">
     <span className="z-10 font-bold text-xl pr-2 text-black-500 dark:text-white">
-      Book a Session!
+      {title}
     </span>
     <div className="absolute right-0 inline-flex h-12 w-12 items-center justify-end rounded-full bg-primary-500 group-hover:bg-gradient-to-r group-hover:from-primary-700 group-hover:to-primary-500 group-hover:via-primary-500 transition-[width] group-hover:w-[calc(100%)]">
       <div className="mr-3.5 flex items-center justify-center">
