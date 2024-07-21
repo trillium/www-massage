@@ -5,7 +5,7 @@ const siteMetadata = {
   avatar: '/static/images/avatar.png',
   occupation: 'Massage Therapist',
   company: 'Trillium Massage',
-  headerTitle: 'Trillium Smith',
+  headerTitle: 'Trillium Massage',
   location: 'Los Angeles, CA',
   // openToWork: true,
   description: 'Book a massage with Trillium!',
