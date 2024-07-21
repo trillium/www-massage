@@ -51,20 +51,20 @@ const AuthorCard = () => {
       </div>
       <div className="flex max-w-full flex-col items-center justify-center">
         <div className="prose max-w-full pb-8 pt-10 dark:prose-invert xl:text-xl">
-          <p className="py-2">
+          <p className="py-2 text-justify first-letter:text-2xl">
             Trillium is a seasoned massage therapist with over a decade of
             experience. Based in Los Angeles, he combines relaxation and pain
             relief techniques to provide his clients with effective massage
             therapy. He has a maintained a 5-star rating based on over 3,000
             client sessions.
           </p>
-          <p className="py-2">
+          <p className="py-2 text-justify">
             Specializing in in-home massage and chair massage, Trillium brings
             his services directly to his clients, allowing people to enjoy
             massage in the comfort of their own home or workplace without the
             hassle of fighting LA traffic.
           </p>
-          <p className="py-2">
+          <p className="py-2 text-justify">
             In addition to massage services, Trillium also offers couple’s
             massage workshops upon request. His workshops focus on how to
             provide effective massage therapy while using good body mechanics
