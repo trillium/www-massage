@@ -61,18 +61,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={public_sans.className} suppressHydrationWarning>
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href="/favicon-32x32.png"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href="/favicon-16x16.png"
-      />
+      <link rel="icon" type="image/svg+xml" href={"/logo_svg.svg"} />
       <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
         <ThemeProviders>
           <SectionContainer>
