@@ -52,20 +52,23 @@ const AuthorCard = () => {
       <div className="flex max-w-full flex-col items-center justify-center">
         <div className="prose max-w-full pb-8 pt-10 dark:prose-invert xl:text-xl">
           <p className="py-2">
-            Trillium is a seasoned massage therapist with a decade of
-            experience, serving the vibrant Los Angeles area. Based in
-            Westchester, Trillium has built a reputation for providing effective
-            massage therapy with a combined focus on relaxation and pain relief.
-            His experience and commitment to client well-being have clients
-            saying &quot;5-star service&quot; after over 3,000 sessions across
-            in-home, in-office, and event locations.
+            Trillium is a seasoned massage therapist with over a decade of
+            experience. Based in Los Angeles, he combines relaxation and pain
+            relief techniques to provide his clients with effective massage
+            therapy. He has a maintained a 5-star rating based on over 3,000
+            client sessions.
           </p>
           <p className="py-2">
             Specializing in in-home massage and chair massage, Trillium brings
-            relaxation and therapeutic relief directly to his clients. This
-            mobile approach ensures that clients can enjoy a massage in the
-            comfort of their own homes or workplaces, offering convenience and a
-            tailored experience. Whether it&apos;s relieving stress, alleviating
+            his services directly to his clients, allowing people to enjoy
+            massage in the comfort of their own home or workplace without the
+            hassle of fighting LA traffic.
+          </p>
+          <p className="py-2">
+            In addition to massage services, Trillium also offers couple’s
+            massage workshops upon request. His workshops focus on how to
+            provide effective massage therapy while using good body mechanics
+            and preventing therapist injury.
           </p>
         </div>
       </div>
