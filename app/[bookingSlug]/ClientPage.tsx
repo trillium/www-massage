@@ -31,7 +31,6 @@ function Page({
     <main className="max-w-2xl sm:mx-auto mx-4 pb-24">
       <Template
         title="Book a session with Trillium :)"
-        text="Select a date and time and fill out the form to request an appointment time."
       />
       <AvailabilityPicker slots={slots} pickerProps={pickerProps} />
     </main>
