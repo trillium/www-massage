@@ -3,11 +3,9 @@ import BookSessionButton from "@/components/BookSessionButton"
 
 export default function About({}) {
   return (
-    <>
+    <div className="flex flex-col items-center">
       <AuthorCard />
-      <div className="tailwind flex items-center justify-center">
-        <BookSessionButton title="Book a Session!" href="/book" />
-      </div>
-    </>
+      <BookSessionButton title="Book a Session!" href="/book" />
+    </div>
   )
 }
