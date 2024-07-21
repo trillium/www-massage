@@ -12,7 +12,7 @@ const BookSessionButton: React.FC<BookSessionButtonProps> = ({
 }) => (
   <Link
     href={href}
-    className="group relative inline-flex h-[calc(48px+8px)] items-center border-primary-500 border-4 justify-center rounded-full pl-6 pr-14 font-medium">
+    className="group mb-4 relative inline-flex h-[calc(48px+8px)] items-center border-primary-500 dark:border-primary-400 border-4 justify-center rounded-full pl-6 pr-14 font-medium">
     <span className="z-10 font-bold text-xl pr-2 text-black-500 dark:text-white">
       {title}
     </span>
