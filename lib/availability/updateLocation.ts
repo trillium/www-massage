@@ -11,8 +11,8 @@ export default async function updateLocation({
   const timeZone = "America/Los_Angeles"
 
   const now = new Date()
-  const start = new Date(now.getTime() - 5 * 60000)
-  const end = new Date(now.getTime() - 60000)
+  const start = new Date(now.getTime() - 15 * 60000)
+  const end = new Date(now.getTime())
 
   const startDateTime = start.toISOString()
   const endDateTime = end.toISOString()
