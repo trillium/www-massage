@@ -1,6 +1,6 @@
 import getAccessToken from "./getAccessToken" // Reuse existing function to get access token
 
-export async function getEventsBySearchQuery(searchQuery: string, {start, end}) {
+export async function getEventsBySearchQuery(searchQuery: string, {start, end}: {start: any, end: any}) {
   
   const accessToken = await getAccessToken()
   const calendarId = "primary" // Use 'primary' for the primary calendar or specify another calendar ID
