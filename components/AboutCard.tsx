@@ -16,7 +16,7 @@ const AuthorCard = () => {
   } = siteMetadata
   return (
     <div>
-      <div className="flex flex-row items-center justify-center space-x-2 pb-8">
+      <div className="flex flex-row items-center justify-center space-x-2 pb-2">
         {avatar && (
           <div className="pr-2 xl:pr-4">
             <Image
