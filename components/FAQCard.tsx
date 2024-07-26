@@ -54,10 +54,6 @@ const questions = [
     a: "Wear whatever makes you comfortable. Many clients choose to undress to their comfort level and are draped appropriately during the session.",
   },
   {
-    q: "How do you ensure client privacy and confidentiality?",
-    a: "Your privacy is paramount. All sessions are conducted professionally, and personal information is kept confidential at all times.",
-  },
-  {
     q: "Do you offer massage packages or gift certificates?",
     a: "Yes, I offer packages for multiple sessions at a discounted rate, and gift certificates are available for special occasions.",
   },
