@@ -64,8 +64,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={public_sans.className} suppressHydrationWarning>
       <link rel="icon" type="image/svg+xml" href={"/logo_svg.svg"} />
-      <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
-        <ThemeProviders>
+      <ThemeProviders>
+        <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
           <SectionContainer>
             <header className="relative flex items-center justify-between px-4 py-10 sm:px-0">
               <div className="align-center flex flex-row items-center">
@@ -91,9 +91,9 @@ export default function RootLayout({
             </header>
             {children}
           </SectionContainer>
-        </ThemeProviders>
-        <Analytics />
-      </body>
+          <Analytics />
+        </body>
+      </ThemeProviders>
     </html>
   )
 }
