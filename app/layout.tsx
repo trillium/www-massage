@@ -1,7 +1,7 @@
 import React from "react"
 import { Public_Sans } from "next/font/google"
 import { Metadata } from "next"
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/react"
 
 import { ThemeProviders } from "@/app/ThemeProviders"
 
@@ -12,7 +12,7 @@ import siteMetadata from "@/data/siteMetadata"
 import { NavOptions } from "@/components/NavOptions"
 import SectionContainer from "@/components/SectionContainer"
 import Link from "next/link"
-import Logo from '@/components/Logo'
+import Logo from "@/components/Logo"
 
 const public_sans = Public_Sans({
   subsets: ["latin"],
