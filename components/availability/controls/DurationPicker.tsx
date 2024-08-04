@@ -35,7 +35,7 @@ export default function DurationPicker({ title }: { title: string }) {
                 "-ml-px": i > 0,
                 "bg-white text-gray-900 ring-gray-300 hover:bg-gray-200":
                   theDuration !== duration,
-                "bg-primary-500 text-white ring-primary-600 shadow-inner shadow-primary-900":
+                "bg-primary-500 text-white ring-primary-400 shadow-inner shadow-primary-900":
                   theDuration === duration,
               }
             )}>
