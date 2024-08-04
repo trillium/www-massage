@@ -3,6 +3,7 @@ import slugs from "./pricing"
 
 import ClientPage from "./ClientPage"
 import { fetchData } from "@/lib/fetch/fetchData"
+import { applyReferral } from "@/lib/posthog/applyReferral"
 
 export default async function Page({
   searchParams,
@@ -19,5 +20,6 @@ export default async function Page({
   }
 
   const { props } = await fetchData({ searchParams })
+  applyReferral({ searchParams })
   return <ClientPage {...props} pricing={pricing} />
 }
