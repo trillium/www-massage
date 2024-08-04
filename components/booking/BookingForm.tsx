@@ -33,7 +33,7 @@ const paymentMethod = [
   {
     name: "Venmo",
     value: "venmo",
-    hint: "Venmo name is @TrilliumSmith"
+    hint: "Venmo name is @TrilliumSmith, last 4 phone number -5344"
   },
   {
     name: "CashApp",
