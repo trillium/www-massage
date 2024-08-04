@@ -44,7 +44,7 @@ const RenderNavLink = ({ navItem }: { navItem: NavItem }) => {
       <Link
         key={navItem.title}
         href={navItem.href}
-        className=" font-medium text-gray-900 hover:text-primary-500 dark:text-gray-100  dark:hover:text-primary-400 sm:block">
+        className="text-sm xs:text-base font-medium text-gray-900 hover:text-primary-500 dark:text-gray-100  dark:hover:text-primary-400 sm:block">
         {navItem.title}
       </Link>
     )

@@ -72,7 +72,7 @@ export default function RootLayout({
                 <Link href="/" aria-label={siteMetadata.headerTitle}>
                   <div className="flex items-center justify-between">
                     <div className="mr-2 flex items-center">
-                      <Logo classes="text-primary-500 w-12 h-12" />
+                      <Logo classes="text-primary-500 w-10 h-10 xs:w-12 xs:h-12" />
                     </div>
                     {typeof siteMetadata.headerTitle === "string" ? (
                       <div className="hidden h-6 text-2xl font-semibold sm:block">
@@ -84,7 +84,7 @@ export default function RootLayout({
                   </div>
                 </Link>
               </div>
-              <nav className="flex items-center space-x-4 leading-5 sm:space-x-6">
+              <nav className="flex items-center space-x-3 xs:space-x-4 leading-5 sm:space-x-6">
                 <NavOptions />
                 <ThemeSwitch />
               </nav>
