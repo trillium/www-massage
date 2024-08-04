@@ -9,6 +9,7 @@ if (typeof window !== "undefined") {
     api_host: "/ingest",
     ui_host: 'https://us.posthog.com',
     person_profiles: "always", // or 'always' to create profiles for anonymous users as well
+    custom_campaign_params: ["ref"]
   })
 }
 
