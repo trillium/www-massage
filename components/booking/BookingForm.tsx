@@ -140,14 +140,14 @@ export default function BookingForm() {
             </div>
             <div className="relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
               <label
-                htmlFor="email"
+                htmlFor="phone"
                 className="block text-xs font-medium text-gray-900 dark:text-gray-100">
                 Phone Number
               </label>
               <input
                 aria-label="Phone Number"
                 required
-                autoComplete="te;"
+                autoComplete="tel"
                 aria-required
                 name="phone"
                 id="phone"
