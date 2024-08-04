@@ -28,6 +28,7 @@
     "next-themes": "^0.3.0",
     "nodemailer": "^6.9.1",
     "posthog-js": "^1.154.2",
+    "posthog-node": "^4.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwind-merge": "^1.10.0",
