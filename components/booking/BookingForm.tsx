@@ -118,7 +118,7 @@ export default function BookingForm() {
 
         <div className="flex flex-col space-y-4">
           <div className="isolate -space-y-px rounded-md shadow-sm">
-            <div className="relative rounded-md rounded-b-none px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-600">
+            <div className="relative rounded-md rounded-b-none px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
               <label
                 htmlFor="name"
                 className="block text-xs font-medium text-gray-900 dark:text-gray-100">
@@ -138,7 +138,7 @@ export default function BookingForm() {
                 placeholder="Will Smith"
               />
             </div>
-            <div className="relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-600">
+            <div className="relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
               <label
                 htmlFor="email"
                 className="block text-xs font-medium text-gray-900 dark:text-gray-100">
@@ -156,7 +156,7 @@ export default function BookingForm() {
                 placeholder="(555) 444 - 3333"
               />
             </div>
-            <div className="relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-600">
+            <div className="relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
               <label
                 htmlFor="email"
                 className="block text-xs font-medium text-gray-900 dark:text-gray-100">
@@ -174,7 +174,7 @@ export default function BookingForm() {
                 placeholder="123 Address Road, Beverly Hills, CA 90210"
               />
             </div>
-            <div className="relative rounded-md rounded-t-none px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-600">
+            <div className="relative rounded-md rounded-t-none px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
               <label
                 htmlFor="email"
                 className="block text-xs font-medium text-gray-900 dark:text-gray-100">
@@ -207,7 +207,7 @@ export default function BookingForm() {
                       type="radio"
                       value={payType.value}
                       defaultChecked={payType.value === paymentMethod[0].value}
-                      className="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600"
+                      className="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-400"
                     />
                     <label
                       htmlFor={payType.value}
@@ -232,7 +232,7 @@ export default function BookingForm() {
           <button
             type="submit"
             disabled={modal === "busy"}
-            className="inline-flex w-full justify-center rounded-md bg-primary-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 sm:ml-3 sm:w-auto disabled:opacity-50">
+            className="inline-flex w-full justify-center rounded-md bg-primary-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 sm:ml-3 sm:w-auto disabled:opacity-50">
             {modal === "busy" ? (
               <>
                 Submitting ... <Spinner className="ml-2" />
