@@ -134,7 +134,7 @@ export default function BookingForm() {
                 name="name"
                 id="name"
                 value={formData && formData.name}
-                className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 mb-1"
                 placeholder="Will Smith"
               />
             </div>
@@ -152,7 +152,7 @@ export default function BookingForm() {
                 name="phone"
                 id="phone"
                 value={formData && formData.phone}
-                className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 mb-1"
                 placeholder="(555) 444 - 3333"
               />
             </div>
@@ -170,7 +170,7 @@ export default function BookingForm() {
                 name="location"
                 id="location"
                 value={formData && formData.location}
-                className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 mb-1"
                 placeholder="123 Address Road, Beverly Hills, CA 90210"
               />
             </div>
@@ -189,7 +189,7 @@ export default function BookingForm() {
                 name="email"
                 id="email"
                 value={formData && formData.email}
-                className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 mb-1"
                 placeholder="name@example.com"
               />
             </div>
