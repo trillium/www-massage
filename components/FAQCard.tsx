@@ -29,7 +29,9 @@ const FAQCard = () => {
             className="pb-4 w-full">
             {({ open }) => (
               <>
-                <Disclosure.Button id={item.id} className="flex w-full justify-between rounded-lg border dark:border-primary-400 bg-none px-4 py-2 text-left font-medium text-gray-900 dark:text-white hover:bg-primary-200 hover:dark:text-gray-900 focus:outline-none focus-visible:ring focus-visible:ring-primary-500/75">
+                <Disclosure.Button
+                  id={item.id}
+                  className="flex w-full justify-between rounded-lg border dark:border-primary-400 bg-none px-4 py-2 text-left font-medium text-gray-900 dark:text-white hover:bg-primary-200 hover:dark:text-gray-900 focus:outline-none focus-visible:ring focus-visible:ring-primary-500/75">
                   <span>{item.q}</span>
                   <ChevronUpIcon
                     className={`${
