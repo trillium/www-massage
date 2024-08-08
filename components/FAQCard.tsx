@@ -67,7 +67,7 @@ const questions = [
   },
 ]
 
-const AuthorCard = () => {
+const FAQCard = () => {
   return (
     <div className="w-full pb-6">
       <Template title="Frequently Asked Questions" />
@@ -104,4 +104,4 @@ const AuthorCard = () => {
   )
 }
 
-export default AuthorCard
+export default FAQCard
