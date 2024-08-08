@@ -35,7 +35,7 @@ const questions = [
   },
   {
     q: "How long do the massage sessions typically last?",
-    a: "Sessions are typically 60, 90, or 120 minutes, depending on your preference and needs. ",
+    a: "Sessions are typically 60, 90, or 120 minutes, with 90 minutes being the most common. It can take between 30 and 45 minutes to fully relax into a massage session, so I tend to recommend at least a 90 minute duration.",
   },
   {
     q: "What are your pricing and payment options?",
