@@ -24,7 +24,7 @@ const siteMetadata = {
   // youtube: 'https://youtube.com',
   // linkedin: 'https://www.linkedin.com/in/trilliumsmith/',
   // threads: 'https://www.threads.net',
-  // instagram: 'https://www.instagram.com',
+  instagram: 'https://www.instagram.com/trilliummassage',
   locale: 'en-US',
   analytics: {
     // If you want to use an analytics provider you have to add it to the
