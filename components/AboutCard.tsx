@@ -1,6 +1,7 @@
 import Image from "./Image"
 // import SocialIcon from '@/components/social-icons'
 import siteMetadata from "@/data/siteMetadata"
+import SocialIcon from '@/components/social-icons'
 
 const paragraphs = `
 I'm a seasoned massage therapist with over a decade of experience, and I'm based in Los Angeles. I specialize in combining relaxation and pain relief techniques to provide my clients with effective massage therapy. With over thousands of client sessions, I have maintained a 5-star rating, reflecting the quality and care I put into my work.
@@ -23,6 +24,7 @@ const AuthorCard = () => {
     linkedin,
     github,
     location,
+    instagram
   } = siteMetadata
   return (
     <div>
@@ -51,12 +53,10 @@ const AuthorCard = () => {
           <div className="md:text-md text-base text-gray-500 dark:text-gray-400">
             {location}
           </div>
-          {/* <div className="flex space-x-3 pt-6">
+          <div className="flex space-x-3 pt-6">
             <SocialIcon kind="mail" href={`mailto:${email}`} />
-            <SocialIcon kind="github" href={github} />
-            <SocialIcon kind="linkedin" href={linkedin} />
-            <SocialIcon kind="twitter" href={twitter} />
-          </div> */}
+            <SocialIcon kind="instagram" href={instagram} />
+          </div>
         </div>
       </div>
       <div className="flex max-w-full flex-col items-center justify-center">
