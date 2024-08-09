@@ -50,7 +50,7 @@ export type ActionType =
     }
   | {
       type: "SET_PRICE"
-      /** Change the duration */
+      /** Change the price */
       payload: number
     }
   | {
