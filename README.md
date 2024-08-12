@@ -40,7 +40,7 @@ See related post at https://dev.to/timfee/build-and-host-your-own-calendy-like-s
 
 # Welcome to my massage therapy booking site :)
 
-![GitHub last commit](https://img.shields.io/github/last-commit/spiteless/www-massage)
+![GitHub last commit](https://img.shields.io/github/last-commit/trillium/www-massage)
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Ftrilliummassage.la)
 
 
@@ -240,7 +240,7 @@ Don't forget to give the project a star 🌟! Thanks again!
 ## License
 
 - Original work [MIT](https://github.com/timfee/meet/blob/main/LICENSE) © [Tim Feely](https://github.com/timfee)
-- Modifications [MIT](https://github.com/spiteless/www-massage/blob/main/LICENSE) © [Trillium Smith](http://trilliumsmith.com)
+- Modifications [MIT](https://github.com/trillium/www-massage/blob/main/LICENSE) © [Trillium Smith](http://trilliumsmith.com)
 
 
 
