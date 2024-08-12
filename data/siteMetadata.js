@@ -17,7 +17,7 @@ const siteMetadata = {
   socialBanner: '/static/images/twitter-card.png',
   // mastodon: 'https://mastodon.social/@mastodonuser',
   email: 'trilliummassagela@gmail.com.com',
-  github: 'https://github.com/spiteless',
+  github: 'https://github.com/trillium',
   // x: 'https://twitter.com/x',
   // twitter: 'https://twitter.com/Twitter',
   // facebook: 'https://facebook.com',
