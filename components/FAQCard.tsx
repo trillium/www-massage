@@ -1,57 +1,45 @@
-"use client"
-
 import { Disclosure, Transition } from "@headlessui/react"
 import { ChevronUpIcon } from "@heroicons/react/20/solid"
 import Template from "@/components/Template"
-import { useEffect, useState } from "react"
 
 const FAQCard = () => {
-  const [urlOpen, setUrlOpen] = useState("")
-  useEffect(() => {
-    if (typeof window !== undefined) {
-      setUrlOpen(
-        decodeURIComponent(
-          window.location.href.split("#")[1].toLowerCase() || ""
-        )
-      )
-    }
-  }, [])
-
   return (
     <div className="w-full pb-6">
       <Template title="Frequently Asked Questions" />
       <div className="flex w-full flex-col items-center justify-center">
         {questions.map((item) => (
-          <Disclosure
-            defaultOpen={urlOpen === item.id}
-            as="div"
-            key={item.q}
-            className="pb-4 w-full">
-            {({ open }) => (
-              <>
-                <Disclosure.Button
-                  id={item.id}
-                  className="flex w-full justify-between rounded-lg border dark:border-primary-400 bg-none px-4 py-2 text-left font-medium text-gray-900 dark:text-white hover:bg-primary-200 hover:dark:text-gray-900 focus:outline-none focus-visible:ring focus-visible:ring-primary-500/75">
-                  <span>{item.q}</span>
-                  <ChevronUpIcon
-                    className={`${
-                      open ? "rotate-180 transform" : ""
-                    } h-5 w-5 text-primary-500`}
-                  />
-                </Disclosure.Button>
-                <Transition
-                  enter="transition duration-100 ease-out"
-                  enterFrom="transform scale-95 opacity-0"
-                  enterTo="transform scale-100 opacity-100"
-                  leave="transition duration-75 ease-out"
-                  leaveFrom="transform scale-100 opacity-100"
-                  leaveTo="transform scale-95 opacity-0">
-                  <Disclosure.Panel className="px-4 pb-2 pt-4">
-                    {item.a}
-                  </Disclosure.Panel>
-                </Transition>
-              </>
-            )}
+          <Disclosure as="div" key={item.q} className="pb-4 w-full">
+            {(props) => {
+              const { open } = props
+              return (
+                <>
+                  <Disclosure.Button
+                    id={item.id}
+                    className="flex w-full justify-between rounded-lg border dark:border-primary-400 bg-none px-4 py-2 text-left font-medium text-gray-900 dark:text-white hover:bg-primary-200 hover:dark:text-gray-900 focus:outline-none focus-visible:ring focus-visible:ring-primary-500/75">
+                    <span>
+                      {item.q} {props.open ? "open" : "closed"} #{item.id}
+                    </span>
+                    <ChevronUpIcon
+                      className={`${
+                        open ? "rotate-180 transform" : ""
+                      } h-5 w-5 text-primary-500`}
+                    />
+                  </Disclosure.Button>
+                  <Transition
+                    enter="transition duration-100 ease-out"
+                    enterFrom="transform scale-95 opacity-0"
+                    enterTo="transform scale-100 opacity-100"
+                    leave="transition duration-75 ease-out"
+                    leaveFrom="transform scale-100 opacity-100"
+                    leaveTo="transform scale-95 opacity-0">
+                    <Disclosure.Panel className="px-4 pb-2 pt-4">
+                      {item.a}
+                      <pre>{JSON.stringify(props, null, 2)}</pre>
+                    </Disclosure.Panel>
+                  </Transition>
+                </>
+              )
+            }}
           </Disclosure>
         ))}
       </div>
