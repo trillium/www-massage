@@ -135,7 +135,7 @@ export default function BookingForm() {
                 id="name"
                 value={formData && formData.name}
                 className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 mb-1"
-                placeholder="Will Smith"
+                placeholder="James Person"
               />
             </div>
             <div className="relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
