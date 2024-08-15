@@ -1,3 +1,4 @@
+"use client"
 import FAQCard from "@/components/FAQCard"
 import BookSessionButton from "@/components/BookSessionButton"
 
