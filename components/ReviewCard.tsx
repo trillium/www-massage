@@ -29,20 +29,6 @@ type RatingCount = {
   averageStr: string
 }
 
-// Assert the type of review_data
-const typedReviewData = review_data as ReviewType[]
-
-const sum = typedReviewData.reduce((acc: number, curr: ReviewType): number => {
-  return acc + curr.rating
-}, 0)
-
-const sumSorted = typedReviewData.reduce(
-  (acc: number, curr: ReviewType): number => {
-    return acc + curr.rating
-  },
-  0
-)
-
 const numberOfReviews = sorted_reviews.reduce(
   (acc: RatingCount, curr: ReviewType, index: number): RatingCount => {
     acc[curr.rating] += 1
