@@ -16,6 +16,7 @@ type ReviewType = {
   name: string
   source: string
   type?: string
+  helpful?: number
 }
 
 // Define a type for the accumulator object
@@ -202,20 +203,12 @@ const MostHelpful = () => (
     <h4 className="font-semibold text-3xl leading-10 text-black dark:text-white mb-6">
       Most helpful reviews
     </h4>
-    <ReviewSnippet
-      text="Professional and prompt. Excellent deep tissue massage. Thorough with the
-      pre-massage assessment of previous injuries. Knew exactly how to get to my
-      problem areas. Thank you!"
-      name="Michi F."
-    />
-    <ReviewSnippet
-      text="Trillium is such a great masage therapist. Not only is he good at deep tissue but hes easy to schedule with, no issues coming and going and on top he has a great personality. Highly recommend him."
-      name="Kimberly N."
-    />
-    <ReviewSnippet
-      text="Great experience!!! Very professional. Amazing equipment. Brought high end speaker for music. Would definitely book again! He really loves what he does."
-      name="Barbara P."
-    />
+    {(review_data as ReviewType[])
+      .filter((item) => item.helpful)
+      .sort((a, b) => (b.helpful ?? 0) - (a.helpful ?? 0))
+      .map(({ comment, date, name }) => (
+        <ReviewSnippet key={`${date}_${name}`} text={comment ?? ""} name={name} />
+      ))}
   </div>
 )
 
