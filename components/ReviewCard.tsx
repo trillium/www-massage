@@ -130,21 +130,11 @@ const OtherCard = ({ enableSorting = false }) => (
               )}>
               <div className="w-full flex justify-between items-center">
                 <div className="flex flex-col sm:flex-row items-center justify-center w-full h-full">
-                  <div className="sm:pr-3 border-gray-200 flex items-center justify-center flex-col">
-                    <h2 className="font-bold text-5xl text-black text-center mb-4">
-                      {numberOfReviews.averageStr}
-                    </h2>
-                    <div className="flex items-center gap-3 mb-4 text-primary-400">
-                      <Star />
-                      <Star />
-                      <Star />
-                      <Star />
-                      <Star percent={0.6 / 5} />
-                    </div>
-                    <p className="font-normal text-lg leading-8 text-gray-400">
-                      {review_data.length} Ratings
-                    </p>
-                  </div>
+                  <SecondaryScore
+                    test={true}
+                    averageStr={numberOfReviews.averageStr}
+                    text={`${numberOfReviews.length} Ratings`}
+                  />
 
                   <SecondaryScore
                     test={
