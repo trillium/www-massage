@@ -1,11 +1,17 @@
+import clsx from "clsx"
+
 interface TemplateProps {
   title: string
   text?: string
+  classes?: string
+  center?: boolean
 }
 
-export default function Template({ title, text }: TemplateProps) {
+export default function Template({ title, text, classes, center=false }: TemplateProps) {
   return (
-    <div className="py-4">
+    <div className={clsx("py-4", {
+      "text-center": center
+    })}>
       <h1 className="text-3xl font-bold tracking-tight text-primary-500 dark:text-primary-400 md:text-5xl sm:text-4xl">
         {title}
       </h1>
