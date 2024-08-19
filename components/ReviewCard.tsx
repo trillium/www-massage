@@ -1,5 +1,6 @@
 import Template from "@/components/Template"
 import review_data from "@/data/ratings.json"
+import clsx from "clsx"
 
 const sorted_reviews = (review_data as ReviewType[]).sort(
   (a: ReviewType, b: ReviewType) => b.date.localeCompare(a.date)
@@ -27,21 +28,8 @@ type RatingCount = {
   sum: number
   average: number
   averageStr: string
+  length: number
 }
-
-// Assert the type of review_data
-const typedReviewData = review_data as ReviewType[]
-
-const sum = typedReviewData.reduce((acc: number, curr: ReviewType): number => {
-  return acc + curr.rating
-}, 0)
-
-const sumSorted = typedReviewData.reduce(
-  (acc: number, curr: ReviewType): number => {
-    return acc + curr.rating
-  },
-  0
-)
 
 const numberOfReviews = sorted_reviews.reduce(
   (acc: RatingCount, curr: ReviewType, index: number): RatingCount => {
@@ -49,6 +37,7 @@ const numberOfReviews = sorted_reviews.reduce(
     acc.sum += curr.rating
     acc.average = acc.sum / (index + 1)
     acc.averageStr = (acc.sum / (index + 1)).toFixed(1)
+    acc.length = index + 1
     return acc
   },
   {
@@ -60,6 +49,7 @@ const numberOfReviews = sorted_reviews.reduce(
     sum: 0,
     average: 0,
     averageStr: "",
+    length: 0,
   }
 )
 
@@ -69,6 +59,7 @@ const numberOfReviewsSorted = sliced_sorted.reduce(
     acc.sum += curr.rating
     acc.average = acc.sum / (index + 1)
     acc.averageStr = (acc.sum / (index + 1)).toFixed(1)
+    acc.length = index + 1
     return acc
   },
   {
@@ -80,6 +71,7 @@ const numberOfReviewsSorted = sliced_sorted.reduce(
     sum: 0,
     average: 0,
     averageStr: "",
+    length: 0,
   }
 )
 
@@ -131,26 +123,20 @@ const OtherCard = ({ enableSorting = false }) => (
             </div>
           </div>
           <div className="col-span-12 max-xl:mt-8 xl:col-span-7 xl:pl-8 w-full min-h-60">
-            <div className="flex items-center justify-center h-full ml-8 max-lg:py-8 rounded-3xl bg-gray-100 w-full max-xl:max-w-3xl max-xl:mx-auto">
+            <div
+              className={clsx(
+                "flex items-center justify-center h-full ml-8 max-lg:py-8 rounded-3xl w-full max-xl:max-w-3xl max-xl:mx-auto",
+                "bg-gray-100 dark:bg-slate-900 border-2 border-primary-400"
+              )}>
               <div className="w-full flex justify-between items-center">
                 <div className="flex flex-col sm:flex-row items-center justify-center w-full h-full">
-                  <div className="sm:pr-3 border-gray-200 flex items-center justify-center flex-col">
-                    <h2 className="font-bold text-5xl text-black text-center mb-4">
-                      {numberOfReviews.averageStr}
-                    </h2>
-                    <div className="flex items-center gap-3 mb-4 text-primary-400">
-                      <Star />
-                      <Star />
-                      <Star />
-                      <Star />
-                      <Star percent={0.6 / 5} />
-                    </div>
-                    <p className="font-normal text-lg leading-8 text-gray-400">
-                      {review_data.length} Ratings
-                    </p>
-                  </div>
+                  <ScoreDisplay
+                    test={true}
+                    averageStr={numberOfReviews.averageStr}
+                    text={`${numberOfReviews.length} Ratings`}
+                  />
 
-                  <SecondaryScore
+                  <ScoreDisplay
                     test={
                       numberOfReviewsSorted.average >=
                         numberOfReviews.average ||
@@ -179,7 +165,7 @@ const OtherCard = ({ enableSorting = false }) => (
   </>
 )
 
-const SecondaryScore = ({
+const ScoreDisplay = ({
   test,
   averageStr,
   text,
@@ -191,8 +177,12 @@ const SecondaryScore = ({
   if (test === false) return <></>
 
   return (
-    <div className="sm:pl-3 pt-6 sm:pt-0 sm:border-l sm:border-t-0 border-t border-gray-200 flex items-center justify-center flex-col">
-      <h2 className="font-bold text-5xl text-black text-center mb-4">
+    <div
+      className={clsx(
+        "sm:pl-3 pt-6 sm:pt-0 flex items-center justify-center flex-col",
+        "last:sm:border-l last:sm:border-t-0 last:border-t border-gray-200"
+      )}>
+      <h2 className="font-bold text-5xl text-black dark:text-gray-200 text-center mb-4">
         {averageStr}
       </h2>
       <div className="flex items-center gap-3 mb-4 text-primary-400">
@@ -290,7 +280,7 @@ const LittleStar = () => (
 const Star = ({
   size = 36,
   percent = 0,
-  fillClasses = ""
+  fillClasses = "",
 }: {
   size?: number
   percent?: number
