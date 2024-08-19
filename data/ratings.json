@@ -57,6 +57,13 @@
   },
   {
     "rating": 5,
+    "date": "2024-06-30",
+    "comment": "Amazing",
+    "name": "Imene M.",
+    "source": "Soothe"
+  },
+  {
+    "rating": 5,
     "date": "2024-07-30",
     "comment": null,
     "name": "Gary Q",
