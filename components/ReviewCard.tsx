@@ -130,13 +130,13 @@ const OtherCard = ({ enableSorting = false }) => (
               )}>
               <div className="w-full flex justify-between items-center">
                 <div className="flex flex-col sm:flex-row items-center justify-center w-full h-full">
-                  <SecondaryScore
+                  <ScoreDisplay
                     test={true}
                     averageStr={numberOfReviews.averageStr}
                     text={`${numberOfReviews.length} Ratings`}
                   />
 
-                  <SecondaryScore
+                  <ScoreDisplay
                     test={
                       numberOfReviewsSorted.average >=
                         numberOfReviews.average ||
@@ -165,7 +165,7 @@ const OtherCard = ({ enableSorting = false }) => (
   </>
 )
 
-const SecondaryScore = ({
+const ScoreDisplay = ({
   test,
   averageStr,
   text,
