@@ -146,7 +146,7 @@ const OtherCard = ({ enableSorting = false }) => (
 const MostHelpful = () => (
   <div className="pb-8 border-b border-gray-200 max-xl:max-w-3xl max-xl:mx-auto">
     <h4 className="font-semibold text-3xl leading-10 text-black dark:text-white mb-6">
-      Most helpful positive review
+      Most helpful reviews
     </h4>
     <ReviewSnippet
       text="Professional and prompt. Excellent deep tissue massage. Thorough with the
