@@ -143,6 +143,34 @@ const OtherCard = ({ enableSorting = false }) => (
   </>
 )
 
+const SecondaryScore = ({
+  test,
+  averageStr,
+  text,
+}: {
+  test: boolean
+  averageStr: string
+  text: string
+}) => {
+  if (test === false) return <></>
+
+  return (
+    <div className="sm:pl-3 pt-6 sm:pt-0 sm:border-l sm:border-t-0 border-t border-gray-200 flex items-center justify-center flex-col">
+      <h2 className="font-bold text-5xl text-black text-center mb-4">
+        {averageStr}
+      </h2>
+      <div className="flex items-center gap-3 mb-4 text-primary-400">
+        <Star />
+        <Star />
+        <Star />
+        <Star />
+        <Star percent={0.6 / 5} />
+      </div>
+      <p className="font-normal text-lg leading-8 text-gray-400">{text}</p>
+    </div>
+  )
+}
+
 const MostHelpful = () => (
   <div className="pb-8 border-b border-gray-200 max-xl:max-w-3xl max-xl:mx-auto">
     <h4 className="font-semibold text-3xl leading-10 text-black dark:text-white mb-6">
