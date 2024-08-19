@@ -1,6 +1,13 @@
 import Template from "@/components/Template"
 import review_data from "@/data/ratings.json"
 
+const sorted_reviews = (review_data as ReviewType[]).sort(
+  (a: ReviewType, b: ReviewType) => b.date.localeCompare(a.date)
+)
+
+const slice_size = 50
+const sliced_sorted = sorted_reviews.slice(0, slice_size)
+
 type ReviewType = {
   rating: 1 | 2 | 3 | 4 | 5
   date: string
@@ -17,6 +24,9 @@ type RatingCount = {
   3: number
   4: number
   5: number
+  sum: number
+  average: number
+  averageStr: string
 }
 
 // Assert the type of review_data
@@ -26,9 +36,19 @@ const sum = typedReviewData.reduce((acc: number, curr: ReviewType): number => {
   return acc + curr.rating
 }, 0)
 
-const numberOfReviews = typedReviewData.reduce(
-  (acc: RatingCount, curr: ReviewType): RatingCount => {
+const sumSorted = typedReviewData.reduce(
+  (acc: number, curr: ReviewType): number => {
+    return acc + curr.rating
+  },
+  0
+)
+
+const numberOfReviews = sorted_reviews.reduce(
+  (acc: RatingCount, curr: ReviewType, index: number): RatingCount => {
     acc[curr.rating] += 1
+    acc.sum += curr.rating
+    acc.average = acc.sum / (index + 1)
+    acc.averageStr = (acc.sum / (index + 1)).toFixed(1)
     return acc
   },
   {
@@ -37,6 +57,29 @@ const numberOfReviews = typedReviewData.reduce(
     3: 0,
     4: 0,
     5: 0,
+    sum: 0,
+    average: 0,
+    averageStr: "",
+  }
+)
+
+const numberOfReviewsSorted = sliced_sorted.reduce(
+  (acc: RatingCount, curr: ReviewType, index: number): RatingCount => {
+    acc[curr.rating] += 1
+    acc.sum += curr.rating
+    acc.average = acc.sum / (index + 1)
+    acc.averageStr = (acc.sum / (index + 1)).toFixed(1)
+    return acc
+  },
+  {
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    sum: 0,
+    average: 0,
+    averageStr: "",
   }
 )
 
@@ -49,8 +92,6 @@ const ratingPercent: { [key: number]: string } = {
   4: ((numberOfReviews[4] / review_data.length) * 100).toFixed(0),
   5: ((numberOfReviews[5] / review_data.length) * 100).toFixed(0),
 }
-
-const average = (sum / review_data.length).toFixed(1)
 
 const ReviewCard = () => {
   return (
@@ -95,7 +136,7 @@ const OtherCard = ({ enableSorting = false }) => (
                 <div className="flex flex-col sm:flex-row items-center justify-center w-full h-full">
                   <div className="sm:pr-3 border-gray-200 flex items-center justify-center flex-col">
                     <h2 className="font-bold text-5xl text-black text-center mb-4">
-                      {average}
+                      {numberOfReviews.averageStr}
                     </h2>
                     <div className="flex items-center gap-3 mb-4 text-primary-400">
                       <Star />
