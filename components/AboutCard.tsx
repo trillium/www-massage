@@ -62,7 +62,7 @@ const AuthorCard = () => {
       <div className="flex max-w-full flex-col items-center justify-center">
         <div className="prose max-w-full pb-8 pt-10 dark:prose-invert xl:text-xl">
           {paragraphs.map((text) => (
-            <p key={text} className="py-2 text-justify first:first-letter:text-2xl">
+            <p key={text} className="py-2 text-justify">
               {text}
             </p>
           ))}
