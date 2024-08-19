@@ -27,6 +27,7 @@ type RatingCount = {
   sum: number
   average: number
   averageStr: string
+  length: number
 }
 
 const numberOfReviews = sorted_reviews.reduce(
@@ -35,6 +36,7 @@ const numberOfReviews = sorted_reviews.reduce(
     acc.sum += curr.rating
     acc.average = acc.sum / (index + 1)
     acc.averageStr = (acc.sum / (index + 1)).toFixed(1)
+    acc.length = index + 1
     return acc
   },
   {
@@ -46,6 +48,7 @@ const numberOfReviews = sorted_reviews.reduce(
     sum: 0,
     average: 0,
     averageStr: "",
+    length: 0,
   }
 )
 
@@ -55,6 +58,7 @@ const numberOfReviewsSorted = sliced_sorted.reduce(
     acc.sum += curr.rating
     acc.average = acc.sum / (index + 1)
     acc.averageStr = (acc.sum / (index + 1)).toFixed(1)
+    acc.length = index + 1
     return acc
   },
   {
@@ -66,6 +70,7 @@ const numberOfReviewsSorted = sliced_sorted.reduce(
     sum: 0,
     average: 0,
     averageStr: "",
+    length: 0,
   }
 )
 
@@ -276,7 +281,7 @@ const LittleStar = () => (
 const Star = ({
   size = 36,
   percent = 0,
-  fillClasses = ""
+  fillClasses = "",
 }: {
   size?: number
   percent?: number
