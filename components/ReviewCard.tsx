@@ -123,7 +123,11 @@ const OtherCard = ({ enableSorting = false }) => (
             </div>
           </div>
           <div className="col-span-12 max-xl:mt-8 xl:col-span-7 xl:pl-8 w-full min-h-60">
-            <div className="flex items-center justify-center h-full ml-8 max-lg:py-8 rounded-3xl bg-gray-100 w-full max-xl:max-w-3xl max-xl:mx-auto">
+            <div
+              className={clsx(
+                "flex items-center justify-center h-full ml-8 max-lg:py-8 rounded-3xl w-full max-xl:max-w-3xl max-xl:mx-auto",
+                "bg-gray-100 dark:bg-slate-900 border-2 border-primary-400"
+              )}>
               <div className="w-full flex justify-between items-center">
                 <div className="flex flex-col sm:flex-row items-center justify-center w-full h-full">
                   <div className="sm:pr-3 border-gray-200 flex items-center justify-center flex-col">
