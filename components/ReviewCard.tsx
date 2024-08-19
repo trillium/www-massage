@@ -109,21 +109,13 @@ const OtherCard = ({ enableSorting = false }) => (
                     </p>
                   </div>
 
-                  {/* <div className="sm:pl-3 pt-6 sm:pt-0 sm:border-l border-gray-200 flex items-center justify-center flex-col">
-                    <h2 className="font-bold text-5xl text-black text-center mb-4">
-                      4.8
-                    </h2>
-                    <div className="flex items-center gap-3 mb-4 text-primary-400">
-                      <Star />
-                      <Star />
-                      <Star />
-                      <Star />
-                      <Star />
-                    </div>
-                    <p className="font-normal text-lg leading-8 text-gray-400">
-                      Last Month
-                    </p>
-                  </div> */}
+                  <SecondaryScore
+                    test={
+                      numberOfReviewsSorted.average >= numberOfReviews.average || numberOfReviewsSorted.averageStr == numberOfReviews.averageStr 
+                    }
+                    averageStr={numberOfReviewsSorted.averageStr}
+                    text={`${slice_size} Most Recent`}
+                  />
                 </div>
               </div>
             </div>
