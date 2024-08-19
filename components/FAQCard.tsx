@@ -34,7 +34,6 @@ const FAQCard = () => {
                     leaveTo="transform scale-95 opacity-0">
                     <Disclosure.Panel className="px-4 pb-2 pt-4">
                       {item.a}
-                      <pre>{JSON.stringify(props, null, 2)}</pre>
                     </Disclosure.Panel>
                   </Transition>
                 </>
