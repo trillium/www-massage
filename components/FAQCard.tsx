@@ -17,7 +17,7 @@ const FAQCard = () => {
                     id={item.id}
                     className="flex w-full justify-between rounded-lg border dark:border-primary-400 bg-none px-4 py-2 text-left font-medium text-gray-900 dark:text-white hover:bg-primary-200 hover:dark:text-gray-900 focus:outline-none focus-visible:ring focus-visible:ring-primary-500/75">
                     <span>
-                      {item.q} {props.open ? "open" : "closed"} #{item.id}
+                      {item.q}
                     </span>
                     <ChevronUpIcon
                       className={`${
