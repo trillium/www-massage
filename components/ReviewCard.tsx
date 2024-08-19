@@ -121,7 +121,7 @@ const OtherCard = ({ enableSorting = false }) => (
                   <p className="h-2 w-full sm:min-w-72 rounded-3xl bg-gray-200 ml-5 mr-3">
                     <span
                       style={{ width: `${ratingPercent[num]}%` }}
-                      className={`h-full rounded-3xl bg-indigo-500 flex`}></span>
+                      className={`h-full rounded-3xl bg-secondary-500 flex`}></span>
                   </p>
                   <p className="font-medium w-5 text-lg py-1 text-black dark:text-white mr-2">
                     {reviews[num]}

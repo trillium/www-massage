@@ -43,7 +43,7 @@ module.exports = {
       },
       colors: {
         primary: colors.teal,
-        secondary: colors.green,
+        secondary: colors.indigo,
         gray: colors.neutral,
       },
       fontFamily: {
