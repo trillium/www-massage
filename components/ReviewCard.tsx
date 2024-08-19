@@ -183,8 +183,12 @@ const SecondaryScore = ({
   if (test === false) return <></>
 
   return (
-    <div className="sm:pl-3 pt-6 sm:pt-0 sm:border-l sm:border-t-0 border-t border-gray-200 flex items-center justify-center flex-col">
-      <h2 className="font-bold text-5xl text-black text-center mb-4">
+    <div
+      className={clsx(
+        "sm:pl-3 pt-6 sm:pt-0 flex items-center justify-center flex-col",
+        "last:sm:border-l last:sm:border-t-0 last:border-t border-gray-200"
+      )}>
+      <h2 className="font-bold text-5xl text-black dark:text-gray-200 text-center mb-4">
         {averageStr}
       </h2>
       <div className="flex items-center gap-3 mb-4 text-primary-400">
