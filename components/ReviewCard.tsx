@@ -40,9 +40,9 @@ const numberOfReviews = typedReviewData.reduce(
   }
 )
 
-const reviews = numberOfReviews
+const reviews: { [key: number]: number } = numberOfReviews
 
-const ratingPercent = {
+const ratingPercent: { [key: number]: string } = {
   1: ((numberOfReviews[1] / review_data.length) * 100).toFixed(0),
   2: ((numberOfReviews[2] / review_data.length) * 100).toFixed(0),
   3: ((numberOfReviews[3] / review_data.length) * 100).toFixed(0),
