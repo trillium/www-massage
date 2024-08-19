@@ -179,8 +179,8 @@ const ScoreDisplay = ({
   return (
     <div
       className={clsx(
-        "sm:pl-3 pt-6 sm:pt-0 flex items-center justify-center flex-col",
-        "last:sm:border-l last:sm:border-t-0 last:border-t border-gray-200"
+        "pt-6 sm:pt-0 flex items-center justify-center flex-col  border-gray-200",
+        "last:sm:pl-3 first:sm:pr-3 last:sm:border-l last:sm:border-t-0 last:border-t"
       )}>
       <h2 className="font-bold text-5xl text-black dark:text-gray-200 text-center mb-4">
         {averageStr}
