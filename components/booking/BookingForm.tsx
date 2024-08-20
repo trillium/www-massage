@@ -13,42 +13,42 @@ import { formatLocalDate, formatLocalTime } from "@/lib/availability/helpers"
  */
 export type BookingFormData = {
   /** Name of the requester */
-  name?: string,
+  name?: string
   /** Email address of the requester */
-  email?: string,
+  email?: string
   /** Address of the requester */
-  location?: string,
+  location?: string
   /** Phone number of the requester */
-  phone?: string,
+  phone?: string
   /** Payment method of the requester */
-  paymentMethod?: string,
+  paymentMethod?: string
 }
 
 const paymentMethod = [
   {
     name: "Cash",
     value: "cash",
-    hint: "Having exact change helps a lot :)"
+    hint: "Having exact change helps a lot :)",
   },
   {
     name: "Venmo",
     value: "venmo",
-    hint: "Venmo name is @TrilliumSmith, last 4 phone number -5344"
+    hint: "Venmo name is @TrilliumSmith, last 4 phone number -5344",
   },
   {
     name: "CashApp",
     value: "cashapp",
-    hint: "CashApp name is $trilliummassage"
+    hint: "CashApp name is $trilliummassage",
   },
   {
     name: "Credit Card",
     value: "creditCard",
-    hint: "Chip cards preferred, reduces fees"
+    hint: "Chip cards preferred, reduces fees",
   },
   {
     name: "Invoice",
     value: "invoice",
-    hint: "Invoice sent via email"
+    hint: "Invoice sent via email",
   },
 ]
 
@@ -83,10 +83,9 @@ export default function BookingForm() {
         }}
         onChange={(event) => {
           const target = event.target as HTMLInputElement
-          const newState = {...formData, [target.name]: target.value}
+          const newState = { ...formData, [target.name]: target.value }
           dispatch({ type: "SET_FORM", payload: newState })
-        }}
-      >
+        }}>
         <Dialog.Title
           as="h3"
           className="text-base font-semibold leading-6 text-gray-900 dark:text-gray-100">
@@ -218,7 +217,11 @@ export default function BookingForm() {
                 ))}
               </div>
               <p className="text-sm pl-4 text-gray-500 dark:text-gray-300">
-                * {!!formData && paymentMethod.filter((p) => p.value === formData.paymentMethod)[0].hint}
+                *{" "}
+                {!!formData &&
+                  paymentMethod.filter(
+                    (p) => p.value === formData.paymentMethod
+                  )[0].hint}
               </p>
             </fieldset>
           </div>
