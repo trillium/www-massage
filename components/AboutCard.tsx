@@ -1,17 +1,9 @@
 import Image from "./Image"
 // import SocialIcon from '@/components/social-icons'
 import siteMetadata from "@/data/siteMetadata"
-import SocialIcon from '@/components/social-icons'
+import SocialIcon from "@/components/social-icons"
+import Link from "next/link"
 
-const paragraphs = `
-I'm a seasoned massage therapist with over a decade of experience, and I'm based in Los Angeles. I specialize in combining relaxation and pain relief techniques to provide my clients with effective massage therapy. With over thousands of client sessions, I have maintained a 5-star rating, reflecting the quality and care I put into my work.
-
-I provide in in-home massage and chair massage, bringing my services directly to you. This means you can enjoy a relaxing massage in the comfort of your own home or workplace, without the hassle of fighting LA traffic.
-
-In addition to my massage services, I offer couple's massage workshops upon request. These workshops focus on teaching you how to provide effective massage therapy while emphasizing good body mechanics to prevent therapist injury.
-`
-  .split("\n")
-  .filter((i) => i.length > 0)
 
 const AuthorCard = () => {
   const {
@@ -24,7 +16,7 @@ const AuthorCard = () => {
     linkedin,
     github,
     location,
-    instagram
+    instagram,
   } = siteMetadata
   return (
     <div>
@@ -61,11 +53,20 @@ const AuthorCard = () => {
       </div>
       <div className="flex max-w-full flex-col items-center justify-center">
         <div className="prose max-w-full pb-8 pt-10 dark:prose-invert xl:text-xl">
-          {paragraphs.map((text) => (
-            <p key={text} className="py-2 text-justify">
-              {text}
-            </p>
-          ))}
+          <p className="py-2 text-justify">
+            Trillium is a seasoned massage therapist with over a decade of
+            experience, based in Los Angeles. Specializing in combining
+            relaxation and pain relief techniques, Trillium provides you with
+            effective massage therapy from the comfort of your own home. With
+            with more than 3,000 in-home massage therpay sessions, Trillium has
+            maintained a <Link className="font-bold text-primary-500 dark:text-primary-400" href={'/reviews'}>4.9-star rating</Link>, reflecting the quality and care he
+            puts into his work.
+          </p>
+
+          <p className="py-2 text-justify">
+            In addition to massage services, Trillium offer Couple&#39;s Massage
+            Workshops upon request. These workshops focus on simple, comfortable, effective ways to provide massage.
+          </p>
         </div>
       </div>
     </div>
