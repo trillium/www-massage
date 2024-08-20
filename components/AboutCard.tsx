@@ -60,7 +60,7 @@ const AuthorCard = () => {
             with more than 3,000 in-home massage therpay sessions, Trillium has
             maintained a{" "}
             <Link
-              className="font-bold text-primary-500 dark:text-primary-400"
+              className="font-bold text-primary-500 dark:text-primary-400 underline-offset-0 hover:underline hover:scale-105 transition-transform duration-300"
               href={"/reviews"}>
               4.9-star rating
             </Link>
