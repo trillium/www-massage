@@ -4,7 +4,6 @@ import siteMetadata from "@/data/siteMetadata"
 import SocialIcon from "@/components/social-icons"
 import Link from "next/link"
 
-
 const AuthorCard = () => {
   const {
     author,
@@ -59,13 +58,19 @@ const AuthorCard = () => {
             relaxation and pain relief techniques, Trillium provides you with
             effective massage therapy from the comfort of your own home. With
             with more than 3,000 in-home massage therpay sessions, Trillium has
-            maintained a <Link className="font-bold text-primary-500 dark:text-primary-400" href={'/reviews'}>4.9-star rating</Link>, reflecting the quality and care he
-            puts into his work.
+            maintained a{" "}
+            <Link
+              className="font-bold text-primary-500 dark:text-primary-400"
+              href={"/reviews"}>
+              4.9-star rating
+            </Link>
+            , reflecting the quality and care he puts into his work.
           </p>
 
           <p className="py-2 text-justify">
             In addition to massage services, Trillium offer Couple&#39;s Massage
-            Workshops upon request. These workshops focus on simple, comfortable, effective ways to provide massage.
+            Workshops upon request. These workshops focus on simple,
+            comfortable, effective ways to provide massage.
           </p>
         </div>
       </div>
