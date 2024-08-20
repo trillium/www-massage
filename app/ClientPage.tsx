@@ -2,7 +2,6 @@
 
 import type { InferGetServerSidePropsType } from "next"
 
-import Template from "@/components/Template"
 import AvailabilityPicker from "@/components/availability/AvailabilityPicker"
 import { PricingWrapper } from "@/components/availability/PricingWrapper"
 import { withProvider } from "@/context/AvailabilityContext"
@@ -22,12 +21,9 @@ function Page({
   const { slots, pickerProps } = PricingWrapper({ start, end, busy, pricing })
 
   return (
-    <main className="max-w-2xl sm:mx-auto mx-4 pb-24">
-      <Template
-        title="Book a session with Trillium :)"
-      />
+    <>
       <AvailabilityPicker slots={slots} pickerProps={pickerProps} />
-    </main>
+    </>
   )
 }
 
