@@ -44,12 +44,6 @@ export default function Calendar({
     days.splice(0, 7)
   }
 
-  // Remove cases where the last week is empty.
-  const lastWeek = days.at(-7)
-  if (lastWeek && lastWeek.toInterval(timeZone).end >= endDate) {
-    days.splice(-7, 7)
-  }
-
   return (
     <div
       className="isolate mt-6 grid grid-cols-7 text-xs leading-6 text-gray-500 dark:text-gray-400"
