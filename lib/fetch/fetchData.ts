@@ -4,7 +4,7 @@ import {
   ALLOWED_DURATIONS,
   DEFAULT_APPOINTMENT_INTERVAL,
   DEFAULT_DURATION,
-  DEFAULT_PRICING
+  DEFAULT_PRICING,
 } from "@/config"
 import getBusyTimes from "@/lib/availability/getBusyTimes"
 import {
@@ -13,7 +13,11 @@ import {
 } from "@/lib/availability/helpers"
 import Day from "@/lib/day"
 
-export async function fetchData({ searchParams }: { searchParams: URLSearchParams }) {
+export async function fetchData({
+  searchParams,
+}: {
+  searchParams: URLSearchParams
+}) {
   const schema = z.object({
     duration: z
       .enum([
@@ -30,7 +34,32 @@ export async function fetchData({ searchParams }: { searchParams: URLSearchParam
       .optional(),
   })
 
-  const { duration, timeZone, selectedDate } = schema.parse(searchParams)
+  let duration: number | undefined = undefined
+  let timeZone: string | undefined = undefined
+  let selectedDate: string | undefined = undefined
+
+  try {
+    const parsedParams = schema.parse(searchParams)
+    try {
+      duration = parsedParams.duration
+    } catch {
+      duration = undefined
+    }
+
+    try {
+      timeZone = parsedParams.timeZone
+    } catch {
+      timeZone = undefined
+    }
+
+    try {
+      selectedDate = parsedParams.selectedDate
+    } catch {
+      selectedDate = undefined
+    }
+  } catch (error) {
+    console.error("Failed to parse searchParams:", error)
+  }
 
   // Offer two weeks of availability.
   const start = Day.todayWithOffset(0)
@@ -52,7 +81,7 @@ export async function fetchData({ searchParams }: { searchParams: URLSearchParam
       duration,
       ...(timeZone && { timeZone }),
       ...(selectedDate && { selectedDate }),
-      price: DEFAULT_PRICING[DEFAULT_DURATION]
+      price: DEFAULT_PRICING[DEFAULT_DURATION],
     },
   }
 }
