@@ -1,13 +1,12 @@
 import clsx from "clsx"
 
 import { ALLOWED_DURATIONS } from "@/config"
-import { useProvider } from "@/context/AvailabilityContext"
+import { setDuration } from "@/redux/slices/availabilitySlice"
+import { useAppDispatch, useReduxAvailability } from "@/app/hooks"
 
 export default function DurationPicker({ title }: { title: string }) {
-  const {
-    state: { duration },
-    dispatch,
-  } = useProvider()
+  const { duration } = useReduxAvailability()
+  const dispatchRedux = useAppDispatch()
 
   return (
     <div>
@@ -21,10 +20,7 @@ export default function DurationPicker({ title }: { title: string }) {
           <button
             key={theDuration}
             onClick={() => {
-              dispatch({
-                type: "SET_DURATION",
-                payload: theDuration,
-              })
+              dispatchRedux(setDuration(theDuration))
             }}
             type="button"
             className={clsx(

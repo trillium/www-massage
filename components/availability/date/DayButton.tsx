@@ -2,8 +2,10 @@ import clsx from "clsx"
 import type { ButtonHTMLAttributes, DetailedHTMLProps } from "react"
 import { twMerge } from "tailwind-merge"
 
-import { useProvider } from "@/context/AvailabilityContext"
 import Day from "@/lib/day"
+
+import { setSelectedDate } from "@/redux/slices/availabilitySlice"
+import { useAppDispatch, useReduxAvailability } from "@/app/hooks"
 
 type DayProps = {
   date: Day
@@ -20,10 +22,9 @@ export default function DayButton({
   hasAvailability,
   ...props
 }: DayProps): JSX.Element {
-  const {
-    state: { start, end, selectedDate },
-    dispatch,
-  } = useProvider()
+  const { selectedDate } = useReduxAvailability()
+
+  const dispatchRedux = useAppDispatch()
 
   const now = Day.todayWithOffset(0)
 
@@ -47,10 +48,12 @@ export default function DayButton({
           {
             "font-semibold bg-slate-300 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hocus:border-primary-500 hocus:shadow-sm hocus:shadow-primary-100 hocus:-mt-0.5 hocus:z-10 hocus:mb-0.5 border border-transparent":
               !isDisabled,
-            "bg-white dark:bg-slate-200 text-gray-500 dark:text-gray-500": isDisabled,
+            "bg-white dark:bg-slate-200 text-gray-500 dark:text-gray-500":
+              isDisabled,
             // "bg-primary-500": isSelected && !isToday,
             // "bg-primary-600 dark:bg-primary-600 hover:bg-primary-500": isSelected && isToday,
-            "text-white dark:text-gray-100 bg-primary-500 dark:bg-primary-600": isSelected,
+            "text-white dark:text-gray-100 bg-primary-500 dark:bg-primary-600":
+              isSelected,
           }
         )
       )}
@@ -61,10 +64,7 @@ export default function DayButton({
         isDisabled ? "Unavailable" : "Available"
       } date ${date.toString()} in calendar`}
       onClick={() => {
-        dispatch({
-          type: "SET_SELECTED_DATE",
-          payload: date,
-        })
+        dispatchRedux(setSelectedDate(date.toString()))
       }}
       {...props}>
       <div className="flex flex-col items-center justify-between leading-none">
