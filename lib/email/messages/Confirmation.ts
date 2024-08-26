@@ -6,7 +6,7 @@ const LINE_SUFFIX = `</div>`
 export default function ClientRequestEmail({
   duration,
   price,
-  name,
+  firstName,
   dateSummary,
   location,
 }: Omit<EmailProps, "approveUrl">) {
@@ -14,7 +14,7 @@ export default function ClientRequestEmail({
 
   let body = `<div dir="ltr">`
   body += [
-    `Hi ${name || "there"}`,
+    `Hi ${firstName || "there"}`,
     `<br>`,
     `Just letting you know I received your appointment request!`,
     `<br>`,
