@@ -216,7 +216,7 @@ const MostHelpful = () => (
   </div>
 )
 
-type ReviewSnippet = {
+type ReviewSnippetProps = {
   name: string
   text: string
   date?: string
