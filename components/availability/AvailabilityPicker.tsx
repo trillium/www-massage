@@ -1,12 +1,12 @@
-import { utcToZonedTime } from "date-fns-tz"
 import dynamic from "next/dynamic"
 
 import BookingForm from "@/components/booking/BookingForm"
 import DurationPicker from "./controls/DurationPicker"
 import TimezonePicker from "./controls/TimezonePicker"
-import { useProvider } from "@/context/AvailabilityContext"
 import type { DateTimeInterval } from "@/lib/types"
 import format from "date-fns-tz/format"
+import { useSelector } from "react-redux"
+import type { RootState } from "@/redux/store"
 
 // Load these dynamically, without SSR, to avoid hydration issues
 // that arise with timezone differences.
@@ -28,9 +28,7 @@ export default function AvailabilityPicker({ slots, pickerProps }: {
 }) {
   const { durationProps } = pickerProps
   const { showPicker } = pickerProps.tzPickerProps || { showPicker: true }
-  const {
-    state: { selectedDate, timeZone },
-  } = useProvider()
+  const { selectedDate, timeZone } = useSelector((state: RootState) => state.availability)
 
   let maximumAvailability = 0
   const availabilityByDate = slots.reduce<Record<string, DateTimeInterval[]>>(

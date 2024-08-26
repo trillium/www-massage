@@ -1,33 +1,39 @@
 "use client"
 
 import type { InferGetServerSidePropsType } from "next"
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
+import format from "date-fns-tz/format"
 
 import { PickerProps } from "@/components/availability/AvailabilityPicker"
-import { OWNER_AVAILABILITY } from "@/config"
-import { useProvider } from "@/context/AvailabilityContext"
+import { DEFAULT_PRICING, OWNER_AVAILABILITY } from "@/config"
 import getAvailability from "@/lib/availability/getAvailability"
 import getPotentialTimes from "@/lib/availability/getPotentialTimes"
 import { mapStringsToDates } from "@/lib/availability/helpers"
 import Day from "@/lib/day"
-import localeDayString from "@/lib/locale"
 
 import PageProps from "@/app/page"
+import { setDuration, setSelectedDate } from "@/redux/slices/availabilitySlice"
+import { useAppDispatch, useReduxAvailability } from "@/app/hooks"
 
 export function PricingWrapper({
   start,
   end,
   busy,
-  pricing,
+  selectedDate,
+  duration,
 }: InferGetServerSidePropsType<typeof PageProps>) {
+  const dispatchRedux = useAppDispatch()
   const {
-    state: { duration, selectedDate },
-    dispatch,
-  } = useProvider()
+    duration: durationRedux,
+    timeZone,
+    selectedDate: selectedDateRedux,
+  } = useReduxAvailability()
 
   const pickerProps: PickerProps = {
     durationProps: {
-      title: `Session Duration - $${pricing[duration]}`,
+      title: `Session Duration - $${
+        DEFAULT_PRICING[durationRedux || duration]
+      }`,
     },
     tzPickerProps: {
       showPicker: false,
@@ -40,7 +46,7 @@ export function PricingWrapper({
   const potential = getPotentialTimes({
     start: startDay,
     end: endDay,
-    duration,
+    duration: durationRedux || duration,
     availabilitySlots: OWNER_AVAILABILITY,
   })
 
@@ -56,25 +62,46 @@ export function PricingWrapper({
     )
   })
 
-  // If we got this far and there's no selectedDate, set it to the first date
-  // with some availability.
-  useEffect(() => {
-    if (!selectedDate && slots.length > 0) {
-      const date: Date = slots[0].start
-      const dateString: string = localeDayString(date)
+  const firstAvail = format(slots[0].start, "yyyy-MM-dd", { timeZone })
 
-      dispatch({
-        type: "SET_SELECTED_DATE",
-        payload: Day.dayFromString(dateString), //payload from date respecting timezone
-      })
+  const initialURLParamsData = useCallback(() => {
+    if (selectedDate) {
+      dispatchRedux(setSelectedDate(selectedDate))
+    } else {
+      dispatchRedux(setSelectedDate(firstAvail))
     }
-    dispatch({
-      type: "SET_PRICE",
-      payload: pricing[duration], //payload from date respecting timezone
-    })
-    // Run once, on initial render.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    if (duration) {
+      dispatchRedux(setDuration(duration))
+    }
+  }, [dispatchRedux, selectedDate, firstAvail, duration])
+
+  useEffect(() => {
+    initialURLParamsData()
+  }, [initialURLParamsData])
+
+  type UrlParams = {
+    duration?: string
+    selectedDate?: string
+    timeZone?: string
+  }
+
+  const createNewUrlParams = useCallback(() => {
+    const newParamsObj: UrlParams = {}
+    if (durationRedux) newParamsObj.duration = durationRedux.toString()
+    if (selectedDateRedux) newParamsObj.selectedDate = selectedDateRedux
+    if (timeZone != "America/Los_Angeles") newParamsObj.timeZone = timeZone
+    const newUrl = new URLSearchParams({ ...newParamsObj })
+    // Push to the window.
+    window.history.replaceState(
+      null,
+      "",
+      `${window.location.pathname}?${newUrl.toString()}`
+    )
+  }, [durationRedux, selectedDateRedux, timeZone])
+
+  useEffect(() => {
+    createNewUrlParams()
+  }, [createNewUrlParams])
 
   return { slots, pickerProps }
 }

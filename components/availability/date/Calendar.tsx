@@ -5,6 +5,8 @@ import { useProvider } from "@/context/AvailabilityContext"
 import { getDateRangeInterval } from "@/lib/availability/helpers"
 import Day from "@/lib/day"
 import type { DateTimeInterval } from "@/lib/types"
+import { useSelector } from "react-redux"
+import type { RootState } from "@/redux/store"
 
 export default function Calendar({
   offers,
@@ -14,15 +16,12 @@ export default function Calendar({
   maximumAvailability: number
 }) {
   const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-  const {
-    state: { start, end, timeZone },
-  } = useProvider()
 
-  const { start: startDate, end: endDate } = getDateRangeInterval({
-    start,
-    end,
-    timeZone: "Etc/GMT",
-  })
+  const { start, end, timeZone } = useSelector(
+    (state: RootState) => state.availability
+  )
+  const startDate = new Date(start)
+  const endDate = new Date(end)
 
   // Handles when the date changes due to the selected timezone
   const now = Day.todayWithOffset(0)
@@ -33,7 +32,7 @@ export default function Calendar({
     // an incomplete row.
     end: endOfWeek(addDays(endDate, 2)),
   }).map((day) => Day.dayFromDate(day))
-  
+
   // Remove cases where the first week is empty.
   // (Usually timezone changing related)
   const firstWeek = days.at(6)

@@ -1,19 +1,21 @@
 import clsx from "clsx"
 import type { DetailedHTMLProps, HTMLAttributes } from "react"
 
-import { useProvider } from "@/context/AvailabilityContext"
 import { formatLocalTime } from "@/lib/availability/helpers"
 import type { DateTimeInterval } from "@/lib/types"
+
+import { setSelectedTime } from "@/redux/slices/availabilitySlice"
+import { setModal } from "@/redux/slices/modalSlice"
+import { useAppDispatch, useReduxAvailability } from "@/app/hooks"
 
 type TimeProps = {
   time: DateTimeInterval
 } & DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 
 export default function Time({ time: { start, end }, ...props }: TimeProps) {
-  const {
-    state: { timeZone },
-    dispatch,
-  } = useProvider()
+  const { timeZone } = useReduxAvailability()
+  const dispatchRedux = useAppDispatch()
+
   return (
     <button
       type="button"
@@ -24,10 +26,8 @@ export default function Time({ time: { start, end }, ...props }: TimeProps) {
         "active:mt-0.5 active:-mb-0.5  outline-primary-600"
       )}
       onClick={() => {
-        dispatch({
-          type: "SET_SELECTED_TIME",
-          payload: { start, end },
-        })
+        dispatchRedux(setSelectedTime({ start: start.toString(), end: end.toString() }))
+        dispatchRedux(setModal({ status: "open" }))
       }}
       {...props}>
       {formatLocalTime(start, { timeZone })} –{" "}
