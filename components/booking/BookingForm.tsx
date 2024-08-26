@@ -123,7 +123,7 @@ export default function BookingForm() {
 
         <div className="flex flex-col space-y-4">
           <div className="isolate -space-y-px rounded-md shadow-sm">
-            <div className="relative rounded-md rounded-b-none px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
+            <div className="last:rounded-t-none first:rounded-b-none last:rounded-md first:rounded-md relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
               <label
                 htmlFor="name"
                 className="block text-xs font-medium text-gray-900 dark:text-gray-100">
@@ -144,7 +144,7 @@ export default function BookingForm() {
                 onChange={formOnChange}
               />
             </div>
-            <div className="relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
+            <div className="last:rounded-t-none first:rounded-b-none last:rounded-md first:rounded-md relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
               <label
                 htmlFor="phone"
                 className="block text-xs font-medium text-gray-900 dark:text-gray-100">
@@ -163,7 +163,7 @@ export default function BookingForm() {
                 onChange={formOnChange}
               />
             </div>
-            <div className="relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
+            <div className="last:rounded-t-none first:rounded-b-none last:rounded-md first:rounded-md relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
               <label
                 htmlFor="email"
                 className="block text-xs font-medium text-gray-900 dark:text-gray-100">
@@ -182,7 +182,7 @@ export default function BookingForm() {
                 onChange={formOnChange}
               />
             </div>
-            <div className="relative rounded-md rounded-t-none px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
+            <div className="last:rounded-t-none first:rounded-b-none last:rounded-md first:rounded-md relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
               <label
                 htmlFor="email"
                 className="block text-xs font-medium text-gray-900 dark:text-gray-100">
