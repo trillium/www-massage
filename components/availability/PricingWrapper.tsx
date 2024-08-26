@@ -31,7 +31,9 @@ export function PricingWrapper({
 
   const pickerProps: PickerProps = {
     durationProps: {
-      title: `Session Duration - $${DEFAULT_PRICING[duration]}`,
+      title: `Session Duration - $${
+        DEFAULT_PRICING[durationRedux || duration]
+      }`,
     },
     tzPickerProps: {
       showPicker: false,
@@ -44,7 +46,7 @@ export function PricingWrapper({
   const potential = getPotentialTimes({
     start: startDay,
     end: endDay,
-    duration,
+    duration: durationRedux || duration,
     availabilitySlots: OWNER_AVAILABILITY,
   })
 
