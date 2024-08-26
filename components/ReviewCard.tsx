@@ -229,35 +229,37 @@ const ReviewSnippet = ({
   name,
   date,
   displayDate = false,
-  rating = 5
-}: ReviewSnippet) => (
-  <div className="pt-4">
-    <div className="flex sm:items-center flex-col sm:flex-row justify-between  mb-4">
-      <div className="flex items-center gap-3 text-primary-400">
-        {Array.from({ length: rating }, (_, i) => (
-          <Star key={i} size={30} />
-        ))}
-        {Array.from({ length: 5 - rating }, (_, i) => (
-          <Star key={i} fillNone size={30} />
-        ))}
+  rating = 5,
+}: ReviewSnippetProps) => {
+  return (
+    <div className="pt-4">
+      <div className="flex sm:items-center flex-col sm:flex-row justify-between  mb-4">
+        <div className="flex items-center gap-3 text-primary-400">
+          {Array.from({ length: rating }, (_, i) => (
+            <Star key={i} size={30} />
+          ))}
+          {Array.from({ length: 5 - rating }, (_, i) => (
+            <Star key={i} fillNone size={30} />
+          ))}
+        </div>
+        <div className="flex items-center gap-3">
+          <h6 className="font-semibold text-lg leading-8 text-black dark:text-white">
+            {name}
+          </h6>
+          {displayDate && (
+            <p className="font-medium text-base leading-7 text-gray-400">
+              {date}
+            </p>
+          )}
+        </div>
       </div>
-      <div className="flex items-center gap-3">
-        <h6 className="font-semibold text-lg leading-8 text-black dark:text-white">
-          {name}
-        </h6>
-        {displayDate && (
-          <p className="font-medium text-base leading-7 text-gray-400">
-            {date}
-          </p>
-        )}
-      </div>
-    </div>
 
-    <p className="font-normal text-lg leading-8 text-gray-500 dark:text-gray-400 ">
-      {text}
-    </p>
-  </div>
-)
+      <p className="font-normal text-lg leading-8 text-gray-500 dark:text-gray-400 ">
+        {text}
+      </p>
+    </div>
+  )
+}
 
 const LittleStar = () => (
   <svg
