@@ -207,7 +207,11 @@ const MostHelpful = () => (
       .filter((item) => item.helpful)
       .sort((a, b) => (b.helpful ?? 0) - (a.helpful ?? 0))
       .map(({ comment, date, name }) => (
-        <ReviewSnippet key={`${date}_${name}`} text={comment ?? ""} name={name} />
+        <ReviewSnippet
+          key={`${date}_${name}`}
+          text={comment ?? ""}
+          name={name}
+        />
       ))}
   </div>
 )
@@ -217,6 +221,7 @@ type ReviewSnippet = {
   text: string
   date?: string
   displayDate?: Boolean
+  rating?: 1 | 2 | 3 | 4 | 5 | undefined
 }
 
 const ReviewSnippet = ({
@@ -224,15 +229,17 @@ const ReviewSnippet = ({
   name,
   date,
   displayDate = false,
+  rating = 5
 }: ReviewSnippet) => (
   <div className="pt-4">
     <div className="flex sm:items-center flex-col sm:flex-row justify-between  mb-4">
       <div className="flex items-center gap-3 text-primary-400">
-        <Star size={30} />
-        <Star size={30} />
-        <Star size={30} />
-        <Star size={30} />
-        <Star size={30} />
+        {Array.from({ length: rating }, (_, i) => (
+          <Star key={i} size={30} />
+        ))}
+        {Array.from({ length: 5 - rating }, (_, i) => (
+          <Star key={i} fillNone size={30} />
+        ))}
       </div>
       <div className="flex items-center gap-3">
         <h6 className="font-semibold text-lg leading-8 text-black dark:text-white">
