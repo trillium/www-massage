@@ -10,6 +10,8 @@ export async function applyReferral({
 }: {
   searchParams: URLSearchParams
 }) {
+  if (process.env.NEXT_PUBLIC_DISABLE_POSTHOG) return false
+  
   const schema = z.object({
     ref: z
       .string()

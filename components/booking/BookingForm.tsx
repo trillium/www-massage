@@ -1,12 +1,22 @@
+import React from "react"
 import { Dialog } from "@headlessui/react"
 import { useRouter } from "next/navigation"
-import type { Dispatch, FormEvent } from "react"
+import type { FormEvent } from "react"
 
 import Modal from "@/components/Modal"
 import Spinner from "@/components/Spinner"
-import type { ActionType } from "@/context/AvailabilityContext"
-import { useProvider } from "@/context/AvailabilityContext"
 import { formatLocalDate, formatLocalTime } from "@/lib/availability/helpers"
+
+import { setForm } from "@/redux/slices/formSlice"
+import type { AppDispatch } from "@/redux/store"
+import { DEFAULT_PRICING } from "@/config"
+import { setModal } from "@/redux/slices/modalSlice"
+import {
+  useAppDispatch,
+  useReduxAvailability,
+  useReduxFormData,
+  useReduxModal,
+} from "@/app/hooks"
 
 /**
  * Represents form data from the booking form
@@ -21,8 +31,10 @@ export type BookingFormData = {
   /** Phone number of the requester */
   phone?: string
   /** Payment method of the requester */
-  paymentMethod?: string
+  paymentMethod?: PaymentMethodType
 }
+
+type PaymentMethodType = (typeof paymentMethod)[number]["value"] | null
 
 const paymentMethod = [
   {
@@ -53,10 +65,12 @@ const paymentMethod = [
 ]
 
 export default function BookingForm() {
-  const {
-    state: { modal, selectedTime, timeZone, duration, formData, price },
-    dispatch,
-  } = useProvider()
+  const dispatchRedux = useAppDispatch()
+  const formData = useReduxFormData()
+  const { status: modal } = useReduxModal()
+  const { selectedTime, timeZone, duration } = useReduxAvailability()
+  const price = duration ? DEFAULT_PRICING[duration] : "null"
+
   const router = useRouter()
 
   if (!selectedTime || !timeZone) {
@@ -70,21 +84,21 @@ export default function BookingForm() {
     timeZoneName: "shortGeneric",
   })
 
+  const formOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const target = event.target as HTMLInputElement
+    dispatchRedux(setForm({ ...formData, [target.name]: target.value }))
+  }
+
   return (
     <Modal
       open={modal !== "closed"}
       setOpen={(open) => {
-        dispatch({ type: "SET_MODAL", payload: open ? "open" : "closed" })
+        dispatchRedux(setModal({ status: open ? "open" : "closed" }))
       }}>
       <form
         className="mt-3 sm:mt-0 sm:ml-4"
         onSubmit={(event) => {
-          handleSubmit(event, dispatch, router)
-        }}
-        onChange={(event) => {
-          const target = event.target as HTMLInputElement
-          const newState = { ...formData, [target.name]: target.value }
-          dispatch({ type: "SET_FORM", payload: newState })
+          handleSubmit(event, dispatchRedux, router)
         }}>
         <Dialog.Title
           as="h3"
@@ -92,17 +106,9 @@ export default function BookingForm() {
           Request appointment
         </Dialog.Title>
 
-        <input
-          type="hidden"
-          name="start"
-          value={selectedTime.start.toISOString()}
-        />
-        <input
-          type="hidden"
-          name="end"
-          value={selectedTime.end.toISOString()}
-        />
-        <input type="hidden" readOnly name="duration" value={duration} />
+        <input type="hidden" readOnly name="start" value={selectedTime.start} />
+        <input type="hidden" readOnly name="end" value={selectedTime.end} />
+        <input type="hidden" readOnly name="duration" value={duration || 0} />
         <input type="hidden" readOnly name="price" value={price} />
         <input type="hidden" readOnly name="timeZone" value={timeZone} />
 
@@ -135,6 +141,7 @@ export default function BookingForm() {
                 value={formData && formData.name}
                 className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 mb-1"
                 placeholder="James Person"
+                onChange={formOnChange}
               />
             </div>
             <div className="relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
@@ -153,6 +160,7 @@ export default function BookingForm() {
                 value={formData && formData.phone}
                 className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 mb-1"
                 placeholder="(555) 444 - 3333"
+                onChange={formOnChange}
               />
             </div>
             <div className="relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
@@ -171,6 +179,7 @@ export default function BookingForm() {
                 value={formData && formData.location}
                 className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 mb-1"
                 placeholder="123 Address Road, Beverly Hills, CA 90210"
+                onChange={formOnChange}
               />
             </div>
             <div className="relative rounded-md rounded-t-none px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
@@ -190,6 +199,7 @@ export default function BookingForm() {
                 value={formData && formData.email}
                 className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 mb-1"
                 placeholder="name@example.com"
+                onChange={formOnChange}
               />
             </div>
           </div>
@@ -207,6 +217,7 @@ export default function BookingForm() {
                       value={payType.value}
                       defaultChecked={payType.value === paymentMethod[0].value}
                       className="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-400"
+                      onChange={formOnChange}
                     />
                     <label
                       htmlFor={payType.value}
@@ -248,7 +259,7 @@ export default function BookingForm() {
             type="button"
             className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hocus:bg-gray-100 sm:mt-0 sm:w-auto"
             onClick={() => {
-              dispatch({ type: "SET_MODAL", payload: "closed" })
+              dispatchRedux(setModal({ status: "closed" }))
             }}>
             Cancel
           </button>
@@ -267,11 +278,11 @@ export default function BookingForm() {
  */
 function handleSubmit(
   event: FormEvent<HTMLFormElement>,
-  dispatch: Dispatch<ActionType>,
+  dispatchRedux: AppDispatch,
   router: ReturnType<typeof useRouter>
 ) {
   event.preventDefault()
-  dispatch({ type: "SET_MODAL", payload: "busy" })
+  dispatchRedux(setModal({ status: "busy" }))
   fetch(`/api/request`, {
     method: "POST",
     headers: {
@@ -284,10 +295,10 @@ function handleSubmit(
       if (json.success) {
         router.push("/confirmation")
       } else {
-        dispatch({ type: "SET_MODAL", payload: "error" })
+        dispatchRedux(setModal({ status: "error" }))
       }
     })
     .catch(() => {
-      dispatch({ type: "SET_MODAL", payload: "error" })
+      dispatchRedux(setModal({ status: "error" }))
     })
 }

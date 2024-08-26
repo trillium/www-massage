@@ -42,17 +42,21 @@ export const NavOptions = () => {
 
 const RenderNavLink = ({ navItem }: { navItem: NavItem }) => {
   const pathname = usePathname()
-  const isActive = pathname === navItem.href;
+  const isActive = pathname === navItem.href
 
   if (!navItem.children) {
     return (
       <Link
         key={navItem.title}
         href={navItem.href}
-        className={clsx("text-sm xs:text-base font-mediu hover:text-primary-500   dark:hover:text-primary-400 sm:block", {
-          "underline underline-offset-2 scale-105 font-bold text-primary-400": isActive,
-          "text-gray-900 dark:text-gray-100": !isActive,
-        })}>
+        className={clsx(
+          "text-sm xs:text-base font-mediu hover:text-primary-500   dark:hover:text-primary-400 sm:block",
+          {
+            "underline underline-offset-2 scale-105 font-bold text-primary-400":
+              isActive,
+            "text-gray-900 dark:text-gray-100": !isActive,
+          }
+        )}>
         {navItem.title}
       </Link>
     )

@@ -4,7 +4,6 @@ import type { InferGetServerSidePropsType } from "next"
 
 import AvailabilityPicker from "@/components/availability/AvailabilityPicker"
 import { PricingWrapper } from "@/components/availability/PricingWrapper"
-import { withProvider } from "@/context/AvailabilityContext"
 import { DEFAULT_PRICING } from "@/config"
 
 import PageProps from "./page"
@@ -17,8 +16,17 @@ function Page({
   start,
   end,
   busy,
+  selectedDate,
+  duration,
 }: InferGetServerSidePropsType<typeof PageProps>) {
-  const { slots, pickerProps } = PricingWrapper({ start, end, busy, pricing })
+  const { slots, pickerProps } = PricingWrapper({
+    start,
+    end,
+    busy,
+    pricing,
+    selectedDate,
+    duration,
+  })
 
   return (
     <>
@@ -27,4 +35,4 @@ function Page({
   )
 }
 
-export default withProvider(Page)
+export default Page
