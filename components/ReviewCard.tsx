@@ -1,6 +1,7 @@
 import Template from "@/components/Template"
 import review_data from "@/data/ratings.json"
 import clsx from "clsx"
+import type { ReviewType } from "@/lib/types"
 
 const sorted_reviews = (review_data as ReviewType[]).sort(
   (a: ReviewType, b: ReviewType) => b.date.localeCompare(a.date)
@@ -8,16 +9,6 @@ const sorted_reviews = (review_data as ReviewType[]).sort(
 
 const slice_size = 50
 const sliced_sorted = sorted_reviews.slice(0, slice_size)
-
-type ReviewType = {
-  rating: 1 | 2 | 3 | 4 | 5
-  date: string
-  comment: string | null
-  name: string
-  source: string
-  type?: string
-  helpful?: number
-}
 
 // Define a type for the accumulator object
 type RatingCount = {

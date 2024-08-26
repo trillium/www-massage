@@ -82,3 +82,13 @@ export type EmailProps = {
   price: string,
   duration: string,
 }
+
+export type ReviewType = {
+  rating: 1 | 2 | 3 | 4 | 5
+  date: string
+  comment: string | null
+  name: string
+  source: string
+  type?: string
+  helpful?: number
+}
