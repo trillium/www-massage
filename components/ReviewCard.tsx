@@ -9,7 +9,7 @@ const sorted_reviews = (review_data as ReviewType[]).sort(
 const slice_size = 50
 const sliced_sorted = sorted_reviews.slice(0, slice_size)
 
-type ReviewType = {
+export type ReviewType = {
   rating: 1 | 2 | 3 | 4 | 5
   date: string
   comment: string | null
@@ -243,7 +243,7 @@ export const ReviewSnippet = ({
       ? firstName
       : firstName + " " + lastName[0] + ".") ||
     "Anonymous"
-    
+
   return (
     <div className="pt-4">
       <div className="flex sm:items-center flex-col sm:flex-row justify-between  mb-4">
@@ -256,7 +256,7 @@ export const ReviewSnippet = ({
           ))}
         </div>
         <div className="flex items-center gap-3">
-          <h6 className="font-semibold text-lg leading-8 text-black dark:text-white">
+          <h6 className="font-semibold text-lg leading-8 text-black dark:text-white capitalize">
             {displayName}
           </h6>
           {displayDate && (
@@ -267,7 +267,7 @@ export const ReviewSnippet = ({
         </div>
       </div>
 
-      <p className="font-normal text-lg leading-8 text-gray-500 dark:text-gray-400 ">
+      <p className="font-normal text-lg leading-8 text-gray-800 dark:text-gray-400 ">
         {text}
       </p>
     </div>
