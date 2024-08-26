@@ -216,21 +216,34 @@ const MostHelpful = () => (
   </div>
 )
 
-type ReviewSnippetProps = {
-  name: string
-  text: string
+export type ReviewSnippetProps = {
+  name?: string
+  firstName?: string
+  lastName?: string
+  text?: string
   date?: string
   displayDate?: Boolean
   rating?: 1 | 2 | 3 | 4 | 5 | undefined
 }
 
-const ReviewSnippet = ({
+export const ReviewSnippet = ({
   text,
+  firstName,
+  lastName,
   name,
   date,
   displayDate = false,
   rating = 5,
 }: ReviewSnippetProps) => {
+  const displayName =
+    name ||
+    (!firstName && !lastName
+      ? "Anonymous"
+      : !lastName
+      ? firstName
+      : firstName + " " + lastName[0] + ".") ||
+    "Anonymous"
+    
   return (
     <div className="pt-4">
       <div className="flex sm:items-center flex-col sm:flex-row justify-between  mb-4">
@@ -244,7 +257,7 @@ const ReviewSnippet = ({
         </div>
         <div className="flex items-center gap-3">
           <h6 className="font-semibold text-lg leading-8 text-black dark:text-white">
-            {name}
+            {displayName}
           </h6>
           {displayDate && (
             <p className="font-medium text-base leading-7 text-gray-400">
