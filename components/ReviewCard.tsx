@@ -270,7 +270,7 @@ const LittleStar = () => (
   </svg>
 )
 
-const Star = ({
+export const Star = ({
   size = 36,
   percent = 0,
   fillClasses = "",
