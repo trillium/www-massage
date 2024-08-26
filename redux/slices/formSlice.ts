@@ -13,7 +13,7 @@ export const initialBookingFormData = {
   /** Phone number of the requester */
   phone: "",
   /** Payment method of the requester */
-  paymentMethod: "cash"
+  paymentMethod: "cash",
 }
 
 type FormStateType = BookingFormData
