@@ -9,7 +9,7 @@ import { OWNER_TIMEZONE } from "@/config"
 import { formatLocalDate, formatLocalTime } from "@/lib/availability/helpers"
 import sendMail from "@/lib/email"
 import ApprovalEmail from "@/lib/email/messages/Approval"
-import ClientRequestEmail from "@/lib/email/messages/Confirmation"
+import ClientRequestEmail from "@/lib/email/messages/ClientRequestEmail"
 import getHash from "@/lib/hash"
 import type { DateTimeIntervalWithTimezone } from "@/lib/types"
 
