@@ -22,7 +22,8 @@ const REQUESTS_PER_IP_PER_MINUTE_LIMIT = 5
 
 // Define the schema for the request body
 const AppointmentRequestSchema = z.object({
-  name: z.string(),
+  firstName: z.string(),
+  lastName: z.string(),
   email: z.string().email(),
   start: z.string().refine((value) => !Number.isNaN(Date.parse(value)), {
     message: "Start must be a valid date.",

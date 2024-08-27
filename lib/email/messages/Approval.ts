@@ -5,7 +5,8 @@ const LINE_SUFFIX = `</div>`
 
 export default function ApprovalEmail({
   email,
-  name,
+  firstName,
+  lastName,
   location,
   dateSummary,
   approveUrl,
@@ -13,12 +14,12 @@ export default function ApprovalEmail({
   price,
   duration
 }: EmailProps) {
-  const SUBJECT = `REQUEST: ${name}, ${duration}, ${price}`
+  const SUBJECT = `REQUEST: ${firstName} ${lastName}, ${duration} minutes, $${price}`
 
   const declineUrl = `mailto:${encodeURI(email)}?subject=${encodeURIComponent(
     `Re: Massage appointment request`
   )}&body=${encodeURIComponent(
-    `Hi ${name || "there"},
+    `Hi ${`${firstName}` || "there"},
 
 I just checked my calendar and it looks like ${dateSummary} won't work.
 
@@ -27,11 +28,12 @@ Would you be able to meet at a different time?`
 
   let body = `<div dir="ltr">`
   body += [
-    `<b>${name}</b> has requested a meeting:`,
+    `<b>${firstName} ${lastName}</b> has requested a meeting:`,
     `<br>`,
     `Their local timezone is ${timeZone}`,
     `<br>`,
-    `<b>Name:</b> ${name}`,
+    `<b>First Name:</b> ${firstName}`,
+    `<b>Last Name:</b> ${lastName}`,
     `<b>Date:</b> ${dateSummary}`,
     `<b>Location:</b> ${location}`,
     `<b>Price:</b> $${price}`,

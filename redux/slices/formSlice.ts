@@ -4,8 +4,10 @@ import type { RootState } from "@/redux/store"
 import type { BookingFormData } from "@/components/booking/BookingForm"
 
 export const initialBookingFormData = {
-  /** Name of the requester */
-  name: "",
+  /** First name of the requester */
+  firstName: "",
+  /** Last name of the requester */
+  lastName: "",
   /** Email address of the requester */
   email: "",
   /** Address of the requester */
@@ -13,7 +15,7 @@ export const initialBookingFormData = {
   /** Phone number of the requester */
   phone: "",
   /** Payment method of the requester */
-  paymentMethod: "cash"
+  paymentMethod: "cash",
 }
 
 type FormStateType = BookingFormData
