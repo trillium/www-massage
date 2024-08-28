@@ -6,6 +6,7 @@ import LRUCache from "lru-cache"
 import { z } from "zod"
 import sendMail from "@/lib/email"
 import ReviewSubmissionEmail from "@/lib/email/messages/ReviewSubmissionEmail"
+import { RatingTypeStrict } from "@/components/ReviewForm"
 
 // Define the rate limiter
 const rateLimitLRU = new LRUCache({
@@ -77,7 +78,7 @@ export async function POST(
   // Generate and send the approval email
   const createReviewEmail = ReviewSubmissionEmail({
     ...data,
-    rating: data.rating as 1 | 2 | 3 | 4 | 5,
+    rating: data.rating as RatingTypeStrict,
   })
   await sendMail({
     to: process.env.OWNER_EMAIL ?? "",
