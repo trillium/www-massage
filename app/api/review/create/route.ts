@@ -78,7 +78,7 @@ export async function POST(
   // Generate and send the approval email
   const createReviewEmail = ReviewSubmissionEmail({
     ...data,
-    gd
+    rating: data.rating as RatingTypeStrict,
   })
   await sendMail({
     to: process.env.OWNER_EMAIL ?? "",
