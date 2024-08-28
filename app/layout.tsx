@@ -69,7 +69,7 @@ export default function RootLayout({
         className={public_sans.className}
         suppressHydrationWarning>
         <link rel="icon" type="image/svg+xml" href={"/logo_svg.svg"} />
-        <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
+        <body className="bg-white min-h-screen pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
           <ThemeProviders>
             <SectionContainer>
               <header className="relative flex items-center justify-between px-4 py-10 sm:px-0">
