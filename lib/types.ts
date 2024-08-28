@@ -75,7 +75,8 @@ export type AppointmentProps = {
 export type EmailProps = {
   dateSummary: string
   email: string
-  name: string
+  firstName: string
+  lastName: string
   location: string
   approveUrl: string
   timeZone: string

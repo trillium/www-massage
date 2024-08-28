@@ -22,8 +22,10 @@ import {
  * Represents form data from the booking form
  */
 export type BookingFormData = {
-  /** Name of the requester */
-  name?: string
+  /** firstName of the requester */
+  firstName?: string
+  /** lastName of the requester */
+  lastName?: string
   /** Email address of the requester */
   email?: string
   /** Address of the requester */
@@ -123,28 +125,51 @@ export default function BookingForm() {
 
         <div className="flex flex-col space-y-4">
           <div className="isolate -space-y-px rounded-md shadow-sm">
-            <div className="relative rounded-md rounded-b-none px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
-              <label
-                htmlFor="name"
-                className="block text-xs font-medium text-gray-900 dark:text-gray-100">
-                Name
-              </label>
-              <input
-                aria-label="Name"
-                type="text"
-                autoCapitalize="words"
-                autoComplete="name"
-                required
-                aria-required
-                name="name"
-                id="name"
-                value={formData && formData.name}
-                className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 mb-1"
-                placeholder="James Person"
-                onChange={formOnChange}
-              />
+            <div className="last:rounded-t-none first:rounded-b-none last:rounded-md first:rounded-md relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400 flex row">
+              <div className="w-full mx-1">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-900 dark:text-gray-100">
+                  First Name
+                </label>
+                <input
+                  aria-label="Name"
+                  type="text"
+                  autoCapitalize="words"
+                  autoComplete="firstName"
+                  required
+                  aria-required
+                  name="firstName"
+                  id="firstName"
+                  value={formData.firstName}
+                  placeholder="First"
+                  onChange={formOnChange}
+                  className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6 mb-1"
+                />
+              </div>
+              <div className="w-full mx-1">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-900 dark:text-gray-100">
+                  Last Name
+                </label>
+                <input
+                  aria-label="Name"
+                  type="text"
+                  autoCapitalize="words"
+                  autoComplete="lastName"
+                  required
+                  aria-required
+                  name="lastName"
+                  id="lastName"
+                  value={formData.lastName}
+                  placeholder="Last"
+                  onChange={formOnChange}
+                  className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6 mb-1"
+                />
+              </div>
             </div>
-            <div className="relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
+            <div className="last:rounded-t-none first:rounded-b-none last:rounded-md first:rounded-md relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
               <label
                 htmlFor="phone"
                 className="block text-xs font-medium text-gray-900 dark:text-gray-100">
@@ -163,7 +188,7 @@ export default function BookingForm() {
                 onChange={formOnChange}
               />
             </div>
-            <div className="relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
+            <div className="last:rounded-t-none first:rounded-b-none last:rounded-md first:rounded-md relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
               <label
                 htmlFor="email"
                 className="block text-xs font-medium text-gray-900 dark:text-gray-100">
@@ -182,7 +207,7 @@ export default function BookingForm() {
                 onChange={formOnChange}
               />
             </div>
-            <div className="relative rounded-md rounded-t-none px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
+            <div className="last:rounded-t-none first:rounded-b-none last:rounded-md first:rounded-md relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
               <label
                 htmlFor="email"
                 className="block text-xs font-medium text-gray-900 dark:text-gray-100">
