@@ -1,7 +1,6 @@
 import { addDays, eachDayOfInterval, endOfWeek, startOfWeek } from "date-fns"
 
 import DayButton from "./DayButton"
-import { useProvider } from "@/context/AvailabilityContext"
 import { getDateRangeInterval } from "@/lib/availability/helpers"
 import Day from "@/lib/day"
 import type { DateTimeInterval } from "@/lib/types"
