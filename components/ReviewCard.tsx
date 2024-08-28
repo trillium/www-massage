@@ -1,6 +1,7 @@
 import Template from "@/components/Template"
 import review_data from "@/data/ratings.json"
 import clsx from "clsx"
+import { RatingType } from "./ReviewForm"
 
 const sorted_reviews = (review_data as ReviewType[]).sort(
   (a: ReviewType, b: ReviewType) => b.date.localeCompare(a.date)
@@ -223,7 +224,7 @@ export type ReviewSnippetProps = {
   text?: string
   date?: string
   displayDate?: Boolean
-  rating?: 1 | 2 | 3 | 4 | 5 | undefined
+  rating?: RatingType
 }
 
 export const ReviewSnippet = ({
