@@ -1,7 +1,7 @@
 import Template from "@/components/Template"
 import review_data from "@/data/ratings.json"
 import clsx from "clsx"
-import type { ReviewType } from "@/lib/types"
+import { RatingType } from "./ReviewForm"
 
 const sorted_reviews = (review_data as ReviewType[]).sort(
   (a: ReviewType, b: ReviewType) => b.date.localeCompare(a.date)
@@ -9,6 +9,16 @@ const sorted_reviews = (review_data as ReviewType[]).sort(
 
 const slice_size = 50
 const sliced_sorted = sorted_reviews.slice(0, slice_size)
+
+export type ReviewType = {
+  rating: 1 | 2 | 3 | 4 | 5
+  date: string
+  comment: string | null
+  name: string
+  source: string
+  type?: string
+  helpful?: number
+}
 
 // Define a type for the accumulator object
 type RatingCount = {
@@ -198,50 +208,72 @@ const MostHelpful = () => (
       .filter((item) => item.helpful)
       .sort((a, b) => (b.helpful ?? 0) - (a.helpful ?? 0))
       .map(({ comment, date, name }) => (
-        <ReviewSnippet key={`${date}_${name}`} text={comment ?? ""} name={name} />
+        <ReviewSnippet
+          key={`${date}_${name}`}
+          text={comment ?? ""}
+          name={name}
+        />
       ))}
   </div>
 )
 
-type ReviewSnippet = {
-  name: string
-  text: string
+export type ReviewSnippetProps = {
+  name?: string
+  firstName?: string
+  lastName?: string
+  text?: string
   date?: string
   displayDate?: Boolean
+  rating?: RatingType
 }
 
-const ReviewSnippet = ({
+export const ReviewSnippet = ({
   text,
+  firstName,
+  lastName,
   name,
   date,
   displayDate = false,
-}: ReviewSnippet) => (
-  <div className="pt-4">
-    <div className="flex sm:items-center flex-col sm:flex-row justify-between  mb-4">
-      <div className="flex items-center gap-3 text-primary-400">
-        <Star size={30} />
-        <Star size={30} />
-        <Star size={30} />
-        <Star size={30} />
-        <Star size={30} />
-      </div>
-      <div className="flex items-center gap-3">
-        <h6 className="font-semibold text-lg leading-8 text-black dark:text-white">
-          {name}
-        </h6>
-        {displayDate && (
-          <p className="font-medium text-base leading-7 text-gray-400">
-            {date}
-          </p>
-        )}
-      </div>
-    </div>
+  rating = 5,
+}: ReviewSnippetProps) => {
+  const displayName =
+    name ||
+    (!firstName && !lastName
+      ? "Anonymous"
+      : !lastName
+      ? firstName
+      : firstName + " " + lastName[0] + ".") ||
+    "Anonymous"
 
-    <p className="font-normal text-lg leading-8 text-gray-500 dark:text-gray-400 ">
-      {text}
-    </p>
-  </div>
-)
+  return (
+    <div className="pt-4">
+      <div className="flex sm:items-center flex-col sm:flex-row justify-between  mb-4">
+        <div className="flex items-center gap-3 text-primary-400">
+          {Array.from({ length: rating || 0 }, (_, i) => (
+            <Star key={i} size={30} />
+          ))}
+          {Array.from({ length: 5 - (rating || 0) }, (_, i) => (
+            <Star key={i} fillNone size={30} />
+          ))}
+        </div>
+        <div className="flex items-center gap-3">
+          <h6 className="font-semibold text-lg leading-8 text-black dark:text-white capitalize">
+            {displayName}
+          </h6>
+          {displayDate && (
+            <p className="font-medium text-base leading-7 text-gray-400">
+              {date}
+            </p>
+          )}
+        </div>
+      </div>
+
+      <p className="font-normal text-lg leading-8 text-gray-800 dark:text-gray-400 ">
+        {text}
+      </p>
+    </div>
+  )
+}
 
 const LittleStar = () => (
   <svg
@@ -261,14 +293,16 @@ const LittleStar = () => (
   </svg>
 )
 
-const Star = ({
+export const Star = ({
   size = 36,
   percent = 0,
   fillClasses = "",
+  fillNone = false,
 }: {
   size?: number
   percent?: number
   fillClasses?: string
+  fillNone?: boolean
 }) => {
   return (
     <svg
@@ -277,7 +311,7 @@ const Star = ({
       height={size}
       viewBox="0 0 36 36"
       className="stroke-current"
-      fill="currentColor">
+      fill={fillNone ? "" : "currentColor"}>
       <path d="M17.1033 2.71738C17.4701 1.97413 18.5299 1.97413 18.8967 2.71738L23.0574 11.1478C23.2031 11.4429 23.4846 11.6475 23.8103 11.6948L33.1139 13.0467C33.9341 13.1659 34.2616 14.1739 33.6681 14.7524L26.936 21.3146C26.7003 21.5443 26.5927 21.8753 26.6484 22.1997L28.2376 31.4656C28.3777 32.2825 27.5203 32.9055 26.7867 32.5198L18.4653 28.145C18.174 27.9919 17.826 27.9919 17.5347 28.145L9.21334 32.5198C8.47971 32.9055 7.62228 32.2825 7.76239 31.4656L9.35162 22.1997C9.40726 21.8753 9.29971 21.5443 9.06402 21.3146L2.33193 14.7524C1.73841 14.1739 2.06593 13.1659 2.88615 13.0467L12.1897 11.6948C12.5154 11.6475 12.7969 11.4429 12.9426 11.1478L17.1033 2.71738Z" />
 
       <g clipPath="url(#clipPath)">

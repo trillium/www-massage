@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
 import type { RootState } from "@/redux/store"
 import type { BookingFormData } from "@/components/booking/BookingForm"
+import type { ReviewFormData } from "@/components/ReviewForm"
+import { ReviewSnippetProps } from "@/components/ReviewCard"
 
 export const initialBookingFormData = {
   /** First name of the requester */
@@ -18,12 +20,37 @@ export const initialBookingFormData = {
   paymentMethod: "cash",
 }
 
-type FormStateType = BookingFormData
+export const initialReviewFormState: ReviewFormData = {
+  /** Name of the requester */
+  name: "",
+  /** Fast name of the requester */
+  firstName: "",
+  /** Last name of the requester */
+  lastName: "",
+  /** Short review description */
+  text: "",
+  /** Datetime start */
+  start: "",
+  /** Datetime end */
+  end: "",
+  /** Ratings */
+  rating: "",
+}
+
+export const initialReviewSnippetProps: ReviewSnippetProps = {
+  name: "",
+  text: "",
+  date: "",
+  rating: undefined,
+}
+
+type FormStateType = BookingFormData & ReviewFormData & ReviewSnippetProps
 
 type FormState = FormStateType
 
-const initialState: FormState = {
+const initialState: FormStateType = {
   ...initialBookingFormData,
+  ...initialReviewFormState,
 }
 
 export const formSlice = createSlice({
@@ -36,7 +63,6 @@ export const formSlice = createSlice({
 
 export const { setForm } = formSlice.actions
 
-// Other code such as selectors can use the imported `RootState` type
 export const selectFormData = (state: RootState) => state.form
 
 export default formSlice.reducer
