@@ -249,10 +249,10 @@ export const ReviewSnippet = ({
     <div className="pt-4">
       <div className="flex sm:items-center flex-col sm:flex-row justify-between  mb-4">
         <div className="flex items-center gap-3 text-primary-400">
-          {Array.from({ length: rating }, (_, i) => (
+          {Array.from({ length: rating || 0 }, (_, i) => (
             <Star key={i} size={30} />
           ))}
-          {Array.from({ length: 5 - rating }, (_, i) => (
+          {Array.from({ length: 5 - (rating || 0) }, (_, i) => (
             <Star key={i} fillNone size={30} />
           ))}
         </div>
