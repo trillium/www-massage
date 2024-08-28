@@ -57,7 +57,7 @@ const AuthorCard = () => {
             experience, based in Los Angeles. Specializing in combining
             relaxation and pain relief techniques, Trillium provides you with
             effective massage therapy from the comfort of your own home. With
-            with more than 3,000 in-home massage therpay sessions, Trillium has
+            with more than 3,000 in-home massage therapy sessions, Trillium has
             maintained a{" "}
             <Link
               className="font-bold text-primary-500 dark:text-primary-400 underline-offset-0 hover:underline hover:scale-105 transition-transform duration-300"
