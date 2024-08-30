@@ -31,18 +31,15 @@ export type ReviewFormData = {
 export type RatingType = 1 | 2 | 3 | 4 | 5 | undefined | ""
 export type RatingTypeStrict = 1 | 2 | 3 | 4 | 5
 
-export type RatingFormData = {
-  name: string
-  rating: RatingType
-  comment: string
-  date: string
-}
-
 export default function ReviewForm({
   error,
   start,
   end,
-}: Omit<ReviewFormData, "rating">) {
+}: {
+  error: string
+  start: string
+  end: string
+}) {
   const dispatchRedux = useAppDispatch()
   const formData = useReduxFormData()
   const { firstName, lastName, rating, text } = formData
