@@ -1,5 +1,4 @@
 import { createHash } from "crypto"
-
 /**
  * Generates a hash for the given data.
  *
@@ -11,8 +10,9 @@ import { createHash } from "crypto"
  * @param {string} data - The input data string for which to generate the hash.
  * @returns {string} The resulting hash as a hexadecimal string.
  */
-export default function getHash(data: string): string {
+export function getHash(data: string): string {
   return createHash("sha256")
-    .update(data + (process.env.GOOGLE_OAUTH_SECRET ?? ""))
+    // .update(data + (process.env.GOOGLE_OAUTH_SECRET ?? ""))
+    .update(data + ("test"))
     .digest("hex")
 }
