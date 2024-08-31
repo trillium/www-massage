@@ -285,29 +285,29 @@ export default function ReviewForm({
 function handleSubmit(
   event: FormEvent<HTMLFormElement>,
   dispatchRedux: AppDispatch,
-  router: ReturnType<typeof useRouter>,
+  router: ReturnType<typeof useRouter>
 ) {
   event.preventDefault()
   dispatchRedux(setModal({ status: "busy" }))
   const jsonData = Object.fromEntries(new FormData(event.currentTarget))
   router.push("/reviews/submitted")
-  fetch(`/api/review/create`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(jsonData),
-  })
-    .then(async (data) => {
-      const json = await data.json()
-      if (json.success) {
-        dispatchRedux(setModal({ status: "closed" }))
-        router.push("/reviews/submitted")
-      } else {
-        dispatchRedux(setModal({ status: "error" }))
-      }
-    })
-    .catch(() => {
-      dispatchRedux(setModal({ status: "error" }))
-    })
+  // fetch(`/api/review/create`, {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify(jsonData),
+  // })
+  //   .then(async (data) => {
+  //     const json = await data.json()
+  //     if (json.success) {
+  //       dispatchRedux(setModal({ status: "closed" }))
+  //       router.push("/reviews/submitted")
+  //     } else {
+  //       dispatchRedux(setModal({ status: "error" }))
+  //     }
+  //   })
+  //   .catch(() => {
+  //     dispatchRedux(setModal({ status: "error" }))
+  //   })
 }
