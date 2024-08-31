@@ -6,7 +6,7 @@ import { useEffect } from "react"
 
 type PageProps = {
   date: string
-  error: string
+  error?: string
   start: string
   end: string
   firstName: string
@@ -30,7 +30,11 @@ export default function ClientPage(props: PageProps) {
 
   return (
     <div className="flex flex-col items-center">
-      <ReviewForm {...{ date, error, start, end, firstName, lastName }} />
+      <ReviewForm
+        error={error ?? ""} // Provide a default value for error
+        start={start}
+        end={end}
+      />
     </div>
   )
 }
