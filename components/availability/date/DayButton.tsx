@@ -46,7 +46,7 @@ export default function DayButton({
           "p-4 transition-all flex flex-col items-center outline-primary-600 relative",
           props.className,
           {
-            "font-semibold bg-slate-300 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hocus:border-primary-500 hocus:shadow-sm hocus:shadow-primary-100 hocus:-mt-0.5 hocus:z-10 hocus:mb-0.5 border border-transparent":
+            "font-semibold bg-slate-300 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hocus:border-primary-500 hocus:shadow-sm hocus:shadow-primary-100 hocus:z-10 border border-transparent":
               !isDisabled,
             "bg-white dark:bg-slate-200 text-gray-500 dark:text-gray-500":
               isDisabled,
