@@ -12,7 +12,7 @@ import { createHash } from "crypto"
  */
 export function getHash(data: string): string {
   return createHash("sha256")
-    // .update(data + (process.env.GOOGLE_OAUTH_SECRET ?? ""))
+    .update(data + (process.env.GOOGLE_OAUTH_SECRET ?? ""))
     .update(data + ("test"))
     .digest("hex")
 }
