@@ -56,7 +56,7 @@ export default function Calendar({
           {weekday}
         </div>
       ))}
-      {days.map((day) => {
+      {days.slice(0, 21).map((day) => {
         const availabilityTest = offers[day.toString()] ?? []
         return (
           <DayButton
