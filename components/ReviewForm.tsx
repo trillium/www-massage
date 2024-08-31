@@ -31,18 +31,15 @@ export type ReviewFormData = {
 export type RatingType = 1 | 2 | 3 | 4 | 5 | undefined | ""
 export type RatingTypeStrict = 1 | 2 | 3 | 4 | 5
 
-export type RatingFormData = {
-  name: string
-  rating: RatingType
-  comment: string
-  date: string
-}
-
 export default function ReviewForm({
   error,
   start,
   end,
-}: Omit<ReviewFormData, "rating">) {
+}: {
+  error: string
+  start: string
+  end: string
+}) {
   const dispatchRedux = useAppDispatch()
   const formData = useReduxFormData()
   const { firstName, lastName, rating, text } = formData
@@ -99,6 +96,7 @@ export default function ReviewForm({
           />
           <input type="hidden" readOnly name="type" value="table" />
           <input type="hidden" readOnly name="date" value={start} />
+          <input type="hidden" readOnly name="error" value={error} />
 
           <div className="flex flex-col space-y-4">
             <div className="isolate -space-y-px rounded-md shadow-sm">
@@ -176,6 +174,8 @@ export default function ReviewForm({
                   name="rating"
                   value={rating}
                   onChange={formOnChange}
+                  required
+                  aria-required
                   className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6 mb-1">
                   <option disabled value="">
                     Select a rating
@@ -210,8 +210,6 @@ export default function ReviewForm({
                 </label>
                 <input
                   aria-label="Comment"
-                  required
-                  aria-required
                   type="text"
                   name="text"
                   id="text"

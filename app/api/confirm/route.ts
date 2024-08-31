@@ -4,7 +4,7 @@ import { redirect } from "next/navigation"
 import { z } from "zod"
 
 import createCalendarAppointment from "@/lib/availability/createAppointment"
-import getHash from "@/lib/hash"
+import { getHash } from "@/lib/hash"
 
 import templates from "@/lib/messageTemplates/templates"
 
