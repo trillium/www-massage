@@ -2,11 +2,19 @@
 import { useAppDispatch, useReduxFormData } from "@/app/hooks"
 import ReviewForm from "@/components/ReviewForm"
 import { setForm } from "@/redux/slices/formSlice"
-import Link from "next/link"
 import { useEffect } from "react"
 
-export default function About(props: any) {
-  const { name, date, error, start, end, firstName, lastName } = props.data
+type PageProps = {
+  date: string
+  error: string
+  start: string
+  end: string
+  firstName: string
+  lastName: string
+}
+
+export default function ClientPage(props: PageProps) {
+  const { date, error, start, end, firstName, lastName } = props
   const dispatchRedux = useAppDispatch()
   const formData = useReduxFormData()
   const newFormData = {
@@ -20,14 +28,9 @@ export default function About(props: any) {
     // eslint-disable-next-line
   }, [])
 
-  let href = "#"
-  if (typeof window !== "undefined") {
-    href = window.location.pathname + props.uri
-  }
-
   return (
     <div className="flex flex-col items-center">
-      <ReviewForm {...{ name, date, error, start, end, firstName, lastName }} />
+      <ReviewForm {...{ date, error, start, end, firstName, lastName }} />
     </div>
   )
 }
