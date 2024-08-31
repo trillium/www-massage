@@ -4,7 +4,7 @@ import { redirect } from "next/navigation"
 import { z } from "zod"
 
 import createCalendarAppointment from "@/lib/availability/createAppointment"
-import getHash from "@/lib/hash"
+import { getHash } from "@/lib/hash"
 
 import templates from "@/lib/messageTemplates/templates"
 
@@ -32,7 +32,7 @@ export async function GET(req: NextRequest) {
 
   const data = searchParams.get("data")
   const key = searchParams.get("key")
-  
+
   if (!data) {
     return NextResponse.json({ error: "Data is missing" }, { status: 400 })
   }
