@@ -38,7 +38,7 @@ export type BookingFormData = {
 
 type PaymentMethodType = (typeof paymentMethod)[number]["value"] | null
 
-const paymentMethod = [
+export const paymentMethod = [
   {
     name: "Cash",
     value: "cash",
