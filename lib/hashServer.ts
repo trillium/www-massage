@@ -35,28 +35,13 @@ export async function decode(obj: HashableObject): Promise<ValidationResult> {
   if (!obj.key) {
     return { validated: false, data: obj }
   }
-  const { hash, ...dataWithoutHash } = obj
+  
+  const { key, data: dataWithoutHash } = obj
   const dataString = JSON.stringify(dataWithoutHash)
   const validHash = await getHash(dataString)
-  return { validated: hash === validHash, data: dataWithoutHash }
-}
-
-// Example usage
-export async function exampleUsage() {
-  const originalObject: HashableObject = { key1: "value1", key2: "value2" }
-  
-  // Encode the object
-  const encodedObject = await encode(originalObject)
-  console.log("Encoded Object:", encodedObject)
-  
-  // Decode the object
-  const validationResult = await decode(encodedObject)
-  console.log("Validation Result:", validationResult)
-  
-  // Compare hashes
-  if (validationResult.validated) {
-    console.log("Hashes are equal.")
-  } else {
-    console.log("Hashes are not equal.")
+  return {
+    validated: key === validHash,
+    data: dataWithoutHash,
+    key: validHash,
   }
 }
