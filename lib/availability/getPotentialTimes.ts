@@ -10,11 +10,13 @@ export default function getPotentialTimes({
   end,
   duration,
   availabilitySlots,
+  defaultAppointmentInterval=DEFAULT_APPOINTMENT_INTERVAL
 }: {
   start: Day
   end: Day
   duration: number
   availabilitySlots: AvailabilitySlotsMap
+  defaultAppointmentInterval?: number
 }): DateTimeInterval[] {
   const intervals: DateTimeInterval[] = []
 
@@ -22,7 +24,7 @@ export default function getPotentialTimes({
     return intervals
   }
 
-  const INTERVAL = duration < DEFAULT_APPOINTMENT_INTERVAL ? duration : DEFAULT_APPOINTMENT_INTERVAL
+  const INTERVAL = duration < defaultAppointmentInterval ? duration : defaultAppointmentInterval
 
   // Sort the slots by start time
   const days = eachDayOfInterval({
