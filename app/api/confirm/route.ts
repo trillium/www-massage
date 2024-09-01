@@ -9,7 +9,8 @@ import { getHash } from "@/lib/hash"
 import templates from "@/lib/messageTemplates/templates"
 
 const AppointmentPropsSchema = z.object({
-  name: z.string(),
+  firstName: z.string(),
+  lastName: z.string(),
   email: z.string().email(),
   start: z.string(),
   end: z.string(),
@@ -75,7 +76,7 @@ export async function GET(req: NextRequest) {
     summary:
       templates.eventSummary({
         duration: validObject.duration,
-        clientName: validObject.name,
+        clientName: `${validObject.firstName} ${validObject.lastName}`,
       }) || "Error in createEventSummary()",
   })
 

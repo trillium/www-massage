@@ -3,7 +3,7 @@ import { addMinutes, eachDayOfInterval, set } from "date-fns"
 import type Day from "../day"
 import type { AvailabilitySlotsMap, DateTimeInterval } from "../types"
 import mergeOverlappingIntervals from "./mergeOverlappingIntervals"
-import { DEFAULT_APPOINTMENT_INTERVAL } from "@/config"
+import { DEFAULT_APPOINTMENT_INTERVAL } from "../../config"
 
 export default function getPotentialTimes({
   start,

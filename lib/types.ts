@@ -66,8 +66,10 @@ export type AppointmentProps = {
   timeZone: string
   /** A unique ID for generating Google Meet details */
   requestId: string
-  /** Name of the requester */
-  name: string
+  /** First name of the requester */
+  firstName: string
+  /** Last name of the requester */
+  lastName: string
   /** Duration of the meeting in minutes  */
   duration: string
 }
