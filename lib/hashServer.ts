@@ -2,7 +2,7 @@
 
 import { getHash } from "./hash"
 
-type HashableObject = {
+export type HashableObject = {
   [key: string]: any
   hash?: string
 }
