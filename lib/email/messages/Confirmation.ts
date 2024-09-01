@@ -10,7 +10,7 @@ export default function ClientRequestEmail({
   dateSummary,
   location,
 }: Omit<EmailProps, "approveUrl">) {
-  const SUBJECT = `Massage Session Request ${price}, ${duration}`
+  const SUBJECT = `Massage Session Request $${price}, ${duration} minutes`
 
   let body = `<div dir="ltr">`
   body += [
