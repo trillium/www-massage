@@ -12,6 +12,7 @@ import ApprovalEmail from "@/lib/email/messages/Approval"
 import ClientRequestEmail from "@/lib/email/messages/Confirmation"
 import { getHash } from "@/lib/hash"
 import type { DateTimeIntervalWithTimezone } from "@/lib/types"
+import { paymentMethod } from "@/components/booking/BookingForm"
 
 // Define the rate limiter
 const rateLimitLRU = new LRUCache({
@@ -21,6 +22,14 @@ const rateLimitLRU = new LRUCache({
 const REQUESTS_PER_IP_PER_MINUTE_LIMIT = 5
 
 // Define the schema for the request body
+
+const paymentMethodValues = paymentMethod.map((method) => method.value) as [
+  string,
+  ...string[]
+]
+
+const PaymentMethodType = z.enum(paymentMethodValues)
+
 export const AppointmentRequestSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
@@ -41,6 +50,7 @@ export const AppointmentRequestSchema = z.object({
   price: z.string().refine((value) => !Number.isNaN(Number.parseInt(value)), {
     message: "Price must be a valid integer.",
   }),
+  paymentMethod: z.enum(paymentMethodValues),
 })
 
 export async function POST(
