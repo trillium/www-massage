@@ -1,4 +1,4 @@
-import { AppointmentRequestSchema } from "@/app/api/request/route"
+import { AppointmentRequestSchema } from "@/lib/schema"
 
 describe("AppointmentRequestSchema", () => {
   it("should validate a correct appointment request", async () => {
