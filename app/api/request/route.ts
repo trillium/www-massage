@@ -21,7 +21,7 @@ const rateLimitLRU = new LRUCache({
 const REQUESTS_PER_IP_PER_MINUTE_LIMIT = 5
 
 // Define the schema for the request body
-const AppointmentRequestSchema = z.object({
+export const AppointmentRequestSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
   email: z.string().email(),
