@@ -21,7 +21,7 @@ type ValidationResult = {
 export async function encode(obj: HashableObject): Promise<HashableObject> {
   const dataString = JSON.stringify(obj)
   const hash = getHash(dataString)
-  return { ...obj, hash }
+  return { key: hash, data: obj }
 }
 
 
@@ -32,7 +32,7 @@ export async function encode(obj: HashableObject): Promise<HashableObject> {
  * @returns {boolean} True if the hash is valid, otherwise false.
  */
 export async function decode(obj: HashableObject): Promise<ValidationResult> {
-  if (!obj.hash) {
+  if (!obj.key) {
     return { validated: false, data: obj }
   }
   const { hash, ...dataWithoutHash } = obj
