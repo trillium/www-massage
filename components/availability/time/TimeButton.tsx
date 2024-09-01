@@ -1,5 +1,6 @@
 import clsx from "clsx"
 import type { DetailedHTMLProps, HTMLAttributes } from "react"
+import { format } from "date-fns"
 
 import { formatLocalTime } from "@/lib/availability/helpers"
 import type { DateTimeInterval } from "@/lib/types"
@@ -26,7 +27,12 @@ export default function Time({ time: { start, end }, ...props }: TimeProps) {
         "active:mt-0.5 active:-mb-0.5  outline-primary-600"
       )}
       onClick={() => {
-        dispatchRedux(setSelectedTime({ start: start.toString(), end: end.toString() }))
+        dispatchRedux(
+          setSelectedTime({
+            start: format(start, "yyyy-MM-dd'T'HH:mm:ssXXX"),
+            end: format(end, "yyyy-MM-dd'T'HH:mm:ssXXX"),
+          })
+        )
         dispatchRedux(setModal({ status: "open" }))
       }}
       {...props}>
