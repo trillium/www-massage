@@ -21,7 +21,7 @@ type ValidationResult = {
 export async function encode(obj: HashableObject): Promise<HashableObject> {
   const dataString = JSON.stringify(obj)
   const hash = getHash(dataString)
-  return { ...obj, hash }
+  return { key: hash, data: obj }
 }
 
 
