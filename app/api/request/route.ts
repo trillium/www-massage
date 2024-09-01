@@ -175,5 +175,3 @@ function intervalToHumanString({
     timeZoneName: "longGeneric",
   })}`
 }
-
-// donezo
