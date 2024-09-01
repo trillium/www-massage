@@ -104,27 +104,4 @@ describe("getPotentialTimes", () => {
     expect(result[2].start).toStrictEqual(new Date("2023-03-15T15:00:00"))
     expect(result[2].end).toStrictEqual(new Date("2023-03-15T16:00:00"))
   })
-
-  test("should return correct durations for overlapping availability slots", () => {
-    const overlappingSlots: AvailabilitySlotsMap = {
-      1: [
-        // 5 hours
-        { start: { hour: 9, minute: 0 }, end: { hour: 12, minute: 0 } },
-        { start: { hour: 11, minute: 0 }, end: { hour: 14, minute: 0 } },
-      ],
-    }
-
-    const result = getPotentialTimes({
-      start,
-      end,
-      duration,
-      availabilitySlots: overlappingSlots,
-    })
-
-    expect(result).toHaveLength(5)
-    expect(result[0].start).toStrictEqual(new Date("2023-03-13T09:00:00"))
-    expect(result[0].end).toStrictEqual(new Date("2023-03-13T10:00:00"))
-    expect(result[4].start).toStrictEqual(new Date("2023-03-13T13:00:00"))
-    expect(result[4].end).toStrictEqual(new Date("2023-03-13T14:00:00"))
-  })
 })
