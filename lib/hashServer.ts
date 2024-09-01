@@ -2,7 +2,7 @@
 
 import { getHash } from "./hash"
 
-type HashableObject = {
+export type HashableObject = {
   [key: string]: any
   hash?: string
 }
@@ -10,6 +10,7 @@ type HashableObject = {
 type ValidationResult = {
   validated: boolean
   data: HashableObject
+  key?: string
 }
 
 /**
@@ -23,7 +24,6 @@ export async function encode(obj: HashableObject): Promise<HashableObject> {
   const hash = getHash(dataString)
   return { key: hash, data: obj }
 }
-
 
 /**
  * Decodes an object by validating its hash property.
