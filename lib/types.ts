@@ -1,3 +1,5 @@
+import { paymentMethod } from "@/data/paymentMethods";
+
 /**
  * Used to represent a period of time in a day that
  * is available for a meeting (procided it's not booked).
@@ -85,3 +87,5 @@ export type EmailProps = {
   price: string,
   duration: string,
 }
+
+export type PaymentMethodType = (typeof paymentMethod)[number]["value"] | null

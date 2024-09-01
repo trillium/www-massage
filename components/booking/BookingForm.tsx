@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react"
 import { Dialog } from "@headlessui/react"
 import { useRouter } from "next/navigation"
@@ -17,6 +19,8 @@ import {
   useReduxFormData,
   useReduxModal,
 } from "@/app/hooks"
+import { PaymentMethodType } from "@/lib/types"
+import { paymentMethod } from "@/data/paymentMethods"
 
 /**
  * Represents form data from the booking form
@@ -35,36 +39,6 @@ export type BookingFormData = {
   /** Payment method of the requester */
   paymentMethod?: PaymentMethodType
 }
-
-type PaymentMethodType = (typeof paymentMethod)[number]["value"] | null
-
-export const paymentMethod = [
-  {
-    name: "Cash",
-    value: "cash",
-    hint: "Having exact change helps a lot :)",
-  },
-  {
-    name: "Venmo",
-    value: "venmo",
-    hint: "Venmo name is @TrilliumSmith, last 4 phone number -5344",
-  },
-  {
-    name: "CashApp",
-    value: "cashapp",
-    hint: "CashApp name is $trilliummassage",
-  },
-  {
-    name: "Credit Card",
-    value: "creditCard",
-    hint: "Chip cards preferred, reduces fees",
-  },
-  {
-    name: "Invoice",
-    value: "invoice",
-    hint: "Invoice sent via email",
-  },
-]
 
 export default function BookingForm() {
   const dispatchRedux = useAppDispatch()
