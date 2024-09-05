@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import type { DetailedHTMLProps, HTMLAttributes } from "react"
+import { useEffect, type DetailedHTMLProps, type HTMLAttributes } from "react"
 import { format } from "date-fns"
 
 import { formatLocalTime } from "@/lib/availability/helpers"
@@ -11,12 +11,19 @@ import { useAppDispatch, useReduxAvailability } from "@/app/hooks"
 
 type TimeProps = {
   time: DateTimeInterval
-} & DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+} & DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & any
 
 export default function Time({ time: { start, end }, ...props }: TimeProps) {
+  const { ready, setReady } = props
   const { timeZone } = useReduxAvailability()
   const dispatchRedux = useAppDispatch()
 
+
+  useEffect( () => {
+    if (ready) {
+      setReady(true)
+    }
+  }, [ready, setReady])
   return (
     <button
       type="button"

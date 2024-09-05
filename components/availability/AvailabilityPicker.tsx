@@ -7,11 +7,13 @@ import type { DateTimeInterval } from "@/lib/types"
 import format from "date-fns-tz/format"
 import { useSelector } from "react-redux"
 import type { RootState } from "@/redux/store"
+import TimeList from "./time/TimeList"
+import Calendar from "./date/Calendar"
 
 // Load these dynamically, without SSR, to avoid hydration issues
 // that arise with timezone differences.
-const Calendar = dynamic(() => import("./date/Calendar"), { ssr: false })
-const TimeList = dynamic(() => import("./time/TimeList"), { ssr: false })
+// const Calendar = dynamic(() => import("./date/Calendar"), { ssr: false })
+// const TimeList = dynamic(() => import("./time/TimeList"), { ssr: false })
 
 export type PickerProps = {
   durationProps: {

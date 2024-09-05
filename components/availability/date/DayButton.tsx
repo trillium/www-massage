@@ -1,5 +1,10 @@
 import clsx from "clsx"
-import type { ButtonHTMLAttributes, DetailedHTMLProps } from "react"
+import {
+  useEffect,
+  useState,
+  type ButtonHTMLAttributes,
+  type DetailedHTMLProps,
+} from "react"
 import { twMerge } from "tailwind-merge"
 
 import Day from "@/lib/day"
@@ -23,6 +28,7 @@ export default function DayButton({
   ...props
 }: DayProps): JSX.Element {
   const { selectedDate } = useReduxAvailability()
+  const [showAvailDots, setShowAvailDots] = useState(false)
 
   const dispatchRedux = useAppDispatch()
 
@@ -37,6 +43,10 @@ export default function DayButton({
     : false
 
   const isDisabled = !hasAvailability
+
+  useEffect(() => {
+    setShowAvailDots(true)
+  }, [])
 
   return (
     <button
@@ -85,7 +95,7 @@ export default function DayButton({
         <figure
           className="flex items-center space-x-0.5 h-3 justify-center"
           aria-hidden="true">
-          {Array.from({ length: isDisabled ? 0 : availabilityScore }).map(
+          {showAvailDots && Array.from({ length: isDisabled ? 0 : availabilityScore }).map(
             (_, index) => (
               <div
                 key={`availability-bar-${index}`}
