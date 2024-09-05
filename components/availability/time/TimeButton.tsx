@@ -11,15 +11,15 @@ import { useAppDispatch, useReduxAvailability } from "@/app/hooks"
 
 type TimeProps = {
   time: DateTimeInterval
-} & DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & any
+} & DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> &
+  any
 
 export default function Time({ time: { start, end }, ...props }: TimeProps) {
   const { ready, setReady } = props
   const { timeZone } = useReduxAvailability()
   const dispatchRedux = useAppDispatch()
 
-
-  useEffect( () => {
+  useEffect(() => {
     if (ready) {
       setReady(true)
     }
@@ -44,7 +44,20 @@ export default function Time({ time: { start, end }, ...props }: TimeProps) {
       }}
       {...props}>
       {formatLocalTime(start, { timeZone })} –{" "}
-      {formatLocalTime(end, { timeZone })}
+      {formatLocalTime(end, { timeZone })} {getTimezoneAbbreviation(end) || "Foo"}
     </button>
   )
+}
+
+function getTimezoneAbbreviation(date: Date, timeZone?: string): string {
+  const options = timeZone
+    ? { timeZone, timeZoneName: "short" as "short" }
+    : { timeZoneName: "short" as "short" }
+
+  const timezoneAbbreviation =
+    new Intl.DateTimeFormat("en-US", options)
+      .formatToParts(date)
+      .find((part) => part.type === "timeZoneName")?.value || ""
+
+  return timezoneAbbreviation
 }
