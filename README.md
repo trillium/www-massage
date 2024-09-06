@@ -152,7 +152,7 @@ This prject is meant to be a simple and extensible booking utility for massage t
 
 [![Next][Next.js]][Next-url]
 [![React][React.js]][React-url]
-[![Tailwindcss][Tailwindcss.com]][JQuery-url] 
+[![Tailwindcss][Tailwindcss.com]][Tailwind-url] 
 </div>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
