@@ -61,6 +61,11 @@ export async function fetchData({
     console.error("Failed to parse searchParams:", error)
   }
 
+  if (duration == undefined) {
+    // if validation faisl 
+    duration = DEFAULT_DURATION
+  }
+
   // Offer two weeks of availability.
   const start = Day.todayWithOffset(0)
   const end = Day.todayWithOffset(14)

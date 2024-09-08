@@ -2,8 +2,14 @@ import { combineSlices, configureStore } from "@reduxjs/toolkit"
 import { formSlice } from "@/redux/slices/formSlice"
 import { availabilitySlice } from "@/redux/slices/availabilitySlice"
 import { modalSlice } from "@/redux/slices/modalSlice"
+import { readySlice } from "./slices/readySlice"
 
-const rootReducer = combineSlices(formSlice, availabilitySlice, modalSlice)
+const rootReducer = combineSlices(
+  formSlice,
+  availabilitySlice,
+  modalSlice,
+  readySlice
+)
 
 export const makeStore = () => {
   return configureStore({

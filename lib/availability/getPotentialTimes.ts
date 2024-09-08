@@ -3,18 +3,20 @@ import { addMinutes, eachDayOfInterval, set } from "date-fns"
 import type Day from "../day"
 import type { AvailabilitySlotsMap, DateTimeInterval } from "../types"
 import mergeOverlappingIntervals from "./mergeOverlappingIntervals"
-import { DEFAULT_APPOINTMENT_INTERVAL } from "@/config"
+import { DEFAULT_APPOINTMENT_INTERVAL } from "../../config"
 
 export default function getPotentialTimes({
   start,
   end,
   duration,
   availabilitySlots,
+  defaultAppointmentInterval=DEFAULT_APPOINTMENT_INTERVAL
 }: {
   start: Day
   end: Day
   duration: number
   availabilitySlots: AvailabilitySlotsMap
+  defaultAppointmentInterval?: number
 }): DateTimeInterval[] {
   const intervals: DateTimeInterval[] = []
 
@@ -22,7 +24,7 @@ export default function getPotentialTimes({
     return intervals
   }
 
-  const INTERVAL = duration < DEFAULT_APPOINTMENT_INTERVAL ? duration : DEFAULT_APPOINTMENT_INTERVAL
+  const INTERVAL = duration < defaultAppointmentInterval ? duration : defaultAppointmentInterval
 
   // Sort the slots by start time
   const days = eachDayOfInterval({

@@ -1,3 +1,5 @@
+import { paymentMethod } from "@/data/paymentMethods";
+
 /**
  * Used to represent a period of time in a day that
  * is available for a meeting (procided it's not booked).
@@ -66,8 +68,10 @@ export type AppointmentProps = {
   timeZone: string
   /** A unique ID for generating Google Meet details */
   requestId: string
-  /** Name of the requester */
-  name: string
+  /** First name of the requester */
+  firstName: string
+  /** Last name of the requester */
+  lastName: string
   /** Duration of the meeting in minutes  */
   duration: string
 }
@@ -93,3 +97,5 @@ export type ReviewType = {
   type?: string
   helpful?: number
 }
+
+export type PaymentMethodType = (typeof paymentMethod)[number]["value"] | null
