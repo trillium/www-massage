@@ -88,4 +88,31 @@ export type EmailProps = {
   duration: string,
 }
 
+export type ReviewType = {
+  rating: 1 | 2 | 3 | 4 | 5
+  date: string
+  comment: string | null
+  name: string
+  source: string
+  type?: string
+  helpful?: number
+}
+
 export type PaymentMethodType = (typeof paymentMethod)[number]["value"] | null
+
+export type GoogleCalendarV3Event = {
+  // Define the properties of the event according to Google Calendar API V3
+  id: string
+  summary: string
+  description?: string
+  start: {
+    dateTime: string
+    timeZone?: string
+  }
+  end: {
+    dateTime: string
+    timeZone?: string
+  }
+  location?: string
+  // Add other properties as needed
+}
