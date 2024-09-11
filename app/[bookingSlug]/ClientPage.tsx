@@ -6,8 +6,10 @@ import Template from "@/components/Template"
 import AvailabilityPicker from "@/components/availability/AvailabilityPicker"
 import { PricingWrapper } from "@/components/availability/PricingWrapper"
 import { DEFAULT_PRICING } from "@/config"
+import { DateTimeInterval, GoogleCalendarV3Event } from "@/lib/types"
 
 import PageProps from "./page"
+import { mapStringsToDates } from "@/lib/availability/helpers"
 
 const pricing = DEFAULT_PRICING
 
@@ -19,7 +21,10 @@ function Page({
   busy,
   selectedDate,
   duration,
+  free,
 }: InferGetServerSidePropsType<typeof PageProps>) {
+  const freeDateTimeInterval: DateTimeInterval[] = mapStringsToDates(free)
+  
   const { slots, pickerProps } = PricingWrapper({
     start,
     end,
@@ -27,6 +32,7 @@ function Page({
     pricing,
     selectedDate,
     duration,
+    free: freeDateTimeInterval,
   })
 
   return (

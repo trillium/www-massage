@@ -32,7 +32,7 @@ export const NavOptions = () => {
   return (
     <>
       {headerNavLinks
-        .filter((link) => link.href !== "/")
+        // .filter((link) => link.href !== "/")
         .map((link) => (
           <RenderNavLink navItem={link} key={link.title} />
         ))}

@@ -14,6 +14,7 @@ import Day from "@/lib/day"
 import PageProps from "@/app/page"
 import { setDuration, setSelectedDate } from "@/redux/slices/availabilitySlice"
 import { useAppDispatch, useReduxAvailability } from "@/app/hooks"
+import { DateTimeInterval } from "@/lib/types"
 
 export function PricingWrapper({
   start,
@@ -21,7 +22,8 @@ export function PricingWrapper({
   busy,
   selectedDate,
   duration,
-}: InferGetServerSidePropsType<typeof PageProps>) {
+  free,
+}: InferGetServerSidePropsType<typeof PageProps> & { free: DateTimeInterval }) {
   const dispatchRedux = useAppDispatch()
   const {
     duration: durationRedux,
@@ -48,11 +50,12 @@ export function PricingWrapper({
     end: endDay,
     duration: durationRedux || duration,
     availabilitySlots: OWNER_AVAILABILITY,
+    containers: free,
   })
 
   const offers = getAvailability({
     busy: mapStringsToDates(busy),
-    potential,
+    potential: potential,
   })
 
   const slots = offers.filter((slot) => {
@@ -62,18 +65,22 @@ export function PricingWrapper({
     )
   })
 
-  const firstAvail = format(slots[0].start, "yyyy-MM-dd", { timeZone })
+  // const firstAvail = format(slots[0].start, "yyyy-MM-dd", { timeZone })
 
   const initialURLParamsData = useCallback(() => {
     if (selectedDate) {
       dispatchRedux(setSelectedDate(selectedDate))
     } else {
-      dispatchRedux(setSelectedDate(firstAvail))
+      if (slots.length > 0) {
+        const firstAvail = format(slots[0].start, "yyyy-MM-dd", { timeZone })
+        dispatchRedux(setSelectedDate(firstAvail))
+      }
     }
     if (duration) {
       dispatchRedux(setDuration(duration))
     }
-  }, [dispatchRedux, selectedDate, firstAvail, duration])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     initialURLParamsData()
