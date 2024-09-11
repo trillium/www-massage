@@ -152,7 +152,9 @@ This prject is meant to be a simple and extensible booking utility for massage t
 
 [![Next][Next.js]][Next-url]
 [![React][React.js]][React-url]
-[![Tailwindcss][Tailwindcss.com]][JQuery-url] 
+[![Tailwindcss][Tailwindcss.com]][Tailwind-url] 
+[![Typescript][typescript-shield]][typescript-url]
+[![Redux][redux-shield]][redux-url]
 </div>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -304,3 +306,7 @@ Project Link: [https://github.com/Spiteless/www-massage](https://github.com/Spit
 [Tailwind-url]: https://tailwindcss.com 
 [Site-url]: https://trilliummassage.la
 [netlify-shield]: https://img.shields.io/netlify/6387ba9f-85f8-4149-83a0-69b7b1a33775?style=for-the-badge
+[typescript-shield]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
+[typescript-url]: https://www.typescriptlang.org/
+[redux-shield]: https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white
+[redux-url]: https://redux.js.org/
