@@ -24,7 +24,7 @@ export default function getAvailability({
 }: {
   potential?: DateTimeInterval[]
   busy?: DateTimeInterval[]
-  padding?: number,
+  padding?: number
   leadTime?: number
 }): DateTimeInterval[] {
   // Our final array of available slots
@@ -39,11 +39,12 @@ export default function getAvailability({
 
   if (leadTime > 0) {
     const leadTimeBuffer = {
-    start: now, end: add(now, {minutes: leadTime})
-  }
+      start: now,
+      end: add(now, { minutes: leadTime }),
+    }
 
-  //add leadTimeBuffer to front of busy array
-  busy?.unshift(leadTimeBuffer)
+    //add leadTimeBuffer to front of busy array
+    busy?.unshift(leadTimeBuffer)
   }
 
   const potential = potentialParam.filter((slot) => {
@@ -59,7 +60,6 @@ export default function getAvailability({
     // Check if the free slot overlaps with any busy slot
     let isFree = true
     for (let j = 0; j < busy.length; j++) {
-
       const busySlot = busy[j]
       // apply padding to busySlot .start and .end times eg:
       //   appointment is 10:00am to 11:00am,  padding is 30min
