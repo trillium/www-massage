@@ -57,7 +57,12 @@ export const formSlice = createSlice({
   name: "form",
   initialState,
   reducers: {
-    setForm: (state, action: PayloadAction<FormStateType>) => action.payload,
+    setForm: (state, action: PayloadAction<Partial<FormStateType>>) => {
+      return {
+        ...state,
+        ...action.payload,
+      }
+    },
   },
 })
 
