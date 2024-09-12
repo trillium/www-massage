@@ -31,7 +31,7 @@ function buildEventBody({
   requestId,
   firstName,
 }: AppointmentProps) {
-  const description = templates.eventDescription({start, end, summary, email, location, name})
+  const description = templates.eventDescription({start, end, summary, email, location, firstName})
 
   return {
     start: {
@@ -45,7 +45,7 @@ function buildEventBody({
     attendees: [
       {
         email,
-        displayName: name,
+        displayName: firstName,
       },
     ],
     ...{location}
