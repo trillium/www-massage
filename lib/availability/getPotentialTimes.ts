@@ -40,15 +40,8 @@ export default function getPotentialTimes({
     const slotsForDay = availabilitySlots[dayOfWeek] ?? []
 
     for (const slot of slotsForDay) {
-      const slotStart = set(day, {
-        hours: slot.start.hour,
-        minutes: slot.start.minute,
-      })
-
-      const slotEnd = set(day, {
-        hours: slot.end.hour,
-        minutes: slot.end.minute,
-      }) // TODO: handle overnight slots
+      const slotStart = mapTimeObjectToDate(day, slot.start)
+      const slotEnd = mapTimeObjectToDate(day, slot.end)
 
       let currentIntervalStart = slotStart
 
