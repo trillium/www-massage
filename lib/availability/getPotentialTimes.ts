@@ -11,12 +11,14 @@ export default function getPotentialTimes({
   duration,
   availabilitySlots,
   defaultAppointmentInterval = DEFAULT_APPOINTMENT_INTERVAL,
+  containers,
 }: {
   start: Day
   end: Day
   duration: number
   availabilitySlots: AvailabilitySlotsMap
   defaultAppointmentInterval?: number
+  containers?: { start: string; end: string }[]
 }): DateTimeInterval[] {
   const intervals: DateTimeInterval[] = []
 
@@ -34,37 +36,41 @@ export default function getPotentialTimes({
     start: start.toInterval("Etc/GMT").start,
     end: end.toInterval("Etc/GMT").end,
   })
-  days.forEach((day) => {
-    const dayOfWeek = day.getDay()
 
-    const slotsForDay = availabilitySlots[dayOfWeek] ?? []
+  if (false) {
+  } else {
+    days.forEach((day) => {
+      const dayOfWeek = day.getDay()
 
-    for (const slot of slotsForDay) {
-      const slotStart = mapTimeObjectToDate(day, slot.start)
-      const slotEnd = mapTimeObjectToDate(day, slot.end)
+      const slotsForDay = availabilitySlots[dayOfWeek] ?? []
 
-      let currentIntervalStart = slotStart
+      for (const slot of slotsForDay) {
+        const slotStart = mapTimeObjectToDate(day, slot.start)
+        const slotEnd = mapTimeObjectToDate(day, slot.end)
 
-      while (
-        // while the beginning of the current interval is before the end of the slot
-        currentIntervalStart < slotEnd &&
-        // and adding the duration to the beginning of the current interval is before the end of the slot
-        addMinutes(currentIntervalStart, duration) <= slotEnd
-      ) {
-        // add the duration to the beginning of the current interval to get the end of the current interval
-        const currentIntervalEnd = addMinutes(currentIntervalStart, duration)
+        let currentIntervalStart = slotStart
 
-        // add the current interval to the list of intervals
-        intervals.push({
-          start: currentIntervalStart,
-          end: currentIntervalEnd,
-        })
+        while (
+          // while the beginning of the current interval is before the end of the slot
+          currentIntervalStart < slotEnd &&
+          // and adding the duration to the beginning of the current interval is before the end of the slot
+          addMinutes(currentIntervalStart, duration) <= slotEnd
+        ) {
+          // add the duration to the beginning of the current interval to get the end of the current interval
+          const currentIntervalEnd = addMinutes(currentIntervalStart, duration)
 
-        // set the beginning of the next interval to the end of the current interval plus INTERVAL time
-        currentIntervalStart = addMinutes(currentIntervalStart, INTERVAL)
+          // add the current interval to the list of intervals
+          intervals.push({
+            start: currentIntervalStart,
+            end: currentIntervalEnd,
+          })
+
+          // set the beginning of the next interval to the end of the current interval plus INTERVAL time
+          currentIntervalStart = addMinutes(currentIntervalStart, INTERVAL)
+        }
       }
-    }
-  })
+    })
+  }
   // return intervals even if they overlap
   return intervals
 }
