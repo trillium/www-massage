@@ -75,3 +75,20 @@ export default function getPotentialTimes({
   // return intervals even if they overlap
   return intervals
 }
+
+function mapTimeObjectToDate(
+  day: Date,
+  values: {
+    year?: number
+    month?: number
+    date?: number
+    hour?: number
+    hours?: number
+    minutes?: number
+    seconds?: number
+    milliseconds?: number
+  }
+) {
+  const { hour, ...rest } = values
+  return set(day, { ...rest, hours: hour ?? values.hours })
+}
