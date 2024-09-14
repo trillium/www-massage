@@ -71,7 +71,7 @@ export default function ReviewForm({
   }
 
   return (
-    <div className="w-full max-w-7xl px-4 md:px-5 lg:px-6 mx-auto">
+    <div className="w-full max-w-7xl px-4 md:px-0 mx-auto">
       <div className="grid grid-cols-12 mb-11">
         <form
           className={"mt-3 sm:mt-0 w-full" + " " + "col-span-12 xl:col-span-7"}
