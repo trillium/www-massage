@@ -12,7 +12,7 @@ export async function getEventsBySearchQuery(
     calendarId
   )}/events?q=${encodeURIComponent(searchQuery)}&timeMin=${encodeURIComponent(
     timeMin
-  )}&timeMax=${encodeURIComponent(timeMax)}`
+  )}&timeMax=${encodeURIComponent(timeMax)}&singleEvents=true`
 
   const response = await fetch(url, {
     method: "GET",
@@ -29,3 +29,6 @@ export async function getEventsBySearchQuery(
   const data = await response.json()
   return data.items // Assuming you want to return the list of events
 }
+
+// Availability will be defined by calendar events called (name)_CONTAINER
+// sub events will take up event container time and have (name) in their summary or body
