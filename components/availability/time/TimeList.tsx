@@ -1,4 +1,4 @@
-import Time from "./TimeButton"
+import TimeButton from "./TimeButton"
 import type { DateTimeInterval } from "@/lib/types"
 
 type TimeListProps = {
@@ -8,7 +8,7 @@ export default function TimeList({ availability }: TimeListProps) {
   return (
     <div className="grid grid-cols-2 gap-2">
       {availability?.map((slot) => (
-        <Time
+        <TimeButton
           key={slot.start.toISOString() + slot.end.toISOString()}
           time={slot}
         />

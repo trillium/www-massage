@@ -13,7 +13,7 @@ type TimeProps = {
   time: DateTimeInterval
 } & DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 
-export default function Time({ time: { start, end }, ...props }: TimeProps) {
+export default function TimeButton({ time: { start, end }, ...props }: TimeProps) {
   const { timeZone } = useReduxAvailability()
   const dispatchRedux = useAppDispatch()
 
