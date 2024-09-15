@@ -5,52 +5,48 @@ import type { BookingFormData } from "@/components/booking/BookingForm"
 import type { ReviewFormData } from "@/components/ReviewForm"
 import { ReviewSnippetProps } from "@/components/ReviewCard"
 
-export const initialBookingFormData: { [K in keyof BookingFormData]: boolean } = {
+export const initialBookingFormData: BookingFormData = {
   /** First name of the requester */
-  firstName: false,
+  firstName: "",
   /** Last name of the requester */
-  lastName: false,
+  lastName: "",
   /** Email address of the requester */
-  email: false,
+  email: "",
   /** Address of the requester */
-  location: false,
+  location: "",
   /** Phone number of the requester */
-  phone: false,
+  phone: "",
   /** Payment method of the requester */
-  paymentMethod: false,
+  paymentMethod: "",
 }
 
-export const initialReviewFormState: { [K in keyof FormStateType]: boolean } = {
+export const initialReviewFormState: FormStateType = {
   /** Name of the requester */
-  name: false,
+  name: "",
   /** Fast name of the requester */
-  firstName: false,
+  firstName: "",
   /** Last name of the requester */
-  lastName: false,
+  lastName: "",
   /** Short review description */
-  text: false,
+  text: "",
   /** Datetime start */
-  start: false,
+  start: "",
   /** Datetime end */
-  end: false,
+  end: "",
   /** Ratings */
-  rating: false,
+  rating: "",
 }
 
-export const initialReviewSnippetProps: { [K in keyof ReviewSnippetProps]: boolean } = {
-  name: false,
-  text: false,
-  date: false,
-  rating: false,
+export const initialReviewSnippetProps: ReviewSnippetProps = {
+  name: "",
+  text: "",
+  date: "",
+  rating: "",
 }
 
 type FormStateType = BookingFormData & ReviewFormData & ReviewSnippetProps
 
-type FormStateTypeBoolean = {
-  [K in keyof FormStateType]: boolean
-}
-
-const initialState: FormStateTypeBoolean = {
+const initialState: FormStateType = {
   ...initialBookingFormData,
   ...initialReviewFormState,
 }
@@ -59,7 +55,7 @@ export const formFieldLockedSlice = createSlice({
   name: "form",
   initialState,
   reducers: {
-    setFormFieldLocked: (state, action: PayloadAction<Partial<FormStateTypeBoolean>>) => {
+    setFormFieldLocked: (state, action: PayloadAction<Partial<FormStateType>>) => {
       return {
         ...state,
         ...action.payload,
