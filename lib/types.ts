@@ -32,6 +32,14 @@ export type StringInterval = {
 }
 
 /**
+ * Represents an interval of time between start and end
+ * with an optional location.
+ */
+export type StringIntervalAndLocation = StringInterval & {
+  location?: string;
+};
+
+/**
  * Represents an interval of time between start and end.
  */
 export type DateTimeInterval = {
@@ -40,6 +48,14 @@ export type DateTimeInterval = {
   /** Ending date */
   end: Date
 }
+
+/**
+ * Represents an interval of time between start and end
+ * with an optional location.
+ */
+export type DateTimeIntervalAndLocation = DateTimeInterval & {
+  location?: string;
+};
 
 /**
  * Represents an interval of time between start and end
