@@ -3,6 +3,7 @@ import type { RootState, AppDispatch, AppStore } from "@/redux/store"
 import { selectAvailability } from "@/redux/slices/availabilitySlice"
 import { selectModal } from "@/redux/slices/modalSlice"
 import { selectFormData } from "@/redux/slices/formSlice"
+import { selectFormFieldLocked } from "@/redux/slices/formFieldLockedSlice"
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
@@ -18,4 +19,7 @@ export const useReduxModal = () => {
 }
 export const useReduxFormData = () => {
   return useAppSelector(selectFormData)
+}
+export const useReduxFormFieldLocked = () => {
+  return useAppSelector(selectFormFieldLocked)
 }
