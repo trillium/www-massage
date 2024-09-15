@@ -56,6 +56,7 @@ export default function getPotentialTimes({
         intervals.push({
           start: currentIntervalStart,
           end: currentIntervalEnd,
+          ...(slot.location && { location: slot.location })
         })
 
         // set the beginning of the next interval to the end of the current interval plus INTERVAL time
