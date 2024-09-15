@@ -62,18 +62,19 @@ export function PricingWrapper({
     )
   })
 
-  const firstAvail = format(slots[0].start, "yyyy-MM-dd", { timeZone })
-
   const initialURLParamsData = useCallback(() => {
     if (selectedDate) {
       dispatchRedux(setSelectedDate(selectedDate))
     } else {
-      dispatchRedux(setSelectedDate(firstAvail))
+      if (slots.length > 0) {
+        const firstAvail = format(slots[0].start, "yyyy-MM-dd", { timeZone })
+        dispatchRedux(setSelectedDate(firstAvail))
+      }
     }
     if (duration) {
       dispatchRedux(setDuration(duration))
     }
-  }, [dispatchRedux, selectedDate, firstAvail, duration])
+  }, [])
 
   useEffect(() => {
     initialURLParamsData()
