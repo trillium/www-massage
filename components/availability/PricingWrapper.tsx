@@ -26,7 +26,8 @@ export function PricingWrapper({
   busy,
   selectedDate,
   duration,
-}: InferGetServerSidePropsType<typeof PageProps>) {
+  containers,
+}: PricingWrapperProps) {
   const dispatchRedux = useAppDispatch()
   const {
     duration: durationRedux,
@@ -53,6 +54,7 @@ export function PricingWrapper({
     end: endDay,
     duration: durationRedux || duration,
     availabilitySlots: OWNER_AVAILABILITY,
+    containers: containers,
   })
 
   const offers = getAvailability({
