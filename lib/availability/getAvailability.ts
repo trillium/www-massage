@@ -1,6 +1,6 @@
 import { add, areIntervalsOverlapping, sub } from "date-fns"
 
-import type { DateTimeInterval } from "../types"
+import type { DateTimeInterval, DateTimeIntervalAndLocation } from "../types"
 import { SLOT_PADDING, LEAD_TIME } from "../../config"
 
 /**
@@ -10,11 +10,11 @@ import { SLOT_PADDING, LEAD_TIME } from "../../config"
  * @param {Object} obj - An object containing potential slots,
  *  busy slots, and padding.
  *
- * @param {DateTimeInterval[]} obj.potential - Potential slots.
+ * @param {DateTimeIntervalAndLocation[]} obj.potential - Potential slots.
  * @param {DateTimeInterval[]} obj.busy - Busy slots.
  * @param {number} [obj.padding] - Padding to apply to busy slots.
  *
- * @returns {DateTimeInterval[]} An array of available slots.
+ * @returns {DateTimeIntervalAndLocation[]} An array of available slots and location.
  */
 export default function getAvailability({
   potential: potentialParam,
@@ -22,13 +22,13 @@ export default function getAvailability({
   padding = SLOT_PADDING,
   leadTime = LEAD_TIME,
 }: {
-  potential?: DateTimeInterval[]
+  potential?: DateTimeIntervalAndLocation[]
   busy?: DateTimeInterval[]
   padding?: number
   leadTime?: number
-}): DateTimeInterval[] {
+}): DateTimeIntervalAndLocation[] {
   // Our final array of available slots
-  const openSlots: DateTimeInterval[] = []
+  const openSlots: DateTimeIntervalAndLocation[] = []
 
   if (potentialParam === undefined || busy === undefined) {
     return []
