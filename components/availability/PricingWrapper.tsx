@@ -14,6 +14,11 @@ import Day from "@/lib/day"
 import PageProps from "@/app/page"
 import { setDuration, setSelectedDate } from "@/redux/slices/availabilitySlice"
 import { useAppDispatch, useReduxAvailability } from "@/app/hooks"
+import { DateTimeIntervalAndLocation } from "@/lib/types"
+
+type PricingWrapperProps = InferGetServerSidePropsType<typeof PageProps> & {
+  containers: DateTimeIntervalAndLocation
+}
 
 export function PricingWrapper({
   start,
