@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation"
 import slugs from "./pricing"
 
 import ClientPage from "./ClientPage"
@@ -14,10 +13,6 @@ export default async function Page({
 }) {
   const { bookingSlug } = params
   const { pricing } = slugs[bookingSlug as keyof typeof slugs] ?? false
-
-  if (!pricing) {
-    return redirect("/")
-  }
 
   const { props } = await fetchData({ searchParams })
   applyReferral({ searchParams })
