@@ -16,19 +16,24 @@ const TimeList = dynamic(() => import("./time/TimeList"), { ssr: false })
 export type PickerProps = {
   durationProps: {
     title: string
-  },
+  }
   tzPickerProps?: {
     showPicker: boolean
   }
 }
 
-export default function AvailabilityPicker({ slots, pickerProps }: {
-  slots: DateTimeInterval[],
+export default function AvailabilityPicker({
+  slots,
+  pickerProps,
+}: {
+  slots: DateTimeInterval[]
   pickerProps: PickerProps
 }) {
   const { durationProps } = pickerProps
   const { showPicker } = pickerProps.tzPickerProps || { showPicker: true }
-  const { selectedDate, timeZone } = useSelector((state: RootState) => state.availability)
+  const { selectedDate, timeZone } = useSelector(
+    (state: RootState) => state.availability
+  )
 
   let maximumAvailability = 0
   const availabilityByDate = slots.reduce<Record<string, DateTimeInterval[]>>(
