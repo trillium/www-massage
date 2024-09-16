@@ -52,10 +52,13 @@ const initialState: FormStateType = {
 }
 
 export const formFieldLockedSlice = createSlice({
-  name: "form",
+  name: "formFieldLocked",
   initialState,
   reducers: {
-    setFormFieldLocked: (state, action: PayloadAction<Partial<FormStateType>>) => {
+    setFormFieldLocked: (
+      state,
+      action: PayloadAction<Partial<FormStateType>>
+    ) => {
       return {
         ...state,
         ...action.payload,
@@ -66,6 +69,6 @@ export const formFieldLockedSlice = createSlice({
 
 export const { setFormFieldLocked } = formFieldLockedSlice.actions
 
-export const selectFormFieldLocked = (state: RootState) => state.form
+export const selectFormFieldLocked = (state: RootState) => state.formFieldLocked
 
 export default formFieldLockedSlice.reducer
