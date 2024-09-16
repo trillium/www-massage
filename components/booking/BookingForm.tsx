@@ -17,6 +17,7 @@ import {
   useAppDispatch,
   useReduxAvailability,
   useReduxFormData,
+  useReduxFormFieldLocked,
   useReduxModal,
 } from "@/app/hooks"
 import { PaymentMethodType } from "@/lib/types"
@@ -43,6 +44,7 @@ export type BookingFormData = {
 export default function BookingForm() {
   const dispatchRedux = useAppDispatch()
   const formData = useReduxFormData()
+  const formFieldLocked = useReduxFormFieldLocked()
   const { status: modal } = useReduxModal()
   const { selectedTime, timeZone, duration } = useReduxAvailability()
   const price = duration ? DEFAULT_PRICING[duration] : "null"
@@ -175,7 +177,11 @@ export default function BookingForm() {
                 aria-required
                 name="location"
                 id="location"
-                value={formData && formData.location}
+                value={
+                  (formFieldLocked && formFieldLocked.location) ||
+                  (formData && formData.location)
+                }
+                disabled={formFieldLocked && !!formFieldLocked.location}
                 className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 mb-1"
                 placeholder="123 Address Road, Beverly Hills, CA 90210"
                 onChange={formOnChange}
