@@ -10,8 +10,11 @@ export default async function Page({
   params: { bookingSlug: string }
 }) {
   const { bookingSlug } = params
-  const { props } = await fetchContainersByQuery({ searchParams, query: bookingSlug })
-  
+  const { props } = await fetchContainersByQuery({
+    searchParams,
+    query: bookingSlug,
+  })
+
   applyReferral({ searchParams })
   return <ClientPage {...props} />
 }
