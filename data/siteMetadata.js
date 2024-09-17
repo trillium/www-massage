@@ -97,7 +97,7 @@ const siteMetadata = {
     //   indexName: 'docsearch',
     // },
   },
-  eventBaseString: "__TRILLIUMMASSAGE_EVENT__"
+  eventBaseString: "__EVENT__"
 }
 
 module.exports = siteMetadata
