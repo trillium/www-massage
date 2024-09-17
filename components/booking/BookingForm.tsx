@@ -23,6 +23,7 @@ import {
 import { PaymentMethodType } from "@/lib/types"
 import { paymentMethod } from "@/data/paymentMethods"
 import siteMetadata from "@/data/siteMetadata"
+import clsx from "clsx"
 const { eventBaseString: baseString } = siteMetadata
 
 /**
@@ -201,8 +202,14 @@ export default function BookingForm() {
                   (eventContainers && eventContainers.location) ||
                   (formData && formData.location)
                 }
-                disabled={eventContainers && !!eventContainers.location}
-                className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 mb-1"
+                readOnly={eventContainers && !!eventContainers.location}
+                className={clsx(
+                  "pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 mb-1",
+                  {
+                    "bg-gray-400 dark:bg-gray-700 select-none":
+                      eventContainers && eventContainers.location,
+                  }
+                )}
                 placeholder="123 Address Road, Beverly Hills, CA 90210"
                 onChange={formOnChange}
               />
