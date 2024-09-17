@@ -1,7 +1,11 @@
 import { addMinutes, eachDayOfInterval, set } from "date-fns"
 
 import type Day from "../day"
-import type { AvailabilitySlotsMap, DateTimeInterval, DateTimeIntervalAndLocation } from "../types"
+import type {
+  AvailabilitySlotsMap,
+  DateTimeInterval,
+  DateTimeIntervalAndLocation,
+} from "../types"
 import mergeOverlappingIntervals from "./mergeOverlappingIntervals"
 import { DEFAULT_APPOINTMENT_INTERVAL } from "../../config"
 
@@ -56,7 +60,7 @@ export default function getPotentialTimes({
         intervals.push({
           start: currentIntervalStart,
           end: currentIntervalEnd,
-          ...(slot.location && { location: slot.location })
+          ...(slot.location && { location: slot.location }),
         })
 
         // set the beginning of the next interval to the end of the current interval plus INTERVAL time
