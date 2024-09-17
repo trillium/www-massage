@@ -13,6 +13,7 @@ export default function TimeList() {
   const dispatchRedux = useAppDispatch()
   useEffect(() => {
     dispatchRedux(setReady({ TimeList: true }))
+    // eslint-disable-next-line
   }, [])
 
   return (
