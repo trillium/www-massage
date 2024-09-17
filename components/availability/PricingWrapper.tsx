@@ -81,6 +81,7 @@ export function PricingWrapper({
     if (duration) {
       dispatchRedux(setDuration(duration))
     }
+    // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
