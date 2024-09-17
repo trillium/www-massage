@@ -15,6 +15,7 @@ import PageProps from "@/app/page"
 import { setDuration, setSelectedDate } from "@/redux/slices/availabilitySlice"
 import { useAppDispatch, useReduxAvailability } from "@/app/hooks"
 import { DateTimeIntervalAndLocation } from "@/lib/types"
+import { setEventContainers } from "@/redux/slices/eventContainersSlice"
 
 type PricingWrapperProps = InferGetServerSidePropsType<typeof PageProps> & {
   containers: DateTimeIntervalAndLocation
@@ -27,6 +28,7 @@ export function PricingWrapper({
   selectedDate,
   duration,
   containers,
+  eventMemberString,
 }: PricingWrapperProps) {
   const dispatchRedux = useAppDispatch()
   const {
@@ -80,6 +82,11 @@ export function PricingWrapper({
     }
     if (duration) {
       dispatchRedux(setDuration(duration))
+    }
+    if (eventMemberString) {
+      dispatchRedux(
+        setEventContainers({ eventMemberString: eventMemberString || "" })
+      )
     }
     // eslint-disable-next-line
   }, [])
