@@ -22,6 +22,7 @@ function Page({
   selectedDate,
   duration,
   containers,
+  eventMemberString
 }: InferGetServerSidePropsType<typeof PageProps>) {
   const containerDateTimeInterval: DateTimeIntervalAndLocation[] = mapStringsToDates(containers)
   
@@ -33,6 +34,7 @@ function Page({
     selectedDate,
     duration,
     containers: containerDateTimeInterval,
+    eventMemberString
   })
 
   return (
