@@ -17,11 +17,13 @@ import {
   useAppDispatch,
   useReduxAvailability,
   useReduxFormData,
-  useReduxFormFieldLocked,
+  useReduxEventContainers,
   useReduxModal,
 } from "@/app/hooks"
 import { PaymentMethodType } from "@/lib/types"
 import { paymentMethod } from "@/data/paymentMethods"
+import siteMetadata from "@/data/siteMetadata"
+const { eventBaseString: baseString } = siteMetadata
 
 /**
  * Represents form data from the booking form
@@ -44,7 +46,7 @@ export type BookingFormData = {
 export default function BookingForm() {
   const dispatchRedux = useAppDispatch()
   const formData = useReduxFormData()
-  const formFieldLocked = useReduxFormFieldLocked()
+  const eventContainers = useReduxEventContainers()
   const { status: modal } = useReduxModal()
   const { selectedTime, timeZone, duration } = useReduxAvailability()
   const price = duration ? DEFAULT_PRICING[duration] : "null"
@@ -89,6 +91,24 @@ export default function BookingForm() {
         <input type="hidden" readOnly name="duration" value={duration || 0} />
         <input type="hidden" readOnly name="price" value={price} />
         <input type="hidden" readOnly name="timeZone" value={timeZone} />
+        <input type="hidden" readOnly name="baseString" value={baseString} />
+        
+        {eventContainers && eventContainers.eventBaseString && (
+          <input
+            type="hidden"
+            readOnly
+            name="containers.baseString"
+            value={eventContainers.eventBaseString}
+          />
+        )}
+        {eventContainers && eventContainers.eventMemberString && (
+          <input
+            type="hidden"
+            readOnly
+            name="containers.memberString"
+            value={eventContainers.eventMemberString}
+          />
+        )}
 
         <div className="border-l-4 border-l-primary-400 bg-primary-50/30 dark:bg-primary-50/10 p-3 mt-3 mb-4 rounded-md">
           <p className="text-sm md:text-base font-semibold text-primary-800 dark:text-primary-400">
@@ -178,10 +198,10 @@ export default function BookingForm() {
                 name="location"
                 id="location"
                 value={
-                  (formFieldLocked && formFieldLocked.location) ||
+                  (eventContainers && eventContainers.location) ||
                   (formData && formData.location)
                 }
-                disabled={formFieldLocked && !!formFieldLocked.location}
+                disabled={eventContainers && !!eventContainers.location}
                 className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 mb-1"
                 placeholder="123 Address Road, Beverly Hills, CA 90210"
                 onChange={formOnChange}
