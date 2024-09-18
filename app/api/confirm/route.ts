@@ -3,7 +3,7 @@ import { type NextRequest } from "next/server"
 import { redirect } from "next/navigation"
 import { z } from "zod"
 
-import createCalendarAppointment from "@/lib/availability/createAppointment"
+import createCalendarAppointment from "@/lib/availability/createCalendarAppointment"
 import { getHash } from "@/lib/hash"
 
 import templates from "@/lib/messageTemplates/templates"
