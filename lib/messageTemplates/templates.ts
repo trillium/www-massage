@@ -4,7 +4,13 @@
  * @function
  * @returns {string} Returns the summary string for an event.
  */
-function eventSummary ({clientName, duration} : {clientName: string, duration: string}) {
+function eventSummary({
+  clientName,
+  duration,
+}: {
+  clientName: string
+  duration: string
+}) {
   return `${duration} minute massage with ${clientName} - TrilliumMassage`
 }
 
@@ -14,10 +20,10 @@ function eventSummary ({clientName, duration} : {clientName: string, duration: s
  * @function
  * @returns {string} Returns the summary string for an event.
  */
-function eventDescription(props: any /* HACK */ ) {
+function eventDescription(props: any /* HACK */) {
   let output = "Thanks for booking!"
   output += "\n\n"
-  Object.entries(props).map(([key, value]) => {    
+  Object.entries(props).map(([key, value]) => {
     output += `<b>${key}</b>: ${value}\n`
   })
   output += "\n\n"
@@ -30,7 +36,7 @@ function eventDescription(props: any /* HACK */ ) {
 
 const templates = {
   eventSummary,
-  eventDescription
+  eventDescription,
 }
 
 export default templates
