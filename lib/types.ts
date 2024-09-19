@@ -1,4 +1,4 @@
-import { paymentMethod } from "@/data/paymentMethods";
+import { paymentMethod } from "@/data/paymentMethods"
 
 /**
  * Used to represent a period of time in a day that
@@ -36,8 +36,8 @@ export type StringInterval = {
  * with an optional location.
  */
 export type StringIntervalAndLocation = StringInterval & {
-  location?: string;
-};
+  location?: string
+}
 
 /**
  * Represents an interval of time between start and end.
@@ -54,8 +54,8 @@ export type DateTimeInterval = {
  * with an optional location.
  */
 export type DateTimeIntervalAndLocation = DateTimeInterval & {
-  location?: string;
-};
+  location?: string
+}
 
 /**
  * Represents an interval of time between start and end
@@ -100,8 +100,8 @@ export type EmailProps = {
   location: string
   approveUrl: string
   timeZone: string
-  price: string,
-  duration: string,
+  price: string
+  duration: string
 }
 
 export type ReviewType = {
@@ -132,8 +132,8 @@ export type GoogleCalendarV3Event = {
   location?: string
   attendees?: [
     {
-      email: string,
-      displayName: string,
-    },
-  ],
+      email: string
+      displayName: string
+    }
+  ]
 }
