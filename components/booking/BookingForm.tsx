@@ -24,7 +24,7 @@ import { PaymentMethodType } from "@/lib/types"
 import { paymentMethod } from "@/data/paymentMethods"
 import siteMetadata from "@/data/siteMetadata"
 import clsx from "clsx"
-const { eventBaseString: baseString } = siteMetadata
+const { eventBaseString } = siteMetadata
 
 /**
  * Represents form data from the booking form
@@ -92,13 +92,13 @@ export default function BookingForm() {
         <input type="hidden" readOnly name="duration" value={duration || 0} />
         <input type="hidden" readOnly name="price" value={price} />
         <input type="hidden" readOnly name="timeZone" value={timeZone} />
-        <input type="hidden" readOnly name="baseString" value={baseString} />
+        <input type="hidden" readOnly name="eventBaseString" value={eventBaseString} />
         
         {eventContainers && eventContainers.eventBaseString && (
           <input
             type="hidden"
             readOnly
-            name="containers.baseString"
+            name="eventBaseString"
             value={eventContainers.eventBaseString}
           />
         )}
@@ -106,7 +106,7 @@ export default function BookingForm() {
           <input
             type="hidden"
             readOnly
-            name="containers.memberString"
+            name="eventMemberString"
             value={eventContainers.eventMemberString}
           />
         )}
