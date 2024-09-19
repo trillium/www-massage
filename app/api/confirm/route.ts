@@ -16,12 +16,15 @@ const AppointmentPropsSchema = z.object({
   end: z.string(),
   timeZone: z.string(),
   location: z.string(),
-  // phone: z.string(),
+  phone: z.string(),
   duration: z
     .string()
     .refine((value) => !Number.isNaN(Number.parseInt(value)), {
       message: "Duration must be a valid integer.",
     }),
+  eventBaseString: z.string(),
+  eventMemberString: z.string().optional(),
+  eventContainerString: z.string().optional(),
 })
 
 export async function GET(req: NextRequest) {
