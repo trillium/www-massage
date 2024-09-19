@@ -112,11 +112,16 @@ function mapTimeObjectToDate(
     date?: number
     hour?: number
     hours?: number
+    minute?: number
     minutes?: number
     seconds?: number
     milliseconds?: number
   }
 ) {
-  const { hour, ...rest } = values
-  return set(day, { ...rest, hours: hour ?? values.hours })
+  const { hour, minute, ...rest } = values
+  return set(day, {
+    ...rest,
+    hours: hour ?? values.hours,
+    minutes: minute ?? values.minutes,
+  })
 }
