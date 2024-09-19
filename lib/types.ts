@@ -130,5 +130,10 @@ export type GoogleCalendarV3Event = {
     timeZone?: string
   }
   location?: string
-  // Add other properties as needed
+  attendees?: [
+    {
+      email: string,
+      displayName: string,
+    },
+  ],
 }
