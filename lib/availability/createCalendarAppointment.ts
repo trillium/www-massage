@@ -28,11 +28,13 @@ function buildEventBody({
   summary,
   email,
   location,
+  phone,
   requestId,
   firstName,
   lastName,
   duration,
   eventBaseString,
+  eventMemberString,
   eventContainerString,
 }: AppointmentProps) {
   const description = templates.eventDescription({
@@ -40,11 +42,13 @@ function buildEventBody({
     end,
     summary,
     email,
+    phone,
     duration,
     location,
     firstName,
     lastName,
     eventBaseString,
+    eventMemberString,
     eventContainerString,
   })
 
