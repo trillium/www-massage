@@ -30,6 +30,7 @@ function eventDescription({
   location,
   firstName,
   eventBaseString,
+  eventMemberString,
   eventContainerString,
 }: Partial<AppointmentProps>) {
   let output = "Thanks for booking!"
@@ -49,6 +50,10 @@ function eventDescription({
   if (eventBaseString) {
     output += "\n"
     output += eventBaseString
+  }
+  if (eventMemberString) {
+    output += "\n"
+    output += eventMemberString
   }
   if (eventContainerString) {
     output += "\n"
