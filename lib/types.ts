@@ -90,6 +90,10 @@ export type AppointmentProps = {
   lastName: string
   /** Duration of the meeting in minutes  */
   duration: string
+  /** Strings to identify this event via calendar queries */
+  eventBaseString: string
+  eventMemberString: string
+  eventContainerString: string
 }
 
 export type EmailProps = {
