@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic"
 
 import BookingForm from "@/components/booking/BookingForm"
-import DurationPicker from "./controls/DurationPicker"
+import DurationPicker, { durationProps } from "./controls/DurationPicker"
 import TimezonePicker from "./controls/TimezonePicker"
 import type { DateTimeIntervalAndLocation } from "@/lib/types"
 import format from "date-fns-tz/format"
@@ -14,9 +14,7 @@ const Calendar = dynamic(() => import("./date/Calendar"), { ssr: false })
 const TimeList = dynamic(() => import("./time/TimeList"), { ssr: false })
 
 export type PickerProps = {
-  durationProps: {
-    title: string
-  }
+  durationProps: durationProps
   tzPickerProps?: {
     showPicker: boolean
   }
