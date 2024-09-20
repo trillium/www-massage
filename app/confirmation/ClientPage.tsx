@@ -37,7 +37,7 @@ export default function Confirmation() {
           Your request has been received!
         </p>
         <p className="mt-6 text-xl text-gray-800 dark:text-gray-200 font-medium">
-          I'll review the appointment and get back to you shortly!
+          I&apos;ll review the appointment and get back to you shortly!
         </p>
       </div>
       <div
