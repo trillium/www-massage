@@ -1,7 +1,7 @@
 import type { AvailabilitySlotsMap } from "./lib/types"
 
 export const ALLOWED_DURATIONS = [60, 90, 120, 150]
-export const VALID_DURATIONS = [15, 30, 45, 60, 90, 120, 150]
+export const VALID_DURATIONS = [15, 30, 45, 60, 90, 120, 150, 180, 210, 240]
 export const DEFAULT_PRICING: {[key: number] : number} = {
   15: 140*1/4,
   30: 140*2/4,
@@ -10,6 +10,9 @@ export const DEFAULT_PRICING: {[key: number] : number} = {
   90: 140*6/4,
   120: 140*8/4,
   150: 140*10/4,
+  180: 140*12/4,
+  210: 140*14/4,
+  240: 140*16/4,
 }
 export const DEFAULT_DURATION = 90
 
