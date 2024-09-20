@@ -7,6 +7,7 @@ import {
   useReduxFormData,
 } from "../hooks"
 import { formatLocalDate, formatLocalTime } from "@/lib/availability/helpers"
+import BookSessionButton from "@/components/BookSessionButton"
 
 export default function Confirmation() {
   const dispatchRedux = useAppDispatch()
@@ -71,6 +72,10 @@ export default function Confirmation() {
             {formData.email}
           </p>
         </div>
+      </div>
+
+      <div className="pt-12 flex flex-grow items-center justify-center">
+        <BookSessionButton title="Book Another Session!" href="/" />
       </div>
     </>
   )
