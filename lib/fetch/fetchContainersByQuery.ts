@@ -5,6 +5,7 @@ import {
   DEFAULT_APPOINTMENT_INTERVAL,
   DEFAULT_DURATION,
   DEFAULT_PRICING,
+  VALID_DURATIONS,
 } from "@/config"
 import Day from "@/lib/day"
 import { getEventsBySearchQuery } from "../availability/getEventsBySearchQuery"
@@ -20,7 +21,7 @@ export async function fetchContainersByQuery({
   const schema = z.object({
     duration: z
       .enum([
-        ...(ALLOWED_DURATIONS.map(String) as [string, ...string[]]),
+        ...(VALID_DURATIONS.map(String) as [string, ...string[]]),
         DEFAULT_APPOINTMENT_INTERVAL.toString(),
       ])
       .optional()
