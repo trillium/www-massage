@@ -100,7 +100,17 @@ export async function fetchContainersByQuery({
     )
   })
   const containersMapped = containers.map((e: GoogleCalendarV3Event) => {
-    return { start: e.start.dateTime, end: e.end.dateTime, location: e.location }
+    let obj = {}
+    try {
+      obj = JSON.parse(e.description || "")
+    } catch {}
+
+    return {
+      start: e.start.dateTime,
+      end: e.end.dateTime,
+      location: e.location,
+      ...obj,
+    }
   })
 
   return {
