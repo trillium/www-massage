@@ -33,7 +33,7 @@ export default function About(props: any) {
       </div>
       {rating && rating > 3 && (
         <div className="pt-8">
-          <BookSessionButton title="Book a Session!" href="/book" />
+          <BookSessionButton title="Book a Session!" href="/" />
         </div>
       )}
     </div>
