@@ -97,6 +97,7 @@ const siteMetadata = {
     //   indexName: 'docsearch',
     // },
   },
+  eventBaseString: "__EVENT__"
 }
 
 module.exports = siteMetadata

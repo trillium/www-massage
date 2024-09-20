@@ -1,4 +1,4 @@
-import { paymentMethod } from "@/data/paymentMethods";
+import { paymentMethod } from "@/data/paymentMethods"
 
 /**
  * Used to represent a period of time in a day that
@@ -32,6 +32,14 @@ export type StringInterval = {
 }
 
 /**
+ * Represents an interval of time between start and end
+ * with an optional location.
+ */
+export type StringIntervalAndLocation = StringInterval & {
+  location?: string
+}
+
+/**
  * Represents an interval of time between start and end.
  */
 export type DateTimeInterval = {
@@ -39,6 +47,14 @@ export type DateTimeInterval = {
   start: Date
   /** Ending date */
   end: Date
+}
+
+/**
+ * Represents an interval of time between start and end
+ * with an optional location.
+ */
+export type DateTimeIntervalAndLocation = DateTimeInterval & {
+  location?: string
 }
 
 /**
@@ -62,6 +78,8 @@ export type AppointmentProps = {
   summary: string
   /** Email address of the requester. */
   email: string
+  /** Phone number of the requester. */
+  phone: string
   /** Location of the meeting. */
   location: string
   /** Timezone of the requester. */
@@ -74,6 +92,10 @@ export type AppointmentProps = {
   lastName: string
   /** Duration of the meeting in minutes  */
   duration: string
+  /** Strings to identify this event via calendar queries */
+  eventBaseString: string
+  eventMemberString?: string
+  eventContainerString?: string
 }
 
 export type EmailProps = {
@@ -84,8 +106,40 @@ export type EmailProps = {
   location: string
   approveUrl: string
   timeZone: string
-  price: string,
-  duration: string,
+  price: string
+  duration: string
+}
+
+export type ReviewType = {
+  rating: 1 | 2 | 3 | 4 | 5
+  date: string
+  comment: string | null
+  name: string
+  source: string
+  type?: string
+  helpful?: number
 }
 
 export type PaymentMethodType = (typeof paymentMethod)[number]["value"] | null
+
+export type GoogleCalendarV3Event = {
+  // Define the properties of the event according to Google Calendar API V3
+  id: string
+  summary: string
+  description?: string
+  start: {
+    dateTime: string
+    timeZone?: string
+  }
+  end: {
+    dateTime: string
+    timeZone?: string
+  }
+  location?: string
+  attendees?: [
+    {
+      email: string
+      displayName: string
+    }
+  ]
+}

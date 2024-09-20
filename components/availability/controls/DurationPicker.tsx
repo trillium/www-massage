@@ -1,10 +1,16 @@
 import clsx from "clsx"
 
-import { ALLOWED_DURATIONS } from "@/config"
+import { ALLOWED_DURATIONS as DEFAULT_ALLOWED_DURATIONS } from "@/config"
 import { setDuration } from "@/redux/slices/availabilitySlice"
 import { useAppDispatch, useReduxAvailability } from "@/app/hooks"
 
-export default function DurationPicker({ title }: { title: string }) {
+export type durationProps = {
+  title: string
+  allowedDurations?: number[]
+}
+
+export default function DurationPicker({ title, allowedDurations }: durationProps) {
+  const ALLOWED_DURATIONS = allowedDurations || DEFAULT_ALLOWED_DURATIONS
   const { duration } = useReduxAvailability()
   const dispatchRedux = useAppDispatch()
 

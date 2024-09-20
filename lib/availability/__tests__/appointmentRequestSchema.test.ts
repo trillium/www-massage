@@ -14,6 +14,7 @@ describe("AppointmentRequestSchema", () => {
       duration: "90",
       price: "210",
       timeZone: "America/Los_Angeles",
+      eventBaseString: "__EVENT__"
     }
 
     const validationResult = AppointmentRequestSchema.safeParse(validData)

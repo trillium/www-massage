@@ -6,8 +6,10 @@ import Template from "@/components/Template"
 import AvailabilityPicker from "@/components/availability/AvailabilityPicker"
 import { PricingWrapper } from "@/components/availability/PricingWrapper"
 import { DEFAULT_PRICING } from "@/config"
+import { DateTimeIntervalAndLocation } from "@/lib/types"
 
 import PageProps from "./page"
+import { mapStringsToDates } from "@/lib/availability/helpers"
 
 const pricing = DEFAULT_PRICING
 
@@ -19,7 +21,12 @@ function Page({
   busy,
   selectedDate,
   duration,
+  containers,
+  eventMemberString,
 }: InferGetServerSidePropsType<typeof PageProps>) {
+  const containerDateTimeInterval: DateTimeIntervalAndLocation[] =
+    mapStringsToDates(containers)
+
   const { slots, pickerProps } = PricingWrapper({
     start,
     end,
@@ -27,6 +34,12 @@ function Page({
     pricing,
     selectedDate,
     duration,
+    containers: containerDateTimeInterval,
+    eventMemberString,
+    ...(containers.length > 0 &&
+      containers[0].allowedDurations && {
+        allowedDurations: containers[0].allowedDurations,
+      }),
   })
 
   return (

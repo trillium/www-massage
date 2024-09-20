@@ -2,6 +2,8 @@ import type Day from "../day"
 import type { StringInterval, DateTimeInterval } from "../types"
 import { LOCAL_DATE_OPTIONS, LOCAL_TIME_OPTIONS } from "@/config"
 
+import { StringIntervalAndLocation, DateTimeIntervalAndLocation } from "../types"
+
 /**
  * Takes an array of {@link StringInterval} objects and converts them to
  * {@link DateTimeInterval} objects.
@@ -9,10 +11,11 @@ import { LOCAL_DATE_OPTIONS, LOCAL_TIME_OPTIONS } from "@/config"
  * @param {StringInterval[]} slots - StringInterval[]
  * @returns An array of {@link DateTimeInterval} objects.
  */
-export function mapStringsToDates(slots: StringInterval[]): DateTimeInterval[] {
-  return slots.map(({ start, end }) => ({
+export function mapStringsToDates(slots: StringIntervalAndLocation[]): DateTimeIntervalAndLocation[] {
+  return slots.map(({ start, end, location }) => ({
     start: new Date(start),
     end: new Date(end),
+    ...(location && { location })
   }))
 }
 

@@ -8,12 +8,23 @@ import type { DateTimeInterval } from "@/lib/types"
 import { setSelectedTime } from "@/redux/slices/availabilitySlice"
 import { setModal } from "@/redux/slices/modalSlice"
 import { useAppDispatch, useReduxAvailability } from "@/app/hooks"
+import {
+  clearEventContainers,
+  setEventContainers,
+} from "@/redux/slices/eventContainersSlice"
 
 type TimeProps = {
   time: DateTimeInterval
-} & DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+} & { location?: string } & DetailedHTMLProps<
+    HTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  >
 
-export default function Time({ time: { start, end }, ...props }: TimeProps) {
+export default function TimeButton({
+  time: { start, end },
+  location,
+  ...props
+}: TimeProps) {
   const { timeZone } = useReduxAvailability()
   const dispatchRedux = useAppDispatch()
 
@@ -33,6 +44,11 @@ export default function Time({ time: { start, end }, ...props }: TimeProps) {
             end: format(end, "yyyy-MM-dd'T'HH:mm:ssXXX"),
           })
         )
+        if (location) {
+          dispatchRedux(setEventContainers({ location: location || "" }))
+        } else {
+          dispatchRedux(clearEventContainers())
+        }
         dispatchRedux(setModal({ status: "open" }))
       }}
       {...props}>
