@@ -5,7 +5,13 @@ import { useCallback, useEffect } from "react"
 import format from "date-fns-tz/format"
 
 import { PickerProps } from "@/components/availability/AvailabilityPicker"
-import { DEFAULT_PRICING, OWNER_AVAILABILITY } from "@/config"
+import {
+  DEFAULT_APPOINTMENT_INTERVAL,
+  DEFAULT_PRICING,
+  OWNER_AVAILABILITY,
+  ALLOWED_DURATIONS,
+  VALID_DURATIONS
+} from "@/config"
 import getAvailability from "@/lib/availability/getAvailability"
 import getPotentialTimes from "@/lib/availability/getPotentialTimes"
 import { mapStringsToDates } from "@/lib/availability/helpers"
@@ -29,6 +35,7 @@ export function PricingWrapper({
   duration,
   containers,
   eventMemberString,
+  allowedDurations,
 }: PricingWrapperProps) {
   const dispatchRedux = useAppDispatch()
   const {
@@ -39,9 +46,10 @@ export function PricingWrapper({
 
   const pickerProps: PickerProps = {
     durationProps: {
-      title: `Session Duration - $${
+      title: `${durationRedux || duration || "##"} minute session - $${
         DEFAULT_PRICING[durationRedux || duration]
       }`,
+      allowedDurations: allowedDurations || ALLOWED_DURATIONS,
     },
     tzPickerProps: {
       showPicker: false,
@@ -80,8 +88,16 @@ export function PricingWrapper({
         dispatchRedux(setSelectedDate(firstAvail))
       }
     }
-    if (duration) {
-      dispatchRedux(setDuration(duration))
+    const newDuration = duration || allowedDurations
+    const ALLOWED = allowedDurations || ALLOWED_DURATIONS
+    if (!ALLOWED.includes(newDuration)) {
+      const middleIndex = Math.floor((ALLOWED.length - 1) / 2)
+      const biasedIndex =
+        ALLOWED.length % 2 === 0 ? middleIndex + 1 : middleIndex
+      const adjustedDuration = ALLOWED[biasedIndex]
+      dispatchRedux(setDuration(adjustedDuration))
+    } else {
+      dispatchRedux(setDuration(newDuration))
     }
     if (eventMemberString) {
       dispatchRedux(
