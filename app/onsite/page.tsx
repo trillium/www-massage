@@ -1,6 +1,6 @@
 import type { InferGetServerSidePropsType } from "next"
 
-import ClientPage from "@/app/ClientPage"
+import ClientPage from "./ClientPage"
 import Template from "@/components/Template"
 import { fetchData } from "@/lib/fetch/fetchData"
 import { applyReferral } from "@/lib/posthog/applyReferral"
