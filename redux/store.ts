@@ -3,12 +3,14 @@ import { formSlice } from "@/redux/slices/formSlice"
 import { availabilitySlice } from "@/redux/slices/availabilitySlice"
 import { modalSlice } from "@/redux/slices/modalSlice"
 import { readySlice } from "./slices/readySlice"
+import { eventContainersSlice } from "./slices/eventContainersSlice"
 
 const rootReducer = combineSlices(
   formSlice,
   availabilitySlice,
   modalSlice,
-  readySlice
+  readySlice,
+  eventContainersSlice
 )
 
 export const makeStore = () => {

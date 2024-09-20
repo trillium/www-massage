@@ -3,7 +3,7 @@ import { type NextRequest } from "next/server"
 import { redirect } from "next/navigation"
 import { z } from "zod"
 
-import createCalendarAppointment from "@/lib/availability/createAppointment"
+import createCalendarAppointment from "@/lib/availability/createCalendarAppointment"
 import { getHash } from "@/lib/hash"
 
 import templates from "@/lib/messageTemplates/templates"
@@ -16,12 +16,15 @@ const AppointmentPropsSchema = z.object({
   end: z.string(),
   timeZone: z.string(),
   location: z.string(),
-  // phone: z.string(),
+  phone: z.string(),
   duration: z
     .string()
     .refine((value) => !Number.isNaN(Number.parseInt(value)), {
       message: "Duration must be a valid integer.",
     }),
+  eventBaseString: z.string(),
+  eventMemberString: z.string().optional(),
+  eventContainerString: z.string().optional(),
 })
 
 export async function GET(req: NextRequest) {
