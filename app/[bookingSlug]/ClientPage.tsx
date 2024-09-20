@@ -34,7 +34,11 @@ function Page({
     selectedDate,
     duration,
     containers: containerDateTimeInterval,
-    eventMemberString
+    eventMemberString,
+    ...(containers.length > 0 &&
+      containers[0].allowedDurations && {
+        allowedDurations: containers[0].allowedDurations,
+      }),
   })
 
   return (
