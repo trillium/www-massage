@@ -325,6 +325,7 @@ function handleSubmit(
     .then(async (data) => {
       const json = await data.json()
       if (json.success) {
+        dispatchRedux(setModal({ status: "closed" }))
         router.push("/confirmation")
       } else {
         dispatchRedux(setModal({ status: "error" }))
