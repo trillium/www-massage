@@ -32,17 +32,17 @@ export async function getEventsBySearchQuery({
   }
 
   if (end) {
-    let timeMin: string;
+    let timeMax: string;
   
     if (typeof end === 'string') {
-      timeMin = new Date(end).toISOString();
+      timeMax = new Date(end).toISOString();
     } else if (end instanceof Date) {
-      timeMin = end.toISOString();
+      timeMax = end.toISOString();
     } else {
       throw new Error('Invalid type for end parameter');
     }
   
-    url += `&timeMin=${encodeURIComponent(timeMin)}`;
+    url += `&timeMax=${encodeURIComponent(timeMax)}`;
   }
 
   const response = await fetch(url, {
@@ -58,7 +58,7 @@ export async function getEventsBySearchQuery({
   }
 
   const data = await response.json()
-  return data.items // Assuming you want to return the list of events
+  return data.items 
 }
 
 // Availability will be defined by calendar events called (name)_CONTAINER
