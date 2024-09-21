@@ -6,7 +6,7 @@ export default function About({}) {
   return (
     <div className="flex flex-col items-center">
       <ReviewCard />
-      <BookSessionButton title="Book a Session!" href="/book" />
+      <BookSessionButton title="Book a Session!" href="/" />
     </div>
   )
 }

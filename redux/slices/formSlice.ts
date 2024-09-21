@@ -5,7 +5,7 @@ import type { BookingFormData } from "@/components/booking/BookingForm"
 import type { ReviewFormData } from "@/components/ReviewForm"
 import { ReviewSnippetProps } from "@/components/ReviewCard"
 
-export const initialBookingFormData = {
+export const initialBookingFormData: BookingFormData = {
   /** First name of the requester */
   firstName: "",
   /** Last name of the requester */
@@ -57,7 +57,12 @@ export const formSlice = createSlice({
   name: "form",
   initialState,
   reducers: {
-    setForm: (state, action: PayloadAction<FormStateType>) => action.payload,
+    setForm: (state, action: PayloadAction<Partial<FormStateType>>) => {
+      return {
+        ...state,
+        ...action.payload,
+      }
+    },
   },
 })
 

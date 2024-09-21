@@ -28,5 +28,9 @@ export const AppointmentRequestSchema = z.object({
   price: z.string().refine((value) => !Number.isNaN(Number.parseInt(value)), {
     message: "Price must be a valid integer.",
   }),
+  phone: z.string(),
   paymentMethod: z.enum(paymentMethodValues),
+  eventBaseString: z.string(),
+  eventMemberString: z.string().optional(),
+  eventContainerString: z.string().optional(),
 })

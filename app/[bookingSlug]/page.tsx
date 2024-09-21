@@ -1,8 +1,6 @@
-import { redirect } from "next/navigation"
-import slugs from "./pricing"
-
+import siteMetadata from "@/data/siteMetadata"
 import ClientPage from "./ClientPage"
-import { fetchData } from "@/lib/fetch/fetchData"
+import { fetchContainersByQuery } from "@/lib/fetch/fetchContainersByQuery"
 import { applyReferral } from "@/lib/posthog/applyReferral"
 
 export default async function Page({
@@ -13,13 +11,17 @@ export default async function Page({
   params: { bookingSlug: string }
 }) {
   const { bookingSlug } = params
-  const { pricing } = slugs[bookingSlug as keyof typeof slugs] ?? false
+  const { props } = await fetchContainersByQuery({
+    searchParams,
+    query: bookingSlug,
+  })
 
-  if (!pricing) {
-    return redirect("/")
+  const containerStrings = {
+    eventBaseString: bookingSlug + siteMetadata.eventBaseString,
+    eventMemberString: bookingSlug + siteMetadata.eventBaseString + "MEMBER__",
+    eventContainerString:
+      bookingSlug + siteMetadata.eventBaseString + "CONTAINER__",
   }
-
-  const { props } = await fetchData({ searchParams })
   applyReferral({ searchParams })
-  return <ClientPage {...props} pricing={pricing} />
+  return <ClientPage {...props} {...containerStrings} />
 }

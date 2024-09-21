@@ -5,7 +5,13 @@ import { useCallback, useEffect } from "react"
 import format from "date-fns-tz/format"
 
 import { PickerProps } from "@/components/availability/AvailabilityPicker"
-import { DEFAULT_PRICING, OWNER_AVAILABILITY } from "@/config"
+import {
+  DEFAULT_APPOINTMENT_INTERVAL,
+  DEFAULT_PRICING,
+  OWNER_AVAILABILITY,
+  ALLOWED_DURATIONS,
+  VALID_DURATIONS
+} from "@/config"
 import getAvailability from "@/lib/availability/getAvailability"
 import getPotentialTimes from "@/lib/availability/getPotentialTimes"
 import { mapStringsToDates } from "@/lib/availability/helpers"
@@ -14,6 +20,12 @@ import Day from "@/lib/day"
 import PageProps from "@/app/page"
 import { setDuration, setSelectedDate } from "@/redux/slices/availabilitySlice"
 import { useAppDispatch, useReduxAvailability } from "@/app/hooks"
+import { DateTimeIntervalAndLocation } from "@/lib/types"
+import { setEventContainers } from "@/redux/slices/eventContainersSlice"
+
+type PricingWrapperProps = InferGetServerSidePropsType<typeof PageProps> & {
+  containers: DateTimeIntervalAndLocation
+}
 
 export function PricingWrapper({
   start,
@@ -21,7 +33,10 @@ export function PricingWrapper({
   busy,
   selectedDate,
   duration,
-}: InferGetServerSidePropsType<typeof PageProps>) {
+  containers,
+  eventMemberString,
+  allowedDurations,
+}: PricingWrapperProps) {
   const dispatchRedux = useAppDispatch()
   const {
     duration: durationRedux,
@@ -31,9 +46,10 @@ export function PricingWrapper({
 
   const pickerProps: PickerProps = {
     durationProps: {
-      title: `Session Duration - $${
+      title: `${durationRedux || duration || "##"} minute session - $${
         DEFAULT_PRICING[durationRedux || duration]
       }`,
+      allowedDurations: allowedDurations || ALLOWED_DURATIONS,
     },
     tzPickerProps: {
       showPicker: false,
@@ -48,6 +64,7 @@ export function PricingWrapper({
     end: endDay,
     duration: durationRedux || duration,
     availabilitySlots: OWNER_AVAILABILITY,
+    containers: containers,
   })
 
   const offers = getAvailability({
@@ -62,18 +79,33 @@ export function PricingWrapper({
     )
   })
 
-  const firstAvail = format(slots[0].start, "yyyy-MM-dd", { timeZone })
-
   const initialURLParamsData = useCallback(() => {
     if (selectedDate) {
       dispatchRedux(setSelectedDate(selectedDate))
     } else {
-      dispatchRedux(setSelectedDate(firstAvail))
+      if (slots.length > 0) {
+        const firstAvail = format(slots[0].start, "yyyy-MM-dd", { timeZone })
+        dispatchRedux(setSelectedDate(firstAvail))
+      }
     }
-    if (duration) {
-      dispatchRedux(setDuration(duration))
+    const newDuration = duration || allowedDurations
+    const ALLOWED = allowedDurations || ALLOWED_DURATIONS
+    if (!ALLOWED.includes(newDuration)) {
+      const middleIndex = Math.floor((ALLOWED.length - 1) / 2)
+      const biasedIndex =
+        ALLOWED.length % 2 === 0 ? middleIndex + 1 : middleIndex
+      const adjustedDuration = ALLOWED[biasedIndex]
+      dispatchRedux(setDuration(adjustedDuration))
+    } else {
+      dispatchRedux(setDuration(newDuration))
     }
-  }, [dispatchRedux, selectedDate, firstAvail, duration])
+    if (eventMemberString) {
+      dispatchRedux(
+        setEventContainers({ eventMemberString: eventMemberString || "" })
+      )
+    }
+    // eslint-disable-next-line
+  }, [])
 
   useEffect(() => {
     initialURLParamsData()

@@ -1,7 +1,9 @@
 import getAccessToken from "./getAccessToken" // Reuse existing function to get access token
 
-export async function getEventsBySearchQuery(searchQuery: string, {start, end}: {start: any, end: any}) {
-  
+export async function getEventsBySearchQuery(
+  searchQuery: string,
+  { start, end }: { start: any; end: any }
+) {
   const accessToken = await getAccessToken()
   const calendarId = "primary" // Use 'primary' for the primary calendar or specify another calendar ID
   const timeMin = start.toISOString()
@@ -10,7 +12,7 @@ export async function getEventsBySearchQuery(searchQuery: string, {start, end}: 
     calendarId
   )}/events?q=${encodeURIComponent(searchQuery)}&timeMin=${encodeURIComponent(
     timeMin
-  )}&timeMax=${encodeURIComponent(timeMax)}`
+  )}&timeMax=${encodeURIComponent(timeMax)}&singleEvents=true`
 
   const response = await fetch(url, {
     method: "GET",
@@ -27,3 +29,6 @@ export async function getEventsBySearchQuery(searchQuery: string, {start, end}: 
   const data = await response.json()
   return data.items // Assuming you want to return the list of events
 }
+
+// Availability will be defined by calendar events called (name)_CONTAINER
+// sub events will take up event container time and have (name) in their summary or body
