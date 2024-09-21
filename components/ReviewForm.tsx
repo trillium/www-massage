@@ -158,9 +158,8 @@ export default function ReviewForm({
                   name="date"
                   id="date"
                   value={formatLocalDate(start, { timeZone })}
-                  className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6 mb-1"
+                  className="bg-gray-400 dark:bg-gray-700 select-none pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6 mb-1"
                   readOnly
-                  disabled
                 />
               </div>
               <div className="last:rounded-t-none first:rounded-b-none last:rounded-md first:rounded-md relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
@@ -290,24 +289,23 @@ function handleSubmit(
   event.preventDefault()
   dispatchRedux(setModal({ status: "busy" }))
   const jsonData = Object.fromEntries(new FormData(event.currentTarget))
-  router.push("/reviews/submitted")
-  // fetch(`/api/review/create`, {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(jsonData),
-  // })
-  //   .then(async (data) => {
-  //     const json = await data.json()
-  //     if (json.success) {
-  //       dispatchRedux(setModal({ status: "closed" }))
-  //       router.push("/reviews/submitted")
-  //     } else {
-  //       dispatchRedux(setModal({ status: "error" }))
-  //     }
-  //   })
-  //   .catch(() => {
-  //     dispatchRedux(setModal({ status: "error" }))
-  //   })
+  fetch(`/api/review/create`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(jsonData),
+  })
+    .then(async (data) => {
+      const json = await data.json()
+      if (json.success) {
+        dispatchRedux(setModal({ status: "closed" }))
+        router.push("/reviews/submitted")
+      } else {
+        dispatchRedux(setModal({ status: "error" }))
+      }
+    })
+    .catch(() => {
+      dispatchRedux(setModal({ status: "error" }))
+    })
 }
