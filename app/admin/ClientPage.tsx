@@ -1,12 +1,12 @@
 "use client"
 
-import BookSessionButton from "@/components/BookSessionButton"
 import URIMaker from "@/components/URIMaker"
+import type { GoogleCalendarV3Event } from "@/lib/types"
 
-export default function About({}) {
+export default function ClientPage({ events }: { events: GoogleCalendarV3Event[] }) {
   return (
     <div className="flex flex-col items-center">
-      <URIMaker />
+      <URIMaker events={events} />
     </div>
   )
 }
