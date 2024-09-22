@@ -86,21 +86,6 @@ export async function POST(
     body: createReviewEmail.body,
   })
 
-  // // TODO, inform client of review received
-  // const confirmationEmail = ClientRequestEmail({
-  //   ...data,
-  //   dateSummary: intervalToHumanString({
-  //     start,
-  //     end,
-  //     timeZone: data.timeZone,
-  //   }),
-  // })
-  // await sendMail({
-  //   to: data.email,
-  //   subject: confirmationEmail.subject,
-  //   body: confirmationEmail.body,
-  // })
-
   return NextResponse.json({ success: true }, { status: 200 })
 
   /**
