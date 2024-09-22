@@ -13,6 +13,7 @@ import { FormEvent, useState } from "react"
 const pricing = DEFAULT_PRICING
 
 // Need to refactor fetchData so it's easier to extend to other pages
+const possibleDurations = [15, 30, 45, 60]
 
 const allowedDurations: AllowedDurationsType = [
   60 * 2,
