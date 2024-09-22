@@ -36,19 +36,13 @@ export default function ReviewSubmissionEmail({
   let body = `<div dir="ltr">`
   body += [
     `<b>{`,
-    `<b>    rating: ${rating},`,
-    `<b>    date: ${localeDayString(new Date(date))},`,
-    `<b>    comment: ${text},`,
-    `<b>    name: ${firstName} ${lastName[1]}.,`,
-    `<b>    source: ${source},`,
-    `<b>    type: ${type},`,
+    `<b>rating: ${rating},`,
+    `<b>date: ${localeDayString(new Date(date))},`,
+    `<b>comment: ${text},`,
+    `<b>name: ${firstName} ${lastName[0]}.,`,
+    `<b>source: ${source},`,
+    `<b>type: ${type},`,
     `<b>}`,
-    `<br>`,
-    `<b>Name:</b> ${firstName} ${lastName}`,
-    `<b>Date:</b> ${dateSummary}`,
-    // `<b>Location:</b> ${location}`,
-    `<b>Price:</b> $${price}`,
-    `<b>Duration:</b> ${duration} minutes`,
     `<br>`,
   ]
     .map((line) => `${LINE_PREFIX}${line}${LINE_SUFFIX}`)
