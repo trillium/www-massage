@@ -64,14 +64,6 @@ function ClientPage({
       JSON.stringify(Object.fromEntries(new FormData(event.currentTarget)))
     )
   }
-  
-  function handleChange(
-    event: FormEvent<HTMLFormElement>
-  ) {
-    const {value, name} = event.target
-    const newState = {...state}
-    console.log(event)
-  }
 
   const formOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement
