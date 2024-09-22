@@ -8,8 +8,11 @@ import { useAppDispatch, useReduxModal } from "@/app/hooks"
 import { encode } from "@/lib/hashServer"
 import { createURI } from "@/lib/uri"
 import DurationPicker from "./availability/controls/DurationPicker"
+import type { GoogleCalendarV3Event } from "@/lib/types"
 
-export default function URIMaker({}: any) {
+type URIMakerProps = { events: GoogleCalendarV3Event[] }
+
+export default function URIMaker({ events }: URIMakerProps) {
   const [hash, setHash] = useState("")
   const { status: modal } = useReduxModal()
   const [state, setState] = useState({
