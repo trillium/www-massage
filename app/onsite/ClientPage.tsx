@@ -22,6 +22,12 @@ const allowedDurations: AllowedDurationsType = [
   60 * 4,
 ]
 
+type StateType = {
+  allowedDurations: number[]
+  eventName: string
+  sessionDuration: string
+}
+
 function Page({
   start,
   end,
@@ -39,7 +45,11 @@ function Page({
     allowedDurations,
   })
 
-  const [state, setState] = useState({})
+  const [state, setState] = useState<StateType>({
+    eventName: "",
+    sessionDuration: "",
+    allowedDurations: []
+  })
 
   function handleSubmit(
     event: FormEvent<HTMLFormElement>
