@@ -98,6 +98,11 @@ function ClientPage({
   
   return (
     <>
+      <div className="w-full flex justify-center items-center align-middle">
+        <h2 className="text-lg py-2 font-bold text-primary-500 dark:text-primary-400">
+          {pathString}
+        </h2>
+      </div>
       <form onSubmit={handleSubmit}>
       <input type="hidden" readOnly name="test1" value={"Test1"} />
       <input type="hidden" readOnly name="test2" value={"Test2"} />
