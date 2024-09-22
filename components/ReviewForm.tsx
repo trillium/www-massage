@@ -57,19 +57,6 @@ export default function ReviewForm({
     dispatchRedux(setForm({ ...formData, [target.name]: target.value }))
   }
 
-  const handleRating = (
-    event:
-      | React.MouseEvent<HTMLButtonElement>
-      | React.TouchEvent<HTMLButtonElement>,
-    num: Number
-  ) => {
-    // const handleRating = (event, num) => {
-    const target = event.target as HTMLInputElement
-    console.log(target, target.value)
-    event.preventDefault()
-    dispatchRedux(setForm({ ...formData, rating: num as RatingType }))
-  }
-
   return (
     <div className="w-full max-w-7xl px-4 md:px-0 mx-auto">
       <div className="grid grid-cols-12 mb-11">
