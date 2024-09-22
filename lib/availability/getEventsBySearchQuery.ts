@@ -1,18 +1,49 @@
 import getAccessToken from "./getAccessToken" // Reuse existing function to get access token
 
-export async function getEventsBySearchQuery(
-  searchQuery: string,
-  { start, end }: { start: any; end: any }
-) {
+export async function getEventsBySearchQuery({
+  start,
+  end,
+  query,
+}: {
+  query: string
+  start?: string | Date
+  end?: string | Date
+}) {
   const accessToken = await getAccessToken()
   const calendarId = "primary" // Use 'primary' for the primary calendar or specify another calendar ID
-  const timeMin = start.toISOString()
-  const timeMax = end.toISOString()
-  const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(
+  const urlBase = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(
     calendarId
-  )}/events?q=${encodeURIComponent(searchQuery)}&timeMin=${encodeURIComponent(
-    timeMin
-  )}&timeMax=${encodeURIComponent(timeMax)}&singleEvents=true`
+  )}/events?q=${encodeURIComponent(query)}&orderBy=startTime&singleEvents=true`
+
+  let url = urlBase
+
+  if (start) {
+    let timeMin: string
+
+    if (typeof start === "string") {
+      timeMin = new Date(start).toISOString()
+    } else if (start instanceof Date) {
+      timeMin = start.toISOString()
+    } else {
+      throw new Error("Invalid type for start parameter")
+    }
+
+    url += `&timeMin=${encodeURIComponent(timeMin)}`
+  }
+
+  if (end) {
+    let timeMax: string;
+  
+    if (typeof end === 'string') {
+      timeMax = new Date(end).toISOString();
+    } else if (end instanceof Date) {
+      timeMax = end.toISOString();
+    } else {
+      throw new Error('Invalid type for end parameter');
+    }
+  
+    url += `&timeMax=${encodeURIComponent(timeMax)}`;
+  }
 
   const response = await fetch(url, {
     method: "GET",
@@ -27,7 +58,7 @@ export async function getEventsBySearchQuery(
   }
 
   const data = await response.json()
-  return data.items // Assuming you want to return the list of events
+  return data.items 
 }
 
 // Availability will be defined by calendar events called (name)_CONTAINER

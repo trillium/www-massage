@@ -76,9 +76,10 @@ export async function fetchContainersByQuery({
   const member_string = query + "__EVENT__MEMBER__"
   const container_string = query + "__EVENT__CONTAINER__"
 
-  const events = await getEventsBySearchQuery(searchQuery, {
+  const events = await getEventsBySearchQuery({
     start: startDate,
     end: endDate,
+    query: searchQuery,
   })
 
   const members = events.filter((e: GoogleCalendarV3Event) => {

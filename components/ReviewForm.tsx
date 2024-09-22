@@ -57,19 +57,6 @@ export default function ReviewForm({
     dispatchRedux(setForm({ ...formData, [target.name]: target.value }))
   }
 
-  const handleRating = (
-    event:
-      | React.MouseEvent<HTMLButtonElement>
-      | React.TouchEvent<HTMLButtonElement>,
-    num: Number
-  ) => {
-    // const handleRating = (event, num) => {
-    const target = event.target as HTMLInputElement
-    console.log(target, target.value)
-    event.preventDefault()
-    dispatchRedux(setForm({ ...formData, rating: num as RatingType }))
-  }
-
   return (
     <div className="w-full max-w-7xl px-4 md:px-0 mx-auto">
       <div className="grid grid-cols-12 mb-11">
@@ -158,9 +145,8 @@ export default function ReviewForm({
                   name="date"
                   id="date"
                   value={formatLocalDate(start, { timeZone })}
-                  className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6 mb-1"
+                  className="bg-gray-400 dark:bg-gray-700 select-none pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6 mb-1"
                   readOnly
-                  disabled
                 />
               </div>
               <div className="last:rounded-t-none first:rounded-b-none last:rounded-md first:rounded-md relative px-3 pt-2.5 pb-1.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-primary-400">
@@ -285,12 +271,11 @@ export default function ReviewForm({
 function handleSubmit(
   event: FormEvent<HTMLFormElement>,
   dispatchRedux: AppDispatch,
-  router: ReturnType<typeof useRouter>,
+  router: ReturnType<typeof useRouter>
 ) {
   event.preventDefault()
   dispatchRedux(setModal({ status: "busy" }))
   const jsonData = Object.fromEntries(new FormData(event.currentTarget))
-  router.push("/reviews/submitted")
   fetch(`/api/review/create`, {
     method: "POST",
     headers: {
