@@ -26,6 +26,22 @@ export default function URIMaker({}: any) {
     uriEncoded = uri
   }
 
+  const handleSetStartEnd = ({
+    start,
+    end,
+  }: {
+    start: string
+    end: string
+  }) => {
+    const newState = { ...state, start, end }
+    setState(newState)
+    const formElement = document.getElementById("URIMakerForm")
+    if (formElement) {
+      formElement.scrollIntoView()
+      formElement.focus()
+    }
+  }
+
   const formOnChange = (
     event:
       | React.ChangeEvent<HTMLInputElement>
@@ -51,6 +67,7 @@ export default function URIMaker({}: any) {
         <DurationPicker title="Select a time" />
         <div className="grid grid-cols-12 mb-11">
           <form
+            id="URIMakerForm"
             className={
               "mt-3 sm:mt-0 w-full" + " " + "col-span-12 xl:col-span-7"
             }
