@@ -208,7 +208,9 @@ export default function URIMaker({ events }: URIMakerProps) {
           </div>
         </div>
       </div>
-      <form onSubmit={handleCopyToClipboard} className="flex w-full flex-row items-end">
+      <form
+        onSubmit={handleCopyToClipboard}
+        className="flex w-full flex-row items-end">
         <div className="flex-1">
           <label
             htmlFor="name"
@@ -279,8 +281,12 @@ function CalendarEvent({
   location,
   handleSetStartEnd,
 }: CalendarEventProps) {
-  const startDateTime = new Date(start.dateTime).toLocaleString("en-US", { timeZone: start.timeZone })
-  const endDateTime = new Date(end.dateTime).toLocaleString("en-US", { timeZone: end.timeZone })
+  const startDateTime = new Date(start.dateTime).toLocaleString("en-US", {
+    timeZone: start.timeZone,
+  })
+  const endDateTime = new Date(end.dateTime).toLocaleString("en-US", {
+    timeZone: end.timeZone,
+  })
 
   return (
     <li className="pb-2">
