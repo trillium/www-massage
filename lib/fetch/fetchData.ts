@@ -1,7 +1,7 @@
 import { z } from "zod"
 
 import {
-  ALLOWED_DURATIONS,
+  VALID_DURATIONS,
   DEFAULT_APPOINTMENT_INTERVAL,
   DEFAULT_DURATION,
   DEFAULT_PRICING,
@@ -21,7 +21,7 @@ export async function fetchData({
   const schema = z.object({
     duration: z
       .enum([
-        ...(ALLOWED_DURATIONS.map(String) as [string, ...string[]]),
+        ...(VALID_DURATIONS.map(String) as [string, ...string[]]),
         DEFAULT_APPOINTMENT_INTERVAL.toString(),
       ])
       .optional()
