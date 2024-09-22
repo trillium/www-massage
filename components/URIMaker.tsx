@@ -214,6 +214,19 @@ export default function URIMaker({}: any) {
           Copy
         </button>
       </form>
+      <div className="pt-4">
+        <ul>
+          {events.map((item: GoogleCalendarV3Event) => {
+            return (
+              <CalendarEvent
+                key={item.id}
+                {...item}
+                handleSetStartEnd={handleSetStartEnd}
+              />
+            )
+          })}
+        </ul>
+      </div>
     </>
   )
 }
