@@ -28,7 +28,7 @@ type StateType = {
   sessionDuration: string
 }
 
-function Page({
+function ClientPage({
   start,
   end,
   busy,
@@ -95,4 +95,4 @@ function Page({
   )
 }
 
-export default Page
+export default ClientPage
