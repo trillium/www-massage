@@ -1,5 +1,4 @@
 import { z } from "zod"
-
 import {
   DEFAULT_APPOINTMENT_INTERVAL,
   DEFAULT_DURATION,
@@ -8,7 +7,8 @@ import {
 } from "@/config"
 import Day from "@/lib/day"
 import { getEventsBySearchQuery } from "../availability/getEventsBySearchQuery"
-import { GoogleCalendarV3Event } from "../types"
+import { GoogleCalendarV3Event } from "@/lib/types"
+import { loadData } from "@/lib/dataLoading"
 
 export async function fetchContainersByQuery({
   searchParams,
@@ -102,8 +102,12 @@ export async function fetchContainersByQuery({
   const containersMapped = containers.map((e: GoogleCalendarV3Event) => {
     let obj = {}
     try {
-      obj = JSON.parse(e.description || "")
-    } catch {}
+      if (e.description) {
+        obj = loadData(e.description)
+      }
+    } catch {
+      console.error(e.description)
+    }
 
     return {
       start: e.start.dateTime,
