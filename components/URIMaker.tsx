@@ -229,7 +229,7 @@ async function handleSubmit(event: FormEvent<HTMLFormElement>, setUri: any) {
   event.preventDefault()
   const jsonData = Object.fromEntries(new FormData(event.currentTarget))
   const uriData = await encode(jsonData)
-  const { hash } = uriData
+  const { key: hash } = uriData
   setUri(hash)
   return
 }
