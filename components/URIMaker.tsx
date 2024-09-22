@@ -233,3 +233,38 @@ async function handleSubmit(event: FormEvent<HTMLFormElement>, setUri: any) {
   setUri(hash)
   return
 }
+
+type CalendarEventProps = GoogleCalendarV3Event & {
+  handleSetStartEnd: ({ start, end }: { start: string; end: string }) => void
+}
+
+function CalendarEvent({
+  summary,
+  description,
+  start,
+  end,
+  location,
+  handleSetStartEnd,
+}: CalendarEventProps) {
+  const startDateTime = new Date(start.dateTime).toLocaleString("en-US", { timeZone: start.timeZone })
+  const endDateTime = new Date(end.dateTime).toLocaleString("en-US", { timeZone: end.timeZone })
+
+  return (
+    <li className="pb-2">
+      <h3 className="font-bold text-primary-400">{summary}</h3>
+      <div className="px-4">
+        <p>{startDateTime}</p>
+        <p>{endDateTime}</p>
+        {location && <p>{location}</p>}
+        {description && <p>{description}</p>}
+      </div>
+      <button
+        className="px-4 py-2 border border-primary-400 rounded-md m-4 hover:bg-primary-400 hover:font-bold  "
+        onClick={() =>
+          handleSetStartEnd({ start: start.dateTime, end: end.dateTime })
+        }>
+        Set Start/End
+      </button>
+    </li>
+  )
+}
