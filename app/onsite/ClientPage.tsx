@@ -70,6 +70,18 @@ function ClientPage({
     setState({ ...state, [target.name]: target.value })
   }
 
+  const formCheckboxOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(event.target.value, 10);
+    const { allowedDurations } = state;
+
+    const newDurations = allowedDurations.includes(value)
+      ? allowedDurations.filter((duration) => duration !== value)
+      : [...allowedDurations, value];
+
+    setState({ ...state, allowedDurations: newDurations });
+  };
+
+  
   return (
     <>
       <form onSubmit={handleSubmit}>
