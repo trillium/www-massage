@@ -16,6 +16,8 @@ const pricing = DEFAULT_PRICING
 const possibleDurations = [15, 30, 45, 60]
 
 const allowedDurations: AllowedDurationsType = [
+  60 * 1,
+  60 * 1.5,
   60 * 2,
   60 * 2.5,
   60 * 3,
