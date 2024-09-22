@@ -54,6 +54,8 @@ function ClientPage({
     allowedDurations: []
   })
 
+  const [pathString, setPathString] = useState("");
+
   function handleSubmit(
     event: FormEvent<HTMLFormElement>
     // dispatchRedux: AppDispatch,
@@ -81,6 +83,18 @@ function ClientPage({
     setState({ ...state, allowedDurations: newDurations });
   };
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const newPathString =
+        window.location.origin +
+        "/" +
+        state.eventName
+          .replace(/\s|-/g, "_")
+          .toLowerCase()
+          .replace(/[^a-z0-9_]/g, "");
+      setPathString(newPathString);
+    }
+  }, [state.eventName]);
   
   return (
     <>
