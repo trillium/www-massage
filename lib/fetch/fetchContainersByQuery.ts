@@ -105,7 +105,9 @@ export async function fetchContainersByQuery({
       if (e.description) {
         obj = loadData(e.description)
       }
-    } catch {
+    } catch (error) {
+      console.error("loadData error")
+      console.error(error)
       console.error(e.description)
     }
 
