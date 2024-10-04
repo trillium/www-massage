@@ -143,3 +143,5 @@ export type GoogleCalendarV3Event = {
     }
   ]
 }
+
+export type AllowedDurationsType = number[]
