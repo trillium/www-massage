@@ -9,6 +9,15 @@ function hasNestedObjects(obj: Record<string, any>): boolean {
   return false;
 }
 
+export function replaceLeadingSpacesWithUnderscores(str: string) {
+  return str.replace(/^( +)/gm, (match) => '_'.repeat(match.length));
+}
+
+export function replaceLeadingUnderscoresWithSpaces(str: string) {
+  return str.replace(/^(_+)/gm, (match) => ' '.repeat(match.length));
+}
+
+
 export function dumpData(obj: Record<string, any>): string {
   if (hasNestedObjects(obj)) {
     throw new Error("Object contains nested objects");
