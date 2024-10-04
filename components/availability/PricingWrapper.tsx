@@ -10,7 +10,8 @@ import {
   DEFAULT_PRICING,
   OWNER_AVAILABILITY,
   ALLOWED_DURATIONS,
-  VALID_DURATIONS
+  VALID_DURATIONS,
+  LEAD_TIME
 } from "@/config"
 import getAvailability from "@/lib/availability/getAvailability"
 import getPotentialTimes from "@/lib/availability/getPotentialTimes"
@@ -36,6 +37,8 @@ export function PricingWrapper({
   containers,
   eventMemberString,
   allowedDurations,
+  leadTime = LEAD_TIME,
+  pricing = DEFAULT_PRICING
 }: PricingWrapperProps) {
   const dispatchRedux = useAppDispatch()
   const {
@@ -47,7 +50,7 @@ export function PricingWrapper({
   const pickerProps: PickerProps = {
     durationProps: {
       title: `${durationRedux || duration || "##"} minute session - $${
-        DEFAULT_PRICING[durationRedux || duration]
+        pricing[durationRedux || duration]
       }`,
       allowedDurations: allowedDurations || ALLOWED_DURATIONS,
     },
@@ -70,6 +73,7 @@ export function PricingWrapper({
   const offers = getAvailability({
     busy: mapStringsToDates(busy),
     potential,
+    leadTime
   })
 
   const slots = offers.filter((slot) => {
