@@ -17,6 +17,12 @@ const pricing = DEFAULT_PRICING
 // Need to refactor fetchData so it's easier to extend to other pages
 const possibleDurations = [15, 30, 45, 60]
 
+const paymentOptionsList = [
+  "Client pays their own session",
+  "Massage session block prepaid in full",
+  "Split individual booking fees with cleint",
+]
+
 const allowedDurations: AllowedDurationsType = [
   60 * 1,
   60 * 1.5,
@@ -32,7 +38,8 @@ type StateType = {
   allowedDurations: number[]
   eventName: string
   sessionDuration?: string
-  pricing?: { [key: number]: number };
+  pricing?: { [key: number]: number }
+  paymentOptions: string
 }
 
 function ClientPage({
@@ -54,13 +61,14 @@ function ClientPage({
 
   const [state, setState] = useState<StateType>({
     eventName: "",
-    // sessionDuration: "",  
+    // sessionDuration: "",
     eventContainerString: "__EVENT__",
     allowedDurations: [],
-    pricing: { 15: 120 / 4, 30: 120 / 2 }
+    pricing: { 15: 120 / 4, 30: 120 / 2 },
+    paymentOptions: "",
   })
 
-  const [pathString, setPathString] = useState("");
+  const [pathString, setPathString] = useState("")
 
   function handleSubmit(
     event: FormEvent<HTMLFormElement>
@@ -79,46 +87,56 @@ function ClientPage({
   }
 
   const formCheckboxOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(event.target.value, 10);
-    const { allowedDurations } = state;
+    const value = parseInt(event.target.value, 10)
+    const { allowedDurations } = state
 
     const newDurations = allowedDurations.includes(value)
       ? allowedDurations.filter((duration) => duration !== value)
-      : [...allowedDurations, value];
+      : [...allowedDurations, value]
 
-    setState({ ...state, allowedDurations: newDurations });
+    setState((state) => ({ ...state, allowedDurations: newDurations }))
+  }
+
+  const paymentOptionsRadioOnChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const value = event.target.value;
+  
+    // Set the state with only the selected value
+    setState((s) => ({ ...s, paymentOptions: value }));
   };
+
+  const { eventName } = state
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const sanitizedName = state.eventName
+      const sanitizedName =
+        eventName
           .replace(/\s|-/g, "_")
           .toLowerCase()
-          .replace(/[^a-z0-9_]/g, "");
-      const newPathString =
-        window.location.origin +
-        "/" +
-        sanitizedName
-      setPathString(newPathString);
-      setState({ ...state, eventContainerString: sanitizedName + "__EVENT__"})
+          .replace(/[^a-z0-9_]/g, "") || "your_name_here"
+      const newPathString = window.location.origin + "/" + sanitizedName
+      setPathString(newPathString)
+      setState((state) => ({
+        ...state,
+        eventContainerString: sanitizedName + "__EVENT__",
+      }))
     }
-  }, [state.eventName]);
-
-  console.log(dumpData(state))
+  }, [eventName])
 
   return (
     <>
       <div className="w-full flex justify-center items-center align-middle">
         <h2 className="text-lg py-2 font-bold text-primary-500 dark:text-primary-400">
-          {pathString}
+          Your link: {pathString}
         </h2>
       </div>
       <form onSubmit={handleSubmit}>
         <ol>
           <label
             htmlFor="eventName"
-            className="block text-base font-medium text-gray-900 dark:text-gray-100">
-            Booking Link Name
+            className="block text-xl font-semibold text-gray-900 dark:text-gray-100">
+            Let&rsquo;s pick a name for your booking:
           </label>
           <input
             aria-label="Comment"
@@ -126,7 +144,7 @@ function ClientPage({
             name="eventName"
             id="eventName"
             value={state.eventName}
-            className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6 mb-1"
+            className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6 mb-1 dark:border-white border-slate-100 border-2 rounded-md"
             placeholder="e.g., WeWork Playa Vista"
             onChange={formOnChange}
             maxLength={300}
@@ -134,38 +152,65 @@ function ClientPage({
 
           <label
             htmlFor="sessionDuration"
-            className="block text-base font-medium text-gray-900 dark:text-gray-100">
+            className="pt-4 block text-xl font-semibold text-gray-900 dark:text-gray-100">
             How long should sessions be?
           </label>
-          <div className="flex flex-col space-y-2">
+          <div className="pl-4 flex flex-col space-y-2">
             {possibleDurations.map((duration) => (
-
-              <div className="flex items-center"
-                key={duration}
-              >
+              <div className="flex items-center" key={duration}>
                 <input
                   checked={state.allowedDurations.includes(duration)}
-                  id="checked-checkbox" type="checkbox" value={duration}
+                  id={`checked-checkbox-${duration}`}
+                  type="checkbox"
+                  value={duration}
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   onChange={formCheckboxOnChange}
                 />
-                <label htmlFor="checked-checkbox" className="ms-2 font-medium">{duration} minutes</label>
+                <label
+                  htmlFor={`checked-checkbox-${duration}`}
+                  className="ms-2 font-medium">
+                  {duration} minutes
+                </label>
               </div>
-
             ))}
           </div>
 
-          <li>Determine How Many Sessions</li>
-          <li>Allow users to book single or multi duration</li>
-          <li>User payment vs company payment</li>
-          <input type="text" name="foo" onChange={formOnChange} />
+          <label
+            htmlFor="sessionDuration"
+            className="pt-4 block text-xl font-semibold text-gray-900 dark:text-gray-100">
+            Payment options
+          </label>
+          <div className="pl-4 flex flex-col space-y-2">
+            {paymentOptionsList.map((option) => (
+              <div className="flex items-center" key={option}>
+                <input
+                  // checked={state.paymentOptions.includes(option)}
+                  id={`checked-checkbox-${option}`}
+                  type="radio"
+                  name="paymentOptions"
+                  value={option}
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  onChange={formOnChange}
+                />
+                <label
+                  htmlFor={`checked-checkbox-${option}`}
+                  className="ms-2 font-medium">
+                  {option}
+                </label>
+              </div>
+            ))}
+          </div>
         </ol>
         <button>Test button</button>
       </form>
       <AvailabilityPicker slots={slots} pickerProps={pickerProps} />
       <pre>{JSON.stringify(state, null, 2)}</pre>
-      <pre className="border m-4 p-2 rounded-md border-black" >{dumpData(state)}</pre>
-      <textarea value={dumpData(state)} className="border m-4 p-2 rounded-md border-black w-full"/>
+      <textarea
+        readOnly
+        value={dumpData(state)}
+        rows={10}
+        className="border m-4 p-2 rounded-md border-black w-full"
+      />
     </>
   )
 }
