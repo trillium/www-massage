@@ -19,12 +19,21 @@ export function replaceLeadingUnderscoresWithSpaces(str: string) {
 
 
 export function dumpData(obj: Record<string, any>): string {
-  if (hasNestedObjects(obj)) {
-    throw new Error("Object contains nested objects");
-  }
-  return yaml.dump(obj);
+  const yamlStr = yaml.dump(obj, {
+  });
+  const outStr = replaceLeadingSpacesWithUnderscores(yamlStr)
+  return outStr;
 }
 
 export function loadData(str: string): object {
-  return yaml.load(str) as object
+  let processedStr = str;
+  try {
+    processedStr = processedStr.replace(/<br>/g, '\n');
+    processedStr = processedStr.replace(/<[^>]*>/g, '');
+    processedStr = replaceLeadingUnderscoresWithSpaces(processedStr);
+  } catch (e) {
+    console.error(e);
+    console.error(str);
+  }
+  return yaml.load(processedStr) as object;
 }
