@@ -16,7 +16,7 @@ export const DEFAULT_PRICING: {[key: number] : number} = {
 }
 export const DEFAULT_DURATION = 90
 
-export const CALENDARS_TO_CHECK = ["primary", "trillium@hatsfabulous.com"]
+export const CALENDARS_TO_CHECK = ["primary", "trillium@hatsfabulous.com", "trillium@trilliumsmith.com"]
 export const SLOT_PADDING = 0
 export const OWNER_TIMEZONE = "America/Los_Angeles"
 export const LEAD_TIME = 3 * 60 // 3 hours
