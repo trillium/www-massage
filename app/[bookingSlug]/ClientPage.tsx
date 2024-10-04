@@ -46,7 +46,7 @@ function Page({
 
   return (
     <main className="max-w-2xl sm:mx-auto mx-4 pb-24">
-      <Template title="Book a session with Trillium :)" />
+      <Template title={topContainer.description ?? "Book a session with Trillium :)"} />
       <AvailabilityPicker slots={slots} pickerProps={pickerProps} />
     </main>
   )
