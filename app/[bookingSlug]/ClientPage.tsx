@@ -27,6 +27,11 @@ function Page({
   const containerDateTimeInterval: DateTimeIntervalAndLocation[] =
     mapStringsToDates(containers)
 
+  const topContainerRaw =
+    containers.length > 0 && containers[0] ? containers[0] : {}
+  const { start: dropStart, end: dropEnd, ...rest } = topContainerRaw;
+  const topContainer = { ...rest };
+
   const { slots, pickerProps } = PricingWrapper({
     start,
     end,
@@ -36,10 +41,7 @@ function Page({
     duration,
     containers: containerDateTimeInterval,
     eventMemberString,
-    ...(containers.length > 0 &&
-      containers[0].allowedDurations && {
-        allowedDurations: containers[0].allowedDurations,
-      }),
+    ...topContainer
   })
 
   return (
