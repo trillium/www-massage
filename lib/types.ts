@@ -107,6 +107,7 @@ export type EmailProps = {
   approveUrl: string
   timeZone: string
   price: string
+  phone: string
   duration: string
 }
 

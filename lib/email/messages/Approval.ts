@@ -12,6 +12,7 @@ export default function ApprovalEmail({
   approveUrl,
   timeZone,
   price,
+  phone,
   duration
 }: EmailProps) {
   const SUBJECT = `REQUEST: ${firstName} ${lastName}, ${duration} minutes, $${price}`
@@ -38,6 +39,7 @@ Would you be able to meet at a different time?`
     `<b>Location:</b> ${location}`,
     `<b>Price:</b> $${price}`,
     `<b>Duration:</b> ${duration} minutes`,
+    `<b>Phone Number:</b> ${phone}`,
     `<br>`,
     `<br>`,
     `<b><a href=${approveUrl}>Accept the meeting</a></b>`,
