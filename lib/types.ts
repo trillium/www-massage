@@ -111,6 +111,16 @@ export type EmailProps = {
   duration: string
 }
 
+export type ChairAppointmentBlockProps = {
+  eventContainerString: string
+  allowedDurations: number[]
+  eventName: string
+  sessionDuration?: string
+  pricing?: { [key: number]: number }
+  paymentOptions: string
+  leadTime: number
+}
+
 export type ReviewType = {
   rating: 1 | 2 | 3 | 4 | 5
   date: string
