@@ -144,7 +144,7 @@ function ClientPage({
             name="eventName"
             id="eventName"
             value={state.eventName}
-            className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6 mb-1 dark:border-white border-slate-100 border-2 rounded-md"
+            className="pl-2 py-1 block w-full p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6 mb-1 dark:border-white border-slate-100 border-2 rounded-md"
             placeholder="e.g., WeWork Playa Vista"
             onChange={formOnChange}
             maxLength={300}
