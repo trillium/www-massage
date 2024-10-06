@@ -20,7 +20,7 @@ import {
   useReduxEventContainers,
   useReduxModal,
 } from "@/app/hooks"
-import { PaymentMethodType } from "@/lib/types"
+import { ChairAppointmentBlockProps, PaymentMethodType } from "@/lib/types"
 import { paymentMethod } from "@/data/paymentMethods"
 import siteMetadata from "@/data/siteMetadata"
 import clsx from "clsx"
@@ -44,7 +44,13 @@ export type BookingFormData = {
   paymentMethod?: PaymentMethodType
 }
 
-export default function BookingForm() {
+// Define the props interface
+type BookingFormProps = {
+  additionalData?: Partial<ChairAppointmentBlockProps>
+  endPoint: string
+}
+
+export default function BookingForm({ additionalData = {}, endPoint }: BookingFormProps) {
   const dispatchRedux = useAppDispatch()
   const formData = useReduxFormData()
   const eventContainers = useReduxEventContainers()
@@ -79,7 +85,13 @@ export default function BookingForm() {
       <form
         className="mt-3 sm:mt-0 sm:ml-4"
         onSubmit={(event) => {
-          handleSubmit(event, dispatchRedux, router)
+          handleSubmit({
+            event,
+            dispatchRedux,
+            router,
+            additionalData,
+            endPoint,
+          })
         }}>
         <Dialog.Title
           as="h3"
@@ -92,8 +104,12 @@ export default function BookingForm() {
         <input type="hidden" readOnly name="duration" value={duration || 0} />
         <input type="hidden" readOnly name="price" value={price} />
         <input type="hidden" readOnly name="timeZone" value={timeZone} />
-        <input type="hidden" readOnly name="eventBaseString" value={eventBaseString} />
-        
+        <input
+          type="hidden"
+          readOnly
+          name="eventBaseString"
+          value={eventBaseString}
+        />
         {eventContainers && eventContainers.eventBaseString && (
           <input
             type="hidden"
@@ -308,19 +324,30 @@ export default function BookingForm() {
  * upon success (or showing a failure message).
  *
  */
-function handleSubmit(
-  event: FormEvent<HTMLFormElement>,
-  dispatchRedux: AppDispatch,
+function handleSubmit({
+  event,
+  dispatchRedux,
+  router,
+  additionalData,
+  endPoint,
+}: {
+  event: FormEvent<HTMLFormElement>
+  dispatchRedux: AppDispatch
   router: ReturnType<typeof useRouter>
-) {
+  additionalData: Partial<ChairAppointmentBlockProps>
+  endPoint: string
+}) {
   event.preventDefault()
   dispatchRedux(setModal({ status: "busy" }))
-  fetch(`/api/request`, {
+  fetch(endPoint, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(Object.fromEntries(new FormData(event.currentTarget))),
+    body: JSON.stringify({
+      ...Object.fromEntries(new FormData(event.currentTarget)),
+      ...additionalData,
+    }),
   })
     .then(async (data) => {
       const json = await data.json()
