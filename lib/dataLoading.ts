@@ -20,6 +20,7 @@ export function loadData(str: string): object {
   let processedStr = str;
   try {
     processedStr = processedStr.replace(/<br>/g, '\n');
+    processedStr = processedStr.replace(/<pre>/g, '\n');
     processedStr = processedStr.replace(/<[^>]*>/g, '');
     processedStr = replaceLeadingUnderscoresWithSpaces(processedStr);
   } catch (e) {

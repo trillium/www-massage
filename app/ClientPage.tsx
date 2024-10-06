@@ -7,6 +7,7 @@ import { PricingWrapper } from "@/components/availability/PricingWrapper"
 import { DEFAULT_PRICING } from "@/config"
 
 import PageProps from "./page"
+import BookingForm from "@/components/booking/BookingForm"
 
 const pricing = DEFAULT_PRICING
 
@@ -30,7 +31,9 @@ function Page({
 
   return (
     <>
-      <AvailabilityPicker slots={slots} pickerProps={pickerProps} />
+      <AvailabilityPicker slots={slots} pickerProps={pickerProps} >
+        <BookingForm endPoint="api/request" />
+      </AvailabilityPicker>
     </>
   )
 }

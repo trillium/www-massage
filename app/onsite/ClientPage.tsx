@@ -1,16 +1,21 @@
 "use client"
 
 import type { InferGetServerSidePropsType } from "next"
+import clsx from 'clsx';
+import 'wicg-inert';
 
 import AvailabilityPicker from "@/components/availability/AvailabilityPicker"
 import { PricingWrapper } from "@/components/availability/PricingWrapper"
 import { DEFAULT_PRICING } from "@/config"
 
 import PageProps from "@/app/page"
-import { AllowedDurationsType } from "@/lib/types"
-import { FormEvent, useEffect, useState } from "react"
+import { AllowedDurationsType, ChairAppointmentBlockProps } from "@/lib/types"
+import { useEffect, useRef, useState } from "react"
+import { useFormik, getIn } from "formik"
+import * as Yup from "yup"
 
 import { dumpData } from "@/lib/dataLoading"
+import BookingForm from "@/components/booking/BookingForm"
 
 const pricing = DEFAULT_PRICING
 
@@ -18,9 +23,9 @@ const pricing = DEFAULT_PRICING
 const possibleDurations = [15, 30, 45, 60]
 
 const paymentOptionsList = [
-  "Client pays their own session",
   "Massage session block prepaid in full",
   "Split individual booking fees with cleint",
+  "Individuals pays their own session",
 ]
 
 const allowedDurations: AllowedDurationsType = [
@@ -33,14 +38,14 @@ const allowedDurations: AllowedDurationsType = [
   60 * 4,
 ]
 
-type StateType = {
-  eventContainerString: string
-  allowedDurations: number[]
-  eventName: string
-  sessionDuration?: string
-  pricing?: { [key: number]: number }
-  paymentOptions: string
-}
+const OnsiteSchema = Yup.object().shape({
+  eventName: Yup.string().max(60, "Too Long!").required("Required"),
+  allowedDurations: Yup.array()
+    .of(Yup.number())
+    .min(1, "At least one duration must be selected.")
+    .required("Required"),
+  paymentOptions: Yup.string().required("Required"),
+})
 
 function ClientPage({
   start,
@@ -59,54 +64,54 @@ function ClientPage({
     allowedDurations,
   })
 
-  const [state, setState] = useState<StateType>({
-    eventName: "",
-    // sessionDuration: "",
-    eventContainerString: "__EVENT__",
-    allowedDurations: [],
-    pricing: { 15: 120 / 4, 30: 120 / 2 },
-    paymentOptions: "",
+  const formik = useFormik({
+    initialValues: {
+      eventName: "",
+      eventBaseString: "__EVENT__",
+      eventContainerString: "__EVENT__CONTAINER__",
+      allowedDurations: [] as number[],
+      pricing: {
+        15: (120 * 1) / 4,
+        30: (120 * 2) / 4,
+        45: (120 * 3) / 4,
+        60: (120 * 4) / 4,
+      },
+      paymentOptions: "",
+      leadTime: 0,
+    },
+    validationSchema: OnsiteSchema,
+    onSubmit: (values) => {
+      console.log(values)
+    },
   })
 
   const [pathString, setPathString] = useState("")
 
-  function handleSubmit(
-    event: FormEvent<HTMLFormElement>
-    // dispatchRedux: AppDispatch,
-    // router: ReturnType<typeof useRouter>
-  ) {
-    event.preventDefault()
-    console.log(
-      JSON.stringify(Object.fromEntries(new FormData(event.currentTarget)))
-    )
-  }
-
-  const formOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const target = event.target as HTMLInputElement
-    setState({ ...state, [target.name]: target.value })
-  }
-
   const formCheckboxOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value, 10)
-    const { allowedDurations } = state
+    const allowedDurations: number[] = formik.values.allowedDurations
 
     const newDurations = allowedDurations.includes(value)
       ? allowedDurations.filter((duration) => duration !== value)
       : [...allowedDurations, value]
 
-    setState((state) => ({ ...state, allowedDurations: newDurations }))
+    setFieldValue("allowedDurations", newDurations)
   }
 
-  const paymentOptionsRadioOnChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const value = event.target.value;
-  
-    // Set the state with only the selected value
-    setState((s) => ({ ...s, paymentOptions: value }));
-  };
+  const { eventName } = formik.values
+  const { setFieldValue } = formik
 
-  const { eventName } = state
+  const divRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (divRef.current) {
+      if (!formik.isValid) {
+        divRef.current.setAttribute('inert', 'true');
+      } else {
+        divRef.current.removeAttribute('inert');
+      }
+    }
+  }, [formik.isValid]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -117,12 +122,10 @@ function ClientPage({
           .replace(/[^a-z0-9_]/g, "") || "your_name_here"
       const newPathString = window.location.origin + "/" + sanitizedName
       setPathString(newPathString)
-      setState((state) => ({
-        ...state,
-        eventContainerString: sanitizedName + "__EVENT__",
-      }))
+      setFieldValue("eventBaseString", sanitizedName + "__EVENT__")
+      setFieldValue("eventContainerString", sanitizedName + "__EVENT__CONTAINER__")
     }
-  }, [eventName])
+  }, [eventName, setFieldValue])
 
   return (
     <>
@@ -131,7 +134,7 @@ function ClientPage({
           Your link: {pathString}
         </h2>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form onBlur={formik.handleBlur}>
         <ol>
           <label
             htmlFor="eventName"
@@ -139,16 +142,19 @@ function ClientPage({
             Let&rsquo;s pick a name for your booking:
           </label>
           <input
-            aria-label="Comment"
+            aria-label="Event Name"
             type="text"
             name="eventName"
             id="eventName"
-            value={state.eventName}
-            className="pl-2 py-1 block w-full border-0 p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6 mb-1 dark:border-white border-slate-100 border-2 rounded-md"
+            value={formik.values.eventName}
+            onChange={formik.handleChange}
+            className="pl-2 py-1 block w-full p-0 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6 mb-1 dark:border-white border-slate-100 border-2 rounded-md"
             placeholder="e.g., WeWork Playa Vista"
-            onChange={formOnChange}
-            maxLength={300}
+            maxLength={60}
+            required
+            aria-required
           />
+          <div className="text-red-600 text-sm min-h-[1.25rem]">{formik.touched.eventName && formik.errors.eventName || " "}</div>
 
           <label
             htmlFor="sessionDuration"
@@ -156,23 +162,31 @@ function ClientPage({
             How long should sessions be?
           </label>
           <div className="pl-4 flex flex-col space-y-2">
-            {possibleDurations.map((duration) => (
-              <div className="flex items-center" key={duration}>
-                <input
-                  checked={state.allowedDurations.includes(duration)}
-                  id={`checked-checkbox-${duration}`}
-                  type="checkbox"
-                  value={duration}
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  onChange={formCheckboxOnChange}
-                />
-                <label
-                  htmlFor={`checked-checkbox-${duration}`}
-                  className="ms-2 font-medium">
-                  {duration} minutes
-                </label>
-              </div>
-            ))}
+            <fieldset onBlur={formik.handleBlur('allowedDurations')}>
+              {possibleDurations.map((duration) => (
+                <div className="flex items-center" key={duration}>
+                  <input
+                    checked={formik.values.allowedDurations.includes(duration)}
+                    id={`checked-checkbox-${duration}`}
+                    type="checkbox"
+                    value={duration}
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    onChange={formCheckboxOnChange}
+                    required
+                    aria-required
+                  />
+                  <label
+                    htmlFor={`checked-checkbox-${duration}`}
+                    className="ms-2 font-medium">
+                    {duration} minutes
+                  </label>
+                </div>
+              ))}
+            </fieldset>
+            <div className="text-red-600 text-sm min-h-[1.25rem]">
+              {formik.touched.allowedDurations && formik.errors.allowedDurations || " "}
+            </div>
+
           </div>
 
           <label
@@ -184,13 +198,13 @@ function ClientPage({
             {paymentOptionsList.map((option) => (
               <div className="flex items-center" key={option}>
                 <input
-                  // checked={state.paymentOptions.includes(option)}
                   id={`checked-checkbox-${option}`}
                   type="radio"
                   name="paymentOptions"
                   value={option}
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  onChange={formOnChange}
+                  onChange={formik.handleChange}
+                  required
                 />
                 <label
                   htmlFor={`checked-checkbox-${option}`}
@@ -199,16 +213,30 @@ function ClientPage({
                 </label>
               </div>
             ))}
+            <div className="text-red-600 text-sm min-h-[1.25rem]">{formik.touched.paymentOptions && formik.errors.paymentOptions || " "}</div>
           </div>
         </ol>
-        <button>Test button</button>
       </form>
-      <AvailabilityPicker slots={slots} pickerProps={pickerProps} />
-      <pre>{JSON.stringify(state, null, 2)}</pre>
+      <div className={clsx({
+        'pointer-events-none opacity-50': !formik.isValid,
+      })}
+        aria-disabled={!formik.isValid}
+        tabIndex={!formik.isValid && -1 || undefined}
+        ref={divRef}
+
+      >
+        <AvailabilityPicker slots={slots} pickerProps={pickerProps}>
+          <BookingForm
+            additionalData={formik.values}
+            endPoint="api/onsite/request"
+          />
+        </AvailabilityPicker>
+      </div>
+      <pre>{JSON.stringify(formik, null, 2)}</pre>
       <textarea
         readOnly
-        value={dumpData(state)}
-        rows={10}
+        value={dumpData(formik.values)}
+        rows={15}
         className="border m-4 p-2 rounded-md border-black w-full"
       />
     </>

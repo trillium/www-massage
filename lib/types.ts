@@ -111,6 +111,18 @@ export type EmailProps = {
   duration: string
 }
 
+export type ChairAppointmentBlockProps = {
+  eventContainerString: string
+  allowedDurations: number[]
+  eventName: string
+  sessionDuration?: string
+  pricing?: { [key: number]: number }
+  paymentOptions: string
+  leadTime: number
+}
+
+export type ChairAppointmentBlockCalendarProps = ChairAppointmentBlockProps & AppointmentProps
+
 export type ReviewType = {
   rating: 1 | 2 | 3 | 4 | 5
   date: string
@@ -126,7 +138,9 @@ export type PaymentMethodType = (typeof paymentMethod)[number]["value"] | null
 export type GoogleCalendarV3Event = {
   // Define the properties of the event according to Google Calendar API V3
   id: string
+  /* The calendar appointment name */
   summary: string
+  /* The calendar appointment text */
   description?: string
   start: {
     dateTime: string

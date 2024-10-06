@@ -10,6 +10,7 @@ import { DateTimeIntervalAndLocation } from "@/lib/types"
 
 import PageProps from "./page"
 import { mapStringsToDates } from "@/lib/availability/helpers"
+import BookingForm from "@/components/booking/BookingForm"
 
 const pricing = DEFAULT_PRICING
 
@@ -47,7 +48,9 @@ function Page({
   return (
     <main className="max-w-2xl sm:mx-auto mx-4 pb-24">
       <Template title={topContainer.description ?? "Book a session with Trillium :)"} />
-      <AvailabilityPicker slots={slots} pickerProps={pickerProps} />
+      <AvailabilityPicker slots={slots} pickerProps={pickerProps}>
+        <BookingForm endPoint="api/request" />
+      </AvailabilityPicker>
     </main>
   )
 }
