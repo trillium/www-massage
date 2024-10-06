@@ -97,15 +97,6 @@ function ClientPage({
     setState((state) => ({ ...state, allowedDurations: newDurations }))
   }
 
-  const paymentOptionsRadioOnChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const value = event.target.value;
-  
-    // Set the state with only the selected value
-    setState((s) => ({ ...s, paymentOptions: value }));
-  };
-
   const { eventName } = state
 
   useEffect(() => {
