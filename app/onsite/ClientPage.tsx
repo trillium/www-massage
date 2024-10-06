@@ -40,6 +40,7 @@ type StateType = {
   sessionDuration?: string
   pricing?: { [key: number]: number }
   paymentOptions: string
+  leadTime: number
 }
 
 function ClientPage({
@@ -64,8 +65,14 @@ function ClientPage({
     // sessionDuration: "",
     eventContainerString: "__EVENT__",
     allowedDurations: [],
-    pricing: { 15: 120 / 4, 30: 120 / 2 },
+    pricing: {
+      15: (120 * 1) / 4,
+      30: (120 * 2) / 4,
+      45: (120 * 3) / 4,
+      60: (120 * 4) / 4,
+    },
     paymentOptions: "",
+    leadTime: 0,
   })
 
   const [pathString, setPathString] = useState("")
