@@ -6,8 +6,6 @@ const paymentMethodValues = paymentMethod.map((method) => method.value) as [
   ...string[]
 ]
 
-const PaymentMethodType = z.enum(paymentMethodValues)
-
 export const AppointmentRequestSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
