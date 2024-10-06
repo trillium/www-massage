@@ -7,7 +7,7 @@ import { PricingWrapper } from "@/components/availability/PricingWrapper"
 import { DEFAULT_PRICING } from "@/config"
 
 import PageProps from "@/app/page"
-import { AllowedDurationsType } from "@/lib/types"
+import { AllowedDurationsType, ChairAppointmentBlockProps } from "@/lib/types"
 import { FormEvent, useEffect, useState } from "react"
 
 import { dumpData } from "@/lib/dataLoading"
@@ -33,16 +33,6 @@ const allowedDurations: AllowedDurationsType = [
   60 * 4,
 ]
 
-type StateType = {
-  eventContainerString: string
-  allowedDurations: number[]
-  eventName: string
-  sessionDuration?: string
-  pricing?: { [key: number]: number }
-  paymentOptions: string
-  leadTime: number
-}
-
 function ClientPage({
   start,
   end,
@@ -60,7 +50,7 @@ function ClientPage({
     allowedDurations,
   })
 
-  const [state, setState] = useState<StateType>({
+  const [state, setState] = useState<ChairAppointmentBlockProps>({
     eventName: "",
     // sessionDuration: "",
     eventContainerString: "__EVENT__",
