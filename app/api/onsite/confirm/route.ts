@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import { type NextRequest } from "next/server"
 import { redirect } from "next/navigation"
 
-import createOnsiteAppointment from "@/lib/availability/createOnsiteAppointment "
+import createOnsiteAppointment from "@/lib/availability/createOnsiteAppointment"
 import { getHash } from "@/lib/hash"
 
 import templates from "@/lib/messageTemplates/onsiteTemplates"
