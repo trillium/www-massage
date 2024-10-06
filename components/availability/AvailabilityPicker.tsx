@@ -1,6 +1,5 @@
 import dynamic from "next/dynamic"
 
-import BookingForm from "@/components/booking/BookingForm"
 import DurationPicker, { durationProps } from "./controls/DurationPicker"
 import TimezonePicker from "./controls/TimezonePicker"
 import type { DateTimeIntervalAndLocation } from "@/lib/types"
@@ -23,9 +22,11 @@ export type PickerProps = {
 export default function AvailabilityPicker({
   slots,
   pickerProps,
+  children
 }: {
   slots: DateTimeIntervalAndLocation[]
   pickerProps: PickerProps
+  children: React.ReactNode
 }) {
   const { durationProps } = pickerProps
   const { showPicker } = pickerProps.tzPickerProps || { showPicker: true }
@@ -61,7 +62,7 @@ export default function AvailabilityPicker({
         <DurationPicker {...durationProps} />
         {showPicker && <TimezonePicker />}
       </div>
-      <BookingForm />
+      {children}
       <Calendar
         offers={availabilityByDate}
         maximumAvailability={maximumAvailability}
