@@ -24,9 +24,9 @@ const possibleDurations = [15, 30, 45, 60]
 
 const paymentOptionsList = [
   "Massage session block prepaid in full",
-  "Split individual booking fees with cleint",
-  "Individuals pays their own session",
-]
+  "Split individual booking fees with client",
+  "Individuals pay for their own sessions",
+] // These need more explanation
 
 const allowedDurations: AllowedDurationsType = [
   60 * 1,
@@ -186,7 +186,6 @@ function ClientPage({
             <div className="text-red-600 text-sm min-h-[1.25rem]">
               {formik.touched.allowedDurations && formik.errors.allowedDurations || " "}
             </div>
-
           </div>
 
           <label
