@@ -231,14 +231,7 @@ function ClientPage({
             endPoint="api/onsite/request"
           />
         </AvailabilityPicker>
-      </div>
-      <pre>{JSON.stringify(formik, null, 2)}</pre>
-      <textarea
-        readOnly
-        value={dumpData(formik.values)}
-        rows={15}
-        className="border m-4 p-2 rounded-md border-black w-full"
-      />
+      </div>     
     </>
   )
 }
