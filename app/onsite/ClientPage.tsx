@@ -52,7 +52,6 @@ function ClientPage({
 
   const [state, setState] = useState<ChairAppointmentBlockProps>({
     eventName: "",
-    // sessionDuration: "",
     eventContainerString: "__EVENT__",
     allowedDurations: [],
     pricing: {
