@@ -171,7 +171,6 @@ function ClientPage({
             {paymentOptionsList.map((option) => (
               <div className="flex items-center" key={option}>
                 <input
-                  // checked={state.paymentOptions.includes(option)}
                   id={`checked-checkbox-${option}`}
                   type="radio"
                   name="paymentOptions"
