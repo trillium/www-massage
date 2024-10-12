@@ -26,6 +26,7 @@ import { setEventContainers } from "@/redux/slices/eventContainersSlice"
 
 type PricingWrapperProps = InferGetServerSidePropsType<typeof PageProps> & {
   containers: DateTimeIntervalAndLocation
+  acceptingPayment: boolean
 }
 
 export function PricingWrapper({
@@ -38,7 +39,8 @@ export function PricingWrapper({
   eventMemberString,
   allowedDurations,
   leadTime = LEAD_TIME,
-  pricing = DEFAULT_PRICING
+  pricing = DEFAULT_PRICING,
+  acceptingPayment
 }: PricingWrapperProps) {
   const dispatchRedux = useAppDispatch()
   const {
@@ -49,9 +51,9 @@ export function PricingWrapper({
 
   const pickerProps: PickerProps = {
     durationProps: {
-      title: `${durationRedux || duration || "##"} minute session - $${
-        pricing[durationRedux || duration]
-      }`,
+      title: `${durationRedux || duration || "##"} minute session${acceptingPayment ? (" - $" +
+        pricing[durationRedux || duration]) : ""
+        }`,
       allowedDurations: allowedDurations || ALLOWED_DURATIONS,
     },
     tzPickerProps: {
