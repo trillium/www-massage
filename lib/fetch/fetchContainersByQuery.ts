@@ -112,10 +112,10 @@ export async function fetchContainersByQuery({
     }
 
     return {
+      ...obj,
       start: e.start.dateTime,
       end: e.end.dateTime,
-      location: e.location,
-      ...obj,
+      location: e.location
     }
   })
 
