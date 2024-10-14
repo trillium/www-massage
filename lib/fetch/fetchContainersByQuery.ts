@@ -73,8 +73,8 @@ export async function fetchContainersByQuery({
   const endDate = new Date(Day.todayWithOffset(21).toString())
 
   const searchQuery = query + "__EVENT__"
-  const member_string = query + "__EVENT__MEMBER__"
-  const container_string = query + "__EVENT__CONTAINER__"
+  const eventMemberString = query + "__EVENT__MEMBER__"
+  const eventContainerString = query + "__EVENT__CONTAINER__"
 
   const events = await getEventsBySearchQuery({
     start: startDate,
@@ -84,8 +84,8 @@ export async function fetchContainersByQuery({
 
   const members = events.filter((e: GoogleCalendarV3Event) => {
     return (
-      e.summary.includes(member_string) ||
-      (e.description && e.description.includes(member_string))
+      e.summary.includes(eventMemberString) ||
+      (e.description && e.description.includes(eventMemberString))
     )
   })
 
@@ -95,8 +95,8 @@ export async function fetchContainersByQuery({
 
   const containers = events.filter((e: GoogleCalendarV3Event) => {
     return (
-      e.summary.includes(container_string) ||
-      (e.description && e.description.includes(container_string))
+      e.summary.includes(eventContainerString) ||
+      (e.description && e.description.includes(eventContainerString))
     )
   })
   const containersMapped = containers.map((e: GoogleCalendarV3Event) => {
@@ -115,7 +115,7 @@ export async function fetchContainersByQuery({
       ...obj,
       start: e.start.dateTime,
       end: e.end.dateTime,
-      location: e.location
+      location: e.location,
     }
   })
 
