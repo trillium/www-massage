@@ -9,12 +9,11 @@ import { PricingWrapper } from "@/components/availability/PricingWrapper"
 import { DEFAULT_PRICING } from "@/config"
 
 import PageProps from "@/app/page"
-import { AllowedDurationsType, ChairAppointmentBlockProps } from "@/lib/types"
+import { AllowedDurationsType } from "@/lib/types"
 import { useEffect, useRef, useState } from "react"
-import { useFormik, getIn } from "formik"
+import { useFormik } from "formik"
 import * as Yup from "yup"
 
-import { dumpData } from "@/lib/dataLoading"
 import BookingForm from "@/components/booking/BookingForm"
 
 const pricing = DEFAULT_PRICING
