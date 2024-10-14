@@ -37,6 +37,7 @@ export function PricingWrapper({
   duration,
   containers,
   eventMemberString,
+  eventBaseString,
   allowedDurations,
   leadTime = LEAD_TIME,
   pricing = DEFAULT_PRICING,
@@ -108,6 +109,11 @@ export function PricingWrapper({
     if (eventMemberString) {
       dispatchRedux(
         setEventContainers({ eventMemberString: eventMemberString || "" })
+      )
+    }
+    if (eventBaseString) {
+      dispatchRedux(
+        setEventContainers({ eventBaseString: eventBaseString || "" })
       )
     }
     // eslint-disable-next-line
