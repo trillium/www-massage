@@ -47,10 +47,11 @@ export type BookingFormData = {
 // Define the props interface
 type BookingFormProps = {
   additionalData?: Partial<ChairAppointmentBlockProps>
+  acceptingPayment?: boolean
   endPoint: string
 }
 
-export default function BookingForm({ additionalData = {}, endPoint }: BookingFormProps) {
+export default function BookingForm({ additionalData = {}, endPoint, acceptingPayment=true }: BookingFormProps) {
   const dispatchRedux = useAppDispatch()
   const formData = useReduxFormData()
   const eventContainers = useReduxEventContainers()
@@ -251,7 +252,7 @@ export default function BookingForm({ additionalData = {}, endPoint }: BookingFo
               />
             </div>
           </div>
-          <div>
+          {acceptingPayment && <div>
             <p className="text-sm font-medium">Intended payment method</p>
             <fieldset className="mt-2">
               <div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-4">
@@ -283,7 +284,7 @@ export default function BookingForm({ additionalData = {}, endPoint }: BookingFo
                   )[0].hint}
               </p>
             </fieldset>
-          </div>
+          </div>}
         </div>
         {modal === "error" && (
           <div className="bg-red-50 text-red-600">

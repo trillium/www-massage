@@ -27,7 +27,7 @@ export const AppointmentRequestSchema = z.object({
     message: "Price must be a valid integer.",
   }),
   phone: z.string(),
-  paymentMethod: z.enum(paymentMethodValues),
+  paymentMethod: z.enum(paymentMethodValues).optional(),
   eventBaseString: z.string(),
   eventMemberString: z.string().optional(),
   eventContainerString: z.string().optional(),

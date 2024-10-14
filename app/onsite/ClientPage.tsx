@@ -9,12 +9,11 @@ import { PricingWrapper } from "@/components/availability/PricingWrapper"
 import { DEFAULT_PRICING } from "@/config"
 
 import PageProps from "@/app/page"
-import { AllowedDurationsType, ChairAppointmentBlockProps } from "@/lib/types"
+import { AllowedDurationsType } from "@/lib/types"
 import { useEffect, useRef, useState } from "react"
-import { useFormik, getIn } from "formik"
+import { useFormik } from "formik"
 import * as Yup from "yup"
 
-import { dumpData } from "@/lib/dataLoading"
 import BookingForm from "@/components/booking/BookingForm"
 
 const pricing = DEFAULT_PRICING
@@ -24,9 +23,9 @@ const possibleDurations = [15, 30, 45, 60]
 
 const paymentOptionsList = [
   "Massage session block prepaid in full",
-  "Split individual booking fees with cleint",
-  "Individuals pays their own session",
-]
+  "Split individual booking fees with client",
+  "Individuals pay for their own sessions",
+] // These need more explanation
 
 const allowedDurations: AllowedDurationsType = [
   60 * 1,
@@ -186,7 +185,6 @@ function ClientPage({
             <div className="text-red-600 text-sm min-h-[1.25rem]">
               {formik.touched.allowedDurations && formik.errors.allowedDurations || " "}
             </div>
-
           </div>
 
           <label

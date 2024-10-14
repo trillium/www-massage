@@ -24,6 +24,7 @@ function Page({
   duration,
   containers,
   eventMemberString,
+  ...props
 }: InferGetServerSidePropsType<typeof PageProps>) {
   const containerDateTimeInterval: DateTimeIntervalAndLocation[] =
     mapStringsToDates(containers)
@@ -45,11 +46,14 @@ function Page({
     ...topContainer
   })
 
+  const { acceptingPayment: payment } = props
+  const acceptingPayment = !!payment
+
   return (
     <main className="max-w-2xl sm:mx-auto mx-4 pb-24">
       <Template title={topContainer.description ?? "Book a session with Trillium :)"} />
       <AvailabilityPicker slots={slots} pickerProps={pickerProps}>
-        <BookingForm endPoint="api/request" />
+        <BookingForm endPoint="api/request" acceptingPayment={acceptingPayment} />
       </AvailabilityPicker>
     </main>
   )
