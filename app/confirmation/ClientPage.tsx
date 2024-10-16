@@ -10,9 +10,8 @@ import { formatLocalDate, formatLocalTime } from "@/lib/availability/helpers"
 import BookSessionButton from "@/components/BookSessionButton"
 
 export default function Confirmation() {
-  const dispatchRedux = useAppDispatch()
   const formData = useReduxFormData()
-  const { selectedTime, timeZone, duration } = useReduxAvailability()
+  const { selectedTime, timeZone } = useReduxAvailability()
 
   let dateString
   let startString
