@@ -80,7 +80,7 @@ export type AppointmentProps = {
   email: string
   /** Phone number of the requester. */
   phone: string
-  /** Location of the meeting. */
+  /** Location of the appointment. */
   location: string
   /** Timezone of the requester. */
   timeZone: string
@@ -90,7 +90,7 @@ export type AppointmentProps = {
   firstName: string
   /** Last name of the requester */
   lastName: string
-  /** Duration of the meeting in minutes  */
+  /** Duration of the appointment in minutes  */
   duration: string
   /** Strings to identify this event via calendar queries */
   eventBaseString: string
