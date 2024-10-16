@@ -135,6 +135,13 @@ export type ReviewType = {
 
 export type PaymentMethodType = (typeof paymentMethod)[number]["value"] | null
 
+export type AttendeeType = {
+  email: string
+  organizer: boolean
+  self: boolean
+  responseStatus: string
+}
+ 
 export type GoogleCalendarV3Event = {
   // Define the properties of the event according to Google Calendar API V3
   id: string
@@ -151,12 +158,7 @@ export type GoogleCalendarV3Event = {
     timeZone?: string
   }
   location?: string
-  attendees?: [
-    {
-      email: string
-      displayName: string
-    }
-  ]
+  attendees?: AttendeeType[]
 }
 
 export type AllowedDurationsType = number[]
