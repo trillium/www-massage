@@ -80,7 +80,7 @@ export type AppointmentProps = {
   email: string
   /** Phone number of the requester. */
   phone: string
-  /** Location of the meeting. */
+  /** Location of the appointment. */
   location: string
   /** Timezone of the requester. */
   timeZone: string
@@ -90,7 +90,7 @@ export type AppointmentProps = {
   firstName: string
   /** Last name of the requester */
   lastName: string
-  /** Duration of the meeting in minutes  */
+  /** Duration of the appointment in minutes  */
   duration: string
   /** Strings to identify this event via calendar queries */
   eventBaseString: string
@@ -135,6 +135,13 @@ export type ReviewType = {
 
 export type PaymentMethodType = (typeof paymentMethod)[number]["value"] | null
 
+export type AttendeeType = {
+  email: string
+  organizer: boolean
+  self: boolean
+  responseStatus: string
+}
+ 
 export type GoogleCalendarV3Event = {
   // Define the properties of the event according to Google Calendar API V3
   id: string
@@ -151,12 +158,7 @@ export type GoogleCalendarV3Event = {
     timeZone?: string
   }
   location?: string
-  attendees?: [
-    {
-      email: string
-      displayName: string
-    }
-  ]
+  attendees?: AttendeeType[]
 }
 
 export type AllowedDurationsType = number[]

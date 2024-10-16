@@ -42,9 +42,9 @@ Would you be able to meet at a different time?`
     `<b>Phone Number:</b> ${phone}`,
     `<br>`,
     `<br>`,
-    `<b><a href=${approveUrl}>Accept the meeting</a></b>`,
+    `<b><a href=${approveUrl}>Accept the appointment</a></b>`,
     `<br>`,
-    `<b><a href=${declineUrl}>Decline the meeting</a></b>`,
+    `<b><a href=${declineUrl}>Decline the appointment</a></b>`,
     `<br>`,
   ]
     .map((line) => `${LINE_PREFIX}${line}${LINE_SUFFIX}`)

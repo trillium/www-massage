@@ -8,15 +8,14 @@ import {
 } from "../hooks"
 import { formatLocalDate, formatLocalTime } from "@/lib/availability/helpers"
 import BookSessionButton from "@/components/BookSessionButton"
+import { BookedCard } from "@/components/BookedCard"
 
 export default function Confirmation() {
-  const dispatchRedux = useAppDispatch()
-  const formData = useReduxFormData()
-  const { selectedTime, timeZone, duration } = useReduxAvailability()
+  const { selectedTime, timeZone } = useReduxAvailability()
 
-  let dateString
-  let startString
-  let endString
+  let dateString = ""
+  let startString = ""
+  let endString = ""
 
   if (selectedTime) {
     dateString = formatLocalDate(selectedTime.start, { timeZone })
@@ -26,6 +25,25 @@ export default function Confirmation() {
       timeZoneName: "shortGeneric",
     })
   }
+  const {
+    firstName,
+    lastName,
+    location,
+    phone,
+    email
+  } = useReduxFormData()
+
+  const BookedData = {
+    dateString: dateString!,
+    startString: startString!,
+    endString: endString!,
+    state: "Pending" as "Pending",
+    firstName: firstName!,
+    lastName: lastName!,
+    location: location!,
+    phone: phone!,
+    email: email!
+  };
 
   return (
     <>
@@ -40,39 +58,7 @@ export default function Confirmation() {
           I&apos;ll review the appointment and get back to you shortly!
         </p>
       </div>
-      <div
-        className={clsx(
-          "flex items-center justify-center h-full max-lg:py-0 rounded-3xl w-full max-xl:max-w-3xl max-xl:mx-auto",
-          "bg-gray-100 dark:bg-slate-900 border-2 border-primary-400"
-        )}>
-        <div className="w-full h-full relative flex-grow p-2">
-          <div className="border-l-4 relative border-l-primary-400 bg-primary-50/30 dark:bg-primary-50/10 p-3 mt-3 mb-4 rounded-md">
-            <div className="flex w-full flex-row justify-between items-center">
-              <div>
-                <p className="text-base md:text-lg font-semibold text-primary-800 dark:text-primary-400">
-                  {dateString}
-                </p>
-                <p className="text-sm md:text-base">
-                  {startString} - {endString}
-                </p>
-              </div>
-              <p className="text-base md:text-xl font-bold">Pending</p>
-            </div>
-          </div>
-          <p className="pl-4 bg-none font-bold text-lg text-gray-700 dark:text-gray-100">
-            {formData.firstName} {formData.lastName}
-          </p>
-          <p className="pl-6 bg-none font-bold text-base  text-gray-500 dark:text-gray-300">
-            {formData.location}
-          </p>
-          <p className="pl-6 bg-none font-bold text-base  text-gray-500 dark:text-gray-300">
-            {formData.phone}
-          </p>
-          <p className="pl-6 bg-none font-bold text-base  text-gray-500 dark:text-gray-300">
-            {formData.email}
-          </p>
-        </div>
-      </div>
+      <BookedCard {...BookedData} />
 
       <div className="pt-12 flex flex-grow items-center justify-center">
         <BookSessionButton title="Book Another Session!" href="/" />

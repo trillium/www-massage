@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
 
   const data = searchParams.get("data")
   const key = searchParams.get("key")
-  
+
   if (!data) {
     return NextResponse.json({ error: "Data is missing" }, { status: 400 })
   }
@@ -69,7 +69,10 @@ export async function GET(req: NextRequest) {
 
   // If we have a link to the event, take us there.
   if (match && match[1]) {
-    redirect(`/booked?url=${encodeURIComponent(match[1])}`)
+    const encodedDetails = encodeURIComponent(JSON.stringify(validObject))
+    redirect(
+      `/booked?data=${encodedDetails}&url=${encodeURIComponent(match[1])}`
+    )
     return
   }
 
