@@ -8,13 +8,15 @@ import {
 } from "../hooks"
 import { formatLocalDate, formatLocalTime } from "@/lib/availability/helpers"
 import BookSessionButton from "@/components/BookSessionButton"
+import { BookedCard } from "@/components/BookedCard"
 
 export default function Confirmation() {
+  const formData = useReduxFormData()
   const { selectedTime, timeZone } = useReduxAvailability()
 
-  let dateString
-  let startString
-  let endString
+  let dateString = ""
+  let startString = ""
+  let endString = ""
 
   if (selectedTime) {
     dateString = formatLocalDate(selectedTime.start, { timeZone })
@@ -32,6 +34,18 @@ export default function Confirmation() {
     email
   } = useReduxFormData()
 
+  const BookedData = {
+    dateString: dateString!,
+    startString: startString!,
+    endString: endString!,
+    state: "Pending" as "Pending",
+    firstName: firstName!,
+    lastName: lastName!,
+    location: location!,
+    phone: phone!,
+    email: email!
+  };
+
   return (
     <>
       <div className="py-4 sm:py-8 sm:px-0 px-4 w-full max-w-2xl">
@@ -45,6 +59,7 @@ export default function Confirmation() {
           I&apos;ll review the appointment and get back to you shortly!
         </p>
       </div>
+      <BookedCard {...BookedData} />
       <div
         className={clsx(
           "flex items-center justify-center h-full max-lg:py-0 rounded-3xl w-full max-xl:max-w-3xl max-xl:mx-auto",
