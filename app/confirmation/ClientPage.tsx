@@ -11,7 +11,6 @@ import BookSessionButton from "@/components/BookSessionButton"
 import { BookedCard } from "@/components/BookedCard"
 
 export default function Confirmation() {
-  const formData = useReduxFormData()
   const { selectedTime, timeZone } = useReduxAvailability()
 
   let dateString = ""
