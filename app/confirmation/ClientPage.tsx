@@ -10,7 +10,6 @@ import { formatLocalDate, formatLocalTime } from "@/lib/availability/helpers"
 import BookSessionButton from "@/components/BookSessionButton"
 
 export default function Confirmation() {
-  const formData = useReduxFormData()
   const { selectedTime, timeZone } = useReduxAvailability()
 
   let dateString
@@ -25,6 +24,13 @@ export default function Confirmation() {
       timeZoneName: "shortGeneric",
     })
   }
+  const {
+    firstName,
+    lastName,
+    location,
+    phone,
+    email
+  } = useReduxFormData()
 
   return (
     <>
