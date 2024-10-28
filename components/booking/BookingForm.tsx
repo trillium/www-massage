@@ -325,7 +325,7 @@ export default function BookingForm({ additionalData = {}, endPoint, acceptingPa
  * upon success (or showing a failure message).
  *
  */
-function handleSubmit({
+export function handleSubmit({
   event,
   dispatchRedux,
   router,
