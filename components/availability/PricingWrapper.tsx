@@ -11,7 +11,7 @@ import {
   OWNER_AVAILABILITY,
   ALLOWED_DURATIONS,
   VALID_DURATIONS,
-  LEAD_TIME
+  LEAD_TIME,
 } from "@/config"
 import getAvailability from "@/lib/availability/getAvailability"
 import getPotentialTimes from "@/lib/availability/getPotentialTimes"
@@ -41,7 +41,7 @@ export function PricingWrapper({
   allowedDurations,
   leadTime = LEAD_TIME,
   pricing = DEFAULT_PRICING,
-  acceptingPayment
+  acceptingPayment = true,
 }: PricingWrapperProps) {
   const dispatchRedux = useAppDispatch()
   const {
@@ -52,15 +52,17 @@ export function PricingWrapper({
 
   const pickerProps: PickerProps = {
     durationProps: {
-      title: `${durationRedux || duration || "##"} minute session${acceptingPayment ? (" - $" +
-        pricing[durationRedux || duration]) : ""
-        }`,
+      title: `${durationRedux || duration || "##"} minute session${
+        acceptingPayment ? " - $" + pricing[durationRedux || duration] : ""
+      }`,
       allowedDurations: allowedDurations || ALLOWED_DURATIONS,
     },
     tzPickerProps: {
       showPicker: false,
     },
   }
+
+  console.log("🐇", pickerProps.durationProps.title)
 
   const startDay = Day.dayFromString(start)
   const endDay = Day.dayFromString(end)
@@ -76,7 +78,7 @@ export function PricingWrapper({
   const offers = getAvailability({
     busy: mapStringsToDates(busy),
     potential,
-    leadTime
+    leadTime,
   })
 
   const slots = offers.filter((slot) => {
